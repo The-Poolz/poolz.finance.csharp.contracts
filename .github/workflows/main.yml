@@ -57,7 +57,7 @@ jobs:
 
       - name: Create Pull Request
         run: |
-          gh pr create --title "Add generated code for ${{ env.CONTRACT_NAME }}" --body "This PR adds generated code for contract ${{ env.CONTRACT_NAME }}." --base main --head "added-${{ env.CONTRACT_NAME }}"
+          gh pr create --title "Add generated code for ${{ env.CONTRACT_NAME }}" --body "This PR adds generated code for contract ${{ env.CONTRACT_NAME }}." --base master --head "added-${{ env.CONTRACT_NAME }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
