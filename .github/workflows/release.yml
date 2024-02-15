@@ -25,7 +25,6 @@ jobs:
           dotnet publish -o build-output
 
       - name: Package and Push NuGet Package to GitHub Packages
-        if: contains(env.tag, '-prod')
         run: |
           dotnet pack --configuration Release --output nupkg/
           nuget push nupkg/*.nupkg -Source https://nuget.pkg.github.com/The-Poolz/index.json -ApiKey ${{ secrets.GITHUB_TOKEN }}
