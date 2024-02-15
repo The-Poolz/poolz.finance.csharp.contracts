@@ -1,0 +1,48 @@
+name: Generate Contract C# Code
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  generate-code:
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.issue.title, 'make ')
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '7.0'
+
+      - name: Install Nethereum.Generator.Console
+        run: dotnet tool install -g Nethereum.Generator.Console --add-source https://www.myget.org/F/nethereum/api/v3/index.json
+
+      - name: Parse issue for contract details
+        id: get-contract-details
+        run: |
+          CONTRACT_DETAILS=$(echo ${{ github.event.issue.title }} | cut -d ' ' -f 2)
+          echo "Contract details: $CONTRACT_DETAILS"
+          echo "::set-output name=contract_name::$(echo $CONTRACT_DETAILS | cut -d '@' -f 1)"
+          echo "::set-output name=contract_version::$(echo $CONTRACT_DETAILS | cut -d '@' -f 2)"
+          
+      - name: Fetch ABI from API
+        run: |
+          CONTRACT_NAME=${{ steps.get-contract-details.outputs.contract_name }}
+          CONTRACT_VERSION=${{ steps.get-contract-details.outputs.contract_version }}
+          ABI_URL="https://poolzfinancedata.com/contracts?NameVersion=${CONTRACT_NAME}@${CONTRACT_VERSION}"
+          ABI_JSON=$(curl -s $ABI_URL)
+          ABI=$(echo $ABI_JSON | jq '.abi')
+          echo $ABI > ${{ github.workspace }}/${CONTRACT_NAME}.abi
+        shell: bash
+
+      - name: Add Nethereum.Generator.Console to PATH
+        run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+
+      - name: Run Nethereum.Generator.Console
+        run: |
+          CONTRACT_NAME=${{ steps.get-contract-details.outputs.contract_name }}
+          nethereum-gen generate from-abi --abi ${{ github.workspace }}/${CONTRACT_NAME}.abi --namespace YourNamespace --outputDir ${{ github.workspace }}/GeneratedContracts
+        shell: bash
