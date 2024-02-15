@@ -8,10 +8,7 @@ jobs:
   generate-code:
     runs-on: ubuntu-latest
     if: startsWith(github.event.issue.title, 'make ')
-    env:
-      CONTRACT_DETAILS: ${{ github.event.issue.title }}
-      CONTRACT_NAME: ${{ steps.get-contract-details.outputs.contract_name }}
-      CONTRACT_VERSION: ${{ steps.get-contract-details.outputs.contract_version }}
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -25,12 +22,11 @@ jobs:
       - name: Install Nethereum.Generator.Console
         run: dotnet tool install -g Nethereum.Generator.Console --add-source https://www.myget.org/F/nethereum/api/v3/index.json
 
-      - name: Parse issue for contract details
-        id: get-contract-details
+      - name: Parse issue for contract details and set environment variables
         run: |
-          CONTRACT_DETAILS=${CONTRACT_DETAILS#make }
-          echo "CONTRACT_NAME=${CONTRACT_DETAILS%@*}" >> $GITHUB_ENV
-          echo "CONTRACT_VERSION=${CONTRACT_DETAILS#*@}" >> $GITHUB_ENV
+          CONTRACT_DETAILS=$(echo ${{ github.event.issue.title }} | cut -d ' ' -f 2)
+          echo "CONTRACT_NAME=$(echo $CONTRACT_DETAILS | cut -d '@' -f 1)" >> $GITHUB_ENV
+          echo "CONTRACT_VERSION=$(echo $CONTRACT_DETAILS | cut -d '@' -f 2)" >> $GITHUB_ENV
           
       - name: Fetch ABI from API and Save
         run: |
