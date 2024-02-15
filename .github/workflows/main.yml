@@ -16,6 +16,9 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '7.0'
+          cache: true
+          
+      - run: dotnet restore --locked-mode
 
       - name: Install Nethereum.Generator.Console
         run: dotnet tool install -g Nethereum.Generator.Console --add-source https://www.myget.org/F/nethereum/api/v3/index.json
