@@ -9,7 +9,7 @@ on:
 jobs:
   auto-merge-and-close-issue:
     runs-on: ubuntu-latest
-    if: startsWith(github.event.pull_request.title, 'added-') && github.actor == 'github-actions[bot]'
+    if: startsWith(github.event.pull_request.title, 'Add generated code for') && github.actor == 'github-actions[bot]'
     steps:
       - name: Auto-merge Pull Request
         uses: pascalgn/automerge-action@v0.16.2
