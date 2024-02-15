@@ -17,7 +17,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Close Issue
-        run: gh issue close ${{ github.event.pull_request.number }} --comment "The changes have been merged and the issue is now closed."
+        run: |
+          PR_NUMBER=$(gh pr view --json number --jq .number)
+          ISSUE_NUMBER=$(gh pr view $PR_NUMBER --json body --jq '.body' | grep -oP '(?<=Closes #)\d+')
+          if [ ! -z "$ISSUE_NUMBER" ]; then
+            gh issue close $ISSUE_NUMBER --comment "The changes have been merged and the issue is now closed."
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
