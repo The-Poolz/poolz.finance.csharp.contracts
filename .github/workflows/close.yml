@@ -1,0 +1,22 @@
+name: Auto-Merge and Close Issue
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+      - master
+
+jobs:
+  auto-merge-and-close-issue:
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.pull_request.title, 'added-') && github.actor == 'github-actions[bot]'
+    steps:
+      - name: Auto-merge Pull Request
+        uses: pascalgn/automerge-action@v0.16.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Close Issue
+        run: gh issue close --comment "The changes have been merged and the issue is now closed." ${{ github.event.pull_request.number }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
