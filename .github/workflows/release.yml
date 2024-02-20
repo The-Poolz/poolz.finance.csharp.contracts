@@ -30,10 +30,21 @@ jobs:
         env:
           GITHUB_REF: ${{ github.ref }}
 
-      - name: Update .csproj file with the new version
+      - name: Update .csproj file with the new version using PowerShell
         run: |
-          VERSION=${{ steps.get_version.outputs.VERSION }}
-          sed -i "s/<Version>.*<\/Version>/<Version>$VERSION<\/Version>/" poolz.finance.csharp.contracts.sln
+          $version = "${{ steps.get_version.outputs.VERSION }}"
+          [xml]$csproj = Get-Content -Path YourProject.csproj
+          $csproj.Project.PropertyGroup.Version = $version
+          $csproj.Save("$(PWD)/YourProject.csproj")
+        shell: pwsh
+
+      - name: Remove build-output from tracking (if previously tracked)
+        run: git rm -r --cached build-output
+
+      - name: Add changes to commit (excluding build-output)
+        run: |
+          git add .
+          git reset build-output/
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
