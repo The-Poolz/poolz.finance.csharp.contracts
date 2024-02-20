@@ -22,7 +22,6 @@ jobs:
       - name: Build and Publish
         run: |
           dotnet build
-          dotnet publish -o build-output
 
       - name: Extract version from tag
         id: get_version
@@ -38,10 +37,9 @@ jobs:
           $csproj.Save("$(PWD)/poolz.finance.csharp.contracts.csproj")
         shell: pwsh
 
-      - name: Add changes to commit (excluding build-output)
+      - name: Add changes to commit
         run: |
           git add .
-          git reset build-output/
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
