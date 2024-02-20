@@ -24,7 +24,22 @@ jobs:
           dotnet build
           dotnet publish -o build-output
 
-      - name: Package and Push NuGet Package to GitHub Packages
+      - name: Extract version from tag
+        id: get_version
+        run: echo "##[set-output name=VERSION;]$(echo ${GITHUB_REF#refs/tags/v})"
+        env:
+          GITHUB_REF: ${{ github.ref }}
+
+      - name: Update .csproj file with the new version
         run: |
-          dotnet pack --configuration Release --output nupkg/
-          nuget push nupkg/*.nupkg -Source https://nuget.pkg.github.com/The-Poolz/index.json -ApiKey ${{ secrets.GITHUB_TOKEN }}
+          VERSION=${{ steps.get_version.outputs.VERSION }}
+          sed -i "s/<Version>.*<\/Version>/<Version>$VERSION<\/Version>/" YourProject.csproj
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: Update project version
+          title: "Update project version to ${{ steps.get_version.outputs.VERSION }}"
+          body: "This PR updates the .csproj project version to ${{ steps.get_version.outputs.VERSION }}"
+          branch: "update-version-${{ steps.get_version.outputs.VERSION }}"
+          delete-branch: true
