@@ -35,11 +35,8 @@ jobs:
           $version = "${{ steps.get_version.outputs.VERSION }}"
           [xml]$csproj = Get-Content -Path poolz.finance.csharp.contracts.csproj
           $csproj.Project.PropertyGroup.Version = $version
-          $csproj.Save("$(PWD)/YourProject.csproj")
+          $csproj.Save("$(PWD)/poolz.finance.csharp.contracts.csproj")
         shell: pwsh
-
-      - name: Remove build-output from tracking (if previously tracked)
-        run: git rm -r --cached build-output
 
       - name: Add changes to commit (excluding build-output)
         run: |
