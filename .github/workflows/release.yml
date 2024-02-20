@@ -33,7 +33,7 @@ jobs:
       - name: Update .csproj file with the new version using PowerShell
         run: |
           $version = "${{ steps.get_version.outputs.VERSION }}"
-          [xml]$csproj = Get-Content -Path poolz.finance.csharp.contracts.sln
+          [xml]$csproj = Get-Content -Path poolz.finance.csharp.contracts.csproj
           $csproj.Project.PropertyGroup.Version = $version
           $csproj.Save("$(PWD)/YourProject.csproj")
         shell: pwsh
