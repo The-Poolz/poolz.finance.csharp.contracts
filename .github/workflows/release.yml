@@ -49,3 +49,10 @@ jobs:
           body: "This PR updates the .csproj project version to ${{ steps.get_version.outputs.VERSION }}"
           branch: "update-version-${{ steps.get_version.outputs.VERSION }}"
           delete-branch: true
+
+      - name: Enable Auto-Merge for Pull Request
+        uses: peter-evans/enable-pull-request-automerge@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ steps.create_pull_request.outputs.pull-request-number }}
+          merge-method: squash
