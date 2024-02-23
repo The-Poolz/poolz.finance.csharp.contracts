@@ -10,9 +10,9 @@ using Nethereum.Contracts.CQS;
 using Nethereum.Contracts.ContractHandlers;
 using Nethereum.Contracts;
 using System.Threading;
-using poolz.finance.csharp.BeaconToken.ContractDefinition;
+using poolz.finance.csharp.contracts.BeaconToken.ContractDefinition;
 
-namespace poolz.finance.csharp.BeaconToken
+namespace poolz.finance.csharp.contracts.BeaconToken
 {
     public partial class BeaconTokenService
     {
@@ -32,9 +32,9 @@ namespace poolz.finance.csharp.BeaconToken
             return new BeaconTokenService(web3, receipt.ContractAddress);
         }
 
-        protected Nethereum.Web3.IWeb3 Web3{ get; }
+        protected virtual Nethereum.Web3.IWeb3 Web3 { get; }
 
-        public ContractHandler ContractHandler { get; }
+        public virtual ContractHandler ContractHandler { get; }
 
         public BeaconTokenService(Nethereum.Web3.Web3 web3, string contractAddress)
         {
@@ -48,13 +48,13 @@ namespace poolz.finance.csharp.BeaconToken
             ContractHandler = web3.Eth.GetContractHandler(contractAddress);
         }
 
-        public Task<BigInteger> AllowanceQueryAsync(AllowanceFunction allowanceFunction, BlockParameter blockParameter = null)
+        public virtual Task<BigInteger> AllowanceQueryAsync(AllowanceFunction allowanceFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<AllowanceFunction, BigInteger>(allowanceFunction, blockParameter);
         }
 
         
-        public Task<BigInteger> AllowanceQueryAsync(string owner, string spender, BlockParameter blockParameter = null)
+        public virtual Task<BigInteger> AllowanceQueryAsync(string owner, string spender, BlockParameter blockParameter = null)
         {
             var allowanceFunction = new AllowanceFunction();
                 allowanceFunction.Owner = owner;
@@ -63,17 +63,17 @@ namespace poolz.finance.csharp.BeaconToken
             return ContractHandler.QueryAsync<AllowanceFunction, BigInteger>(allowanceFunction, blockParameter);
         }
 
-        public Task<string> ApproveRequestAsync(ApproveFunction approveFunction)
+        public virtual Task<string> ApproveRequestAsync(ApproveFunction approveFunction)
         {
              return ContractHandler.SendRequestAsync(approveFunction);
         }
 
-        public Task<TransactionReceipt> ApproveRequestAndWaitForReceiptAsync(ApproveFunction approveFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> ApproveRequestAndWaitForReceiptAsync(ApproveFunction approveFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(approveFunction, cancellationToken);
         }
 
-        public Task<string> ApproveRequestAsync(string spender, BigInteger amount)
+        public virtual Task<string> ApproveRequestAsync(string spender, BigInteger amount)
         {
             var approveFunction = new ApproveFunction();
                 approveFunction.Spender = spender;
@@ -82,7 +82,7 @@ namespace poolz.finance.csharp.BeaconToken
              return ContractHandler.SendRequestAsync(approveFunction);
         }
 
-        public Task<TransactionReceipt> ApproveRequestAndWaitForReceiptAsync(string spender, BigInteger amount, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> ApproveRequestAndWaitForReceiptAsync(string spender, BigInteger amount, CancellationTokenSource cancellationToken = null)
         {
             var approveFunction = new ApproveFunction();
                 approveFunction.Spender = spender;
@@ -91,13 +91,13 @@ namespace poolz.finance.csharp.BeaconToken
              return ContractHandler.SendRequestAndWaitForReceiptAsync(approveFunction, cancellationToken);
         }
 
-        public Task<BigInteger> BalanceOfQueryAsync(BalanceOfFunction balanceOfFunction, BlockParameter blockParameter = null)
+        public virtual Task<BigInteger> BalanceOfQueryAsync(BalanceOfFunction balanceOfFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<BalanceOfFunction, BigInteger>(balanceOfFunction, blockParameter);
         }
 
         
-        public Task<BigInteger> BalanceOfQueryAsync(string account, BlockParameter blockParameter = null)
+        public virtual Task<BigInteger> BalanceOfQueryAsync(string account, BlockParameter blockParameter = null)
         {
             var balanceOfFunction = new BalanceOfFunction();
                 balanceOfFunction.Account = account;
@@ -105,17 +105,17 @@ namespace poolz.finance.csharp.BeaconToken
             return ContractHandler.QueryAsync<BalanceOfFunction, BigInteger>(balanceOfFunction, blockParameter);
         }
 
-        public Task<string> BurnRequestAsync(BurnFunction burnFunction)
+        public virtual Task<string> BurnRequestAsync(BurnFunction burnFunction)
         {
              return ContractHandler.SendRequestAsync(burnFunction);
         }
 
-        public Task<TransactionReceipt> BurnRequestAndWaitForReceiptAsync(BurnFunction burnFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> BurnRequestAndWaitForReceiptAsync(BurnFunction burnFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(burnFunction, cancellationToken);
         }
 
-        public Task<string> BurnRequestAsync(BigInteger amount)
+        public virtual Task<string> BurnRequestAsync(BigInteger amount)
         {
             var burnFunction = new BurnFunction();
                 burnFunction.Amount = amount;
@@ -123,7 +123,7 @@ namespace poolz.finance.csharp.BeaconToken
              return ContractHandler.SendRequestAsync(burnFunction);
         }
 
-        public Task<TransactionReceipt> BurnRequestAndWaitForReceiptAsync(BigInteger amount, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> BurnRequestAndWaitForReceiptAsync(BigInteger amount, CancellationTokenSource cancellationToken = null)
         {
             var burnFunction = new BurnFunction();
                 burnFunction.Amount = amount;
@@ -131,17 +131,17 @@ namespace poolz.finance.csharp.BeaconToken
              return ContractHandler.SendRequestAndWaitForReceiptAsync(burnFunction, cancellationToken);
         }
 
-        public Task<string> BurnFromRequestAsync(BurnFromFunction burnFromFunction)
+        public virtual Task<string> BurnFromRequestAsync(BurnFromFunction burnFromFunction)
         {
              return ContractHandler.SendRequestAsync(burnFromFunction);
         }
 
-        public Task<TransactionReceipt> BurnFromRequestAndWaitForReceiptAsync(BurnFromFunction burnFromFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> BurnFromRequestAndWaitForReceiptAsync(BurnFromFunction burnFromFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(burnFromFunction, cancellationToken);
         }
 
-        public Task<string> BurnFromRequestAsync(string account, BigInteger amount)
+        public virtual Task<string> BurnFromRequestAsync(string account, BigInteger amount)
         {
             var burnFromFunction = new BurnFromFunction();
                 burnFromFunction.Account = account;
@@ -150,7 +150,7 @@ namespace poolz.finance.csharp.BeaconToken
              return ContractHandler.SendRequestAsync(burnFromFunction);
         }
 
-        public Task<TransactionReceipt> BurnFromRequestAndWaitForReceiptAsync(string account, BigInteger amount, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> BurnFromRequestAndWaitForReceiptAsync(string account, BigInteger amount, CancellationTokenSource cancellationToken = null)
         {
             var burnFromFunction = new BurnFromFunction();
                 burnFromFunction.Account = account;
@@ -159,28 +159,28 @@ namespace poolz.finance.csharp.BeaconToken
              return ContractHandler.SendRequestAndWaitForReceiptAsync(burnFromFunction, cancellationToken);
         }
 
-        public Task<BigInteger> CapQueryAsync(CapFunction capFunction, BlockParameter blockParameter = null)
+        public virtual Task<BigInteger> CapQueryAsync(CapFunction capFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<CapFunction, BigInteger>(capFunction, blockParameter);
         }
 
         
-        public Task<BigInteger> CapQueryAsync(BlockParameter blockParameter = null)
+        public virtual Task<BigInteger> CapQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<CapFunction, BigInteger>(null, blockParameter);
         }
 
-        public Task<string> DecreaseAllowanceRequestAsync(DecreaseAllowanceFunction decreaseAllowanceFunction)
+        public virtual Task<string> DecreaseAllowanceRequestAsync(DecreaseAllowanceFunction decreaseAllowanceFunction)
         {
              return ContractHandler.SendRequestAsync(decreaseAllowanceFunction);
         }
 
-        public Task<TransactionReceipt> DecreaseAllowanceRequestAndWaitForReceiptAsync(DecreaseAllowanceFunction decreaseAllowanceFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> DecreaseAllowanceRequestAndWaitForReceiptAsync(DecreaseAllowanceFunction decreaseAllowanceFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(decreaseAllowanceFunction, cancellationToken);
         }
 
-        public Task<string> DecreaseAllowanceRequestAsync(string spender, BigInteger subtractedValue)
+        public virtual Task<string> DecreaseAllowanceRequestAsync(string spender, BigInteger subtractedValue)
         {
             var decreaseAllowanceFunction = new DecreaseAllowanceFunction();
                 decreaseAllowanceFunction.Spender = spender;
@@ -189,7 +189,7 @@ namespace poolz.finance.csharp.BeaconToken
              return ContractHandler.SendRequestAsync(decreaseAllowanceFunction);
         }
 
-        public Task<TransactionReceipt> DecreaseAllowanceRequestAndWaitForReceiptAsync(string spender, BigInteger subtractedValue, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> DecreaseAllowanceRequestAndWaitForReceiptAsync(string spender, BigInteger subtractedValue, CancellationTokenSource cancellationToken = null)
         {
             var decreaseAllowanceFunction = new DecreaseAllowanceFunction();
                 decreaseAllowanceFunction.Spender = spender;
@@ -198,17 +198,17 @@ namespace poolz.finance.csharp.BeaconToken
              return ContractHandler.SendRequestAndWaitForReceiptAsync(decreaseAllowanceFunction, cancellationToken);
         }
 
-        public Task<string> IncreaseAllowanceRequestAsync(IncreaseAllowanceFunction increaseAllowanceFunction)
+        public virtual Task<string> IncreaseAllowanceRequestAsync(IncreaseAllowanceFunction increaseAllowanceFunction)
         {
              return ContractHandler.SendRequestAsync(increaseAllowanceFunction);
         }
 
-        public Task<TransactionReceipt> IncreaseAllowanceRequestAndWaitForReceiptAsync(IncreaseAllowanceFunction increaseAllowanceFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> IncreaseAllowanceRequestAndWaitForReceiptAsync(IncreaseAllowanceFunction increaseAllowanceFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(increaseAllowanceFunction, cancellationToken);
         }
 
-        public Task<string> IncreaseAllowanceRequestAsync(string spender, BigInteger addedValue)
+        public virtual Task<string> IncreaseAllowanceRequestAsync(string spender, BigInteger addedValue)
         {
             var increaseAllowanceFunction = new IncreaseAllowanceFunction();
                 increaseAllowanceFunction.Spender = spender;
@@ -217,7 +217,7 @@ namespace poolz.finance.csharp.BeaconToken
              return ContractHandler.SendRequestAsync(increaseAllowanceFunction);
         }
 
-        public Task<TransactionReceipt> IncreaseAllowanceRequestAndWaitForReceiptAsync(string spender, BigInteger addedValue, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> IncreaseAllowanceRequestAndWaitForReceiptAsync(string spender, BigInteger addedValue, CancellationTokenSource cancellationToken = null)
         {
             var increaseAllowanceFunction = new IncreaseAllowanceFunction();
                 increaseAllowanceFunction.Spender = spender;
@@ -226,50 +226,50 @@ namespace poolz.finance.csharp.BeaconToken
              return ContractHandler.SendRequestAndWaitForReceiptAsync(increaseAllowanceFunction, cancellationToken);
         }
 
-        public Task<string> NameQueryAsync(NameFunction nameFunction, BlockParameter blockParameter = null)
+        public virtual Task<string> NameQueryAsync(NameFunction nameFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<NameFunction, string>(nameFunction, blockParameter);
         }
 
         
-        public Task<string> NameQueryAsync(BlockParameter blockParameter = null)
+        public virtual Task<string> NameQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<NameFunction, string>(null, blockParameter);
         }
 
-        public Task<string> SymbolQueryAsync(SymbolFunction symbolFunction, BlockParameter blockParameter = null)
+        public virtual Task<string> SymbolQueryAsync(SymbolFunction symbolFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<SymbolFunction, string>(symbolFunction, blockParameter);
         }
 
         
-        public Task<string> SymbolQueryAsync(BlockParameter blockParameter = null)
+        public virtual Task<string> SymbolQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<SymbolFunction, string>(null, blockParameter);
         }
 
-        public Task<BigInteger> TotalSupplyQueryAsync(TotalSupplyFunction totalSupplyFunction, BlockParameter blockParameter = null)
+        public virtual Task<BigInteger> TotalSupplyQueryAsync(TotalSupplyFunction totalSupplyFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<TotalSupplyFunction, BigInteger>(totalSupplyFunction, blockParameter);
         }
 
         
-        public Task<BigInteger> TotalSupplyQueryAsync(BlockParameter blockParameter = null)
+        public virtual Task<BigInteger> TotalSupplyQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<TotalSupplyFunction, BigInteger>(null, blockParameter);
         }
 
-        public Task<string> TransferRequestAsync(TransferFunction transferFunction)
+        public virtual Task<string> TransferRequestAsync(TransferFunction transferFunction)
         {
              return ContractHandler.SendRequestAsync(transferFunction);
         }
 
-        public Task<TransactionReceipt> TransferRequestAndWaitForReceiptAsync(TransferFunction transferFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> TransferRequestAndWaitForReceiptAsync(TransferFunction transferFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(transferFunction, cancellationToken);
         }
 
-        public Task<string> TransferRequestAsync(string to, BigInteger amount)
+        public virtual Task<string> TransferRequestAsync(string to, BigInteger amount)
         {
             var transferFunction = new TransferFunction();
                 transferFunction.To = to;
@@ -278,7 +278,7 @@ namespace poolz.finance.csharp.BeaconToken
              return ContractHandler.SendRequestAsync(transferFunction);
         }
 
-        public Task<TransactionReceipt> TransferRequestAndWaitForReceiptAsync(string to, BigInteger amount, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> TransferRequestAndWaitForReceiptAsync(string to, BigInteger amount, CancellationTokenSource cancellationToken = null)
         {
             var transferFunction = new TransferFunction();
                 transferFunction.To = to;
@@ -287,17 +287,17 @@ namespace poolz.finance.csharp.BeaconToken
              return ContractHandler.SendRequestAndWaitForReceiptAsync(transferFunction, cancellationToken);
         }
 
-        public Task<string> TransferFromRequestAsync(TransferFromFunction transferFromFunction)
+        public virtual Task<string> TransferFromRequestAsync(TransferFromFunction transferFromFunction)
         {
              return ContractHandler.SendRequestAsync(transferFromFunction);
         }
 
-        public Task<TransactionReceipt> TransferFromRequestAndWaitForReceiptAsync(TransferFromFunction transferFromFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> TransferFromRequestAndWaitForReceiptAsync(TransferFromFunction transferFromFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(transferFromFunction, cancellationToken);
         }
 
-        public Task<string> TransferFromRequestAsync(string from, string to, BigInteger amount)
+        public virtual Task<string> TransferFromRequestAsync(string from, string to, BigInteger amount)
         {
             var transferFromFunction = new TransferFromFunction();
                 transferFromFunction.From = from;
@@ -307,7 +307,7 @@ namespace poolz.finance.csharp.BeaconToken
              return ContractHandler.SendRequestAsync(transferFromFunction);
         }
 
-        public Task<TransactionReceipt> TransferFromRequestAndWaitForReceiptAsync(string from, string to, BigInteger amount, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> TransferFromRequestAndWaitForReceiptAsync(string from, string to, BigInteger amount, CancellationTokenSource cancellationToken = null)
         {
             var transferFromFunction = new TransferFromFunction();
                 transferFromFunction.From = from;
@@ -317,28 +317,28 @@ namespace poolz.finance.csharp.BeaconToken
              return ContractHandler.SendRequestAndWaitForReceiptAsync(transferFromFunction, cancellationToken);
         }
 
-        public Task<byte> DecimalsQueryAsync(DecimalsFunction decimalsFunction, BlockParameter blockParameter = null)
+        public virtual Task<byte> DecimalsQueryAsync(DecimalsFunction decimalsFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<DecimalsFunction, byte>(decimalsFunction, blockParameter);
         }
 
         
-        public Task<byte> DecimalsQueryAsync(BlockParameter blockParameter = null)
+        public virtual Task<byte> DecimalsQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<DecimalsFunction, byte>(null, blockParameter);
         }
 
-        public Task<string> ActivateBeaconRequestAsync(ActivateBeaconFunction activateBeaconFunction)
+        public virtual Task<string> ActivateBeaconRequestAsync(ActivateBeaconFunction activateBeaconFunction)
         {
              return ContractHandler.SendRequestAsync(activateBeaconFunction);
         }
 
-        public Task<TransactionReceipt> ActivateBeaconRequestAndWaitForReceiptAsync(ActivateBeaconFunction activateBeaconFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> ActivateBeaconRequestAndWaitForReceiptAsync(ActivateBeaconFunction activateBeaconFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(activateBeaconFunction, cancellationToken);
         }
 
-        public Task<string> ActivateBeaconRequestAsync(byte[] address)
+        public virtual Task<string> ActivateBeaconRequestAsync(byte[] address)
         {
             var activateBeaconFunction = new ActivateBeaconFunction();
                 activateBeaconFunction.Address = address;
@@ -346,7 +346,7 @@ namespace poolz.finance.csharp.BeaconToken
              return ContractHandler.SendRequestAsync(activateBeaconFunction);
         }
 
-        public Task<TransactionReceipt> ActivateBeaconRequestAndWaitForReceiptAsync(byte[] address, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> ActivateBeaconRequestAndWaitForReceiptAsync(byte[] address, CancellationTokenSource cancellationToken = null)
         {
             var activateBeaconFunction = new ActivateBeaconFunction();
                 activateBeaconFunction.Address = address;
@@ -354,17 +354,17 @@ namespace poolz.finance.csharp.BeaconToken
              return ContractHandler.SendRequestAndWaitForReceiptAsync(activateBeaconFunction, cancellationToken);
         }
 
-        public Task<string> ActivateBeaconRequestAsync(ActivateBeacon1Function activateBeacon1Function)
+        public virtual Task<string> ActivateBeaconRequestAsync(ActivateBeacon1Function activateBeacon1Function)
         {
              return ContractHandler.SendRequestAsync(activateBeacon1Function);
         }
 
-        public Task<TransactionReceipt> ActivateBeaconRequestAndWaitForReceiptAsync(ActivateBeacon1Function activateBeacon1Function, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> ActivateBeaconRequestAndWaitForReceiptAsync(ActivateBeacon1Function activateBeacon1Function, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(activateBeacon1Function, cancellationToken);
         }
 
-        public Task<string> ActivateBeaconRequestAsync(byte[] address, BigInteger amount)
+        public virtual Task<string> ActivateBeaconRequestAsync(byte[] address, BigInteger amount)
         {
             var activateBeacon1Function = new ActivateBeacon1Function();
                 activateBeacon1Function.Address = address;
@@ -373,7 +373,7 @@ namespace poolz.finance.csharp.BeaconToken
              return ContractHandler.SendRequestAsync(activateBeacon1Function);
         }
 
-        public Task<TransactionReceipt> ActivateBeaconRequestAndWaitForReceiptAsync(byte[] address, BigInteger amount, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> ActivateBeaconRequestAndWaitForReceiptAsync(byte[] address, BigInteger amount, CancellationTokenSource cancellationToken = null)
         {
             var activateBeacon1Function = new ActivateBeacon1Function();
                 activateBeacon1Function.Address = address;
