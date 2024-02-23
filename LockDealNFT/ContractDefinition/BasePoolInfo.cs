@@ -5,7 +5,7 @@ using System.Numerics;
 using Nethereum.Hex.HexTypes;
 using Nethereum.ABI.FunctionEncoding.Attributes;
 
-namespace poolz.finance.csharp.LockDealNFT.ContractDefinition
+namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
 {
     public partial class BasePoolInfo : BasePoolInfoBase { }
 
