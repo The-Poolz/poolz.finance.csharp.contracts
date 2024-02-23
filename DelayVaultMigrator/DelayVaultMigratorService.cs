@@ -32,9 +32,9 @@ namespace poolz.finance.csharp.DelayVaultMigrator
             return new DelayVaultMigratorService(web3, receipt.ContractAddress);
         }
 
-        protected Nethereum.Web3.IWeb3 Web3{ get; }
+        protected virtual Nethereum.Web3.IWeb3 Web3 { get; }
 
-        public ContractHandler ContractHandler { get; }
+        public virtual ContractHandler ContractHandler { get; }
 
         public DelayVaultMigratorService(Nethereum.Web3.Web3 web3, string contractAddress)
         {
@@ -48,17 +48,17 @@ namespace poolz.finance.csharp.DelayVaultMigrator
             ContractHandler = web3.Eth.GetContractHandler(contractAddress);
         }
 
-        public Task<string> CreateNewPoolRequestAsync(CreateNewPoolFunction createNewPoolFunction)
+        public virtual Task<string> CreateNewPoolRequestAsync(CreateNewPoolFunction createNewPoolFunction)
         {
              return ContractHandler.SendRequestAsync(createNewPoolFunction);
         }
 
-        public Task<TransactionReceipt> CreateNewPoolRequestAndWaitForReceiptAsync(CreateNewPoolFunction createNewPoolFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> CreateNewPoolRequestAndWaitForReceiptAsync(CreateNewPoolFunction createNewPoolFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(createNewPoolFunction, cancellationToken);
         }
 
-        public Task<string> CreateNewPoolRequestAsync(string token, BigInteger returnValue2, BigInteger returnValue3, BigInteger returnValue4, BigInteger startAmount, string owner)
+        public virtual Task<string> CreateNewPoolRequestAsync(string token, BigInteger returnValue2, BigInteger returnValue3, BigInteger returnValue4, BigInteger startAmount, string owner)
         {
             var createNewPoolFunction = new CreateNewPoolFunction();
                 createNewPoolFunction.Token = token;
@@ -71,7 +71,7 @@ namespace poolz.finance.csharp.DelayVaultMigrator
              return ContractHandler.SendRequestAsync(createNewPoolFunction);
         }
 
-        public Task<TransactionReceipt> CreateNewPoolRequestAndWaitForReceiptAsync(string token, BigInteger returnValue2, BigInteger returnValue3, BigInteger returnValue4, BigInteger startAmount, string owner, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> CreateNewPoolRequestAndWaitForReceiptAsync(string token, BigInteger returnValue2, BigInteger returnValue3, BigInteger returnValue4, BigInteger startAmount, string owner, CancellationTokenSource cancellationToken = null)
         {
             var createNewPoolFunction = new CreateNewPoolFunction();
                 createNewPoolFunction.Token = token;
@@ -84,17 +84,17 @@ namespace poolz.finance.csharp.DelayVaultMigrator
              return ContractHandler.SendRequestAndWaitForReceiptAsync(createNewPoolFunction, cancellationToken);
         }
 
-        public Task<string> FinalizeRequestAsync(FinalizeFunction finalizeFunction)
+        public virtual Task<string> FinalizeRequestAsync(FinalizeFunction finalizeFunction)
         {
              return ContractHandler.SendRequestAsync(finalizeFunction);
         }
 
-        public Task<TransactionReceipt> FinalizeRequestAndWaitForReceiptAsync(FinalizeFunction finalizeFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> FinalizeRequestAndWaitForReceiptAsync(FinalizeFunction finalizeFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(finalizeFunction, cancellationToken);
         }
 
-        public Task<string> FinalizeRequestAsync(string newVault)
+        public virtual Task<string> FinalizeRequestAsync(string newVault)
         {
             var finalizeFunction = new FinalizeFunction();
                 finalizeFunction.NewVault = newVault;
@@ -102,7 +102,7 @@ namespace poolz.finance.csharp.DelayVaultMigrator
              return ContractHandler.SendRequestAsync(finalizeFunction);
         }
 
-        public Task<TransactionReceipt> FinalizeRequestAndWaitForReceiptAsync(string newVault, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> FinalizeRequestAndWaitForReceiptAsync(string newVault, CancellationTokenSource cancellationToken = null)
         {
             var finalizeFunction = new FinalizeFunction();
                 finalizeFunction.NewVault = newVault;
@@ -110,44 +110,44 @@ namespace poolz.finance.csharp.DelayVaultMigrator
              return ContractHandler.SendRequestAndWaitForReceiptAsync(finalizeFunction, cancellationToken);
         }
 
-        public Task<string> FirewallAdminQueryAsync(FirewallAdminFunction firewallAdminFunction, BlockParameter blockParameter = null)
+        public virtual Task<string> FirewallAdminQueryAsync(FirewallAdminFunction firewallAdminFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<FirewallAdminFunction, string>(firewallAdminFunction, blockParameter);
         }
 
         
-        public Task<string> FirewallAdminQueryAsync(BlockParameter blockParameter = null)
+        public virtual Task<string> FirewallAdminQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<FirewallAdminFunction, string>(null, blockParameter);
         }
 
-        public Task<string> FullMigrateRequestAsync(FullMigrateFunction fullMigrateFunction)
+        public virtual Task<string> FullMigrateRequestAsync(FullMigrateFunction fullMigrateFunction)
         {
              return ContractHandler.SendRequestAsync(fullMigrateFunction);
         }
 
-        public Task<string> FullMigrateRequestAsync()
+        public virtual Task<string> FullMigrateRequestAsync()
         {
              return ContractHandler.SendRequestAsync<FullMigrateFunction>();
         }
 
-        public Task<TransactionReceipt> FullMigrateRequestAndWaitForReceiptAsync(FullMigrateFunction fullMigrateFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> FullMigrateRequestAndWaitForReceiptAsync(FullMigrateFunction fullMigrateFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(fullMigrateFunction, cancellationToken);
         }
 
-        public Task<TransactionReceipt> FullMigrateRequestAndWaitForReceiptAsync(CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> FullMigrateRequestAndWaitForReceiptAsync(CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync<FullMigrateFunction>(null, cancellationToken);
         }
 
-        public Task<BigInteger> GetUserV1AmountQueryAsync(GetUserV1AmountFunction getUserV1AmountFunction, BlockParameter blockParameter = null)
+        public virtual Task<BigInteger> GetUserV1AmountQueryAsync(GetUserV1AmountFunction getUserV1AmountFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<GetUserV1AmountFunction, BigInteger>(getUserV1AmountFunction, blockParameter);
         }
 
         
-        public Task<BigInteger> GetUserV1AmountQueryAsync(string user, BlockParameter blockParameter = null)
+        public virtual Task<BigInteger> GetUserV1AmountQueryAsync(string user, BlockParameter blockParameter = null)
         {
             var getUserV1AmountFunction = new GetUserV1AmountFunction();
                 getUserV1AmountFunction.User = user;
@@ -155,61 +155,61 @@ namespace poolz.finance.csharp.DelayVaultMigrator
             return ContractHandler.QueryAsync<GetUserV1AmountFunction, BigInteger>(getUserV1AmountFunction, blockParameter);
         }
 
-        public Task<string> LockDealNFTQueryAsync(LockDealNFTFunction lockDealNFTFunction, BlockParameter blockParameter = null)
+        public virtual Task<string> LockDealNFTQueryAsync(LockDealNFTFunction lockDealNFTFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<LockDealNFTFunction, string>(lockDealNFTFunction, blockParameter);
         }
 
         
-        public Task<string> LockDealNFTQueryAsync(BlockParameter blockParameter = null)
+        public virtual Task<string> LockDealNFTQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<LockDealNFTFunction, string>(null, blockParameter);
         }
 
-        public Task<string> NewVaultQueryAsync(NewVaultFunction newVaultFunction, BlockParameter blockParameter = null)
+        public virtual Task<string> NewVaultQueryAsync(NewVaultFunction newVaultFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<NewVaultFunction, string>(newVaultFunction, blockParameter);
         }
 
         
-        public Task<string> NewVaultQueryAsync(BlockParameter blockParameter = null)
+        public virtual Task<string> NewVaultQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<NewVaultFunction, string>(null, blockParameter);
         }
 
-        public Task<string> OldVaultQueryAsync(OldVaultFunction oldVaultFunction, BlockParameter blockParameter = null)
+        public virtual Task<string> OldVaultQueryAsync(OldVaultFunction oldVaultFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<OldVaultFunction, string>(oldVaultFunction, blockParameter);
         }
 
         
-        public Task<string> OldVaultQueryAsync(BlockParameter blockParameter = null)
+        public virtual Task<string> OldVaultQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<OldVaultFunction, string>(null, blockParameter);
         }
 
-        public Task<string> OwnerQueryAsync(OwnerFunction ownerFunction, BlockParameter blockParameter = null)
+        public virtual Task<string> OwnerQueryAsync(OwnerFunction ownerFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<OwnerFunction, string>(ownerFunction, blockParameter);
         }
 
         
-        public Task<string> OwnerQueryAsync(BlockParameter blockParameter = null)
+        public virtual Task<string> OwnerQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<OwnerFunction, string>(null, blockParameter);
         }
 
-        public Task<string> SetFirewallRequestAsync(SetFirewallFunction setFirewallFunction)
+        public virtual Task<string> SetFirewallRequestAsync(SetFirewallFunction setFirewallFunction)
         {
              return ContractHandler.SendRequestAsync(setFirewallFunction);
         }
 
-        public Task<TransactionReceipt> SetFirewallRequestAndWaitForReceiptAsync(SetFirewallFunction setFirewallFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> SetFirewallRequestAndWaitForReceiptAsync(SetFirewallFunction setFirewallFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(setFirewallFunction, cancellationToken);
         }
 
-        public Task<string> SetFirewallRequestAsync(string firewall)
+        public virtual Task<string> SetFirewallRequestAsync(string firewall)
         {
             var setFirewallFunction = new SetFirewallFunction();
                 setFirewallFunction.Firewall = firewall;
@@ -217,7 +217,7 @@ namespace poolz.finance.csharp.DelayVaultMigrator
              return ContractHandler.SendRequestAsync(setFirewallFunction);
         }
 
-        public Task<TransactionReceipt> SetFirewallRequestAndWaitForReceiptAsync(string firewall, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> SetFirewallRequestAndWaitForReceiptAsync(string firewall, CancellationTokenSource cancellationToken = null)
         {
             var setFirewallFunction = new SetFirewallFunction();
                 setFirewallFunction.Firewall = firewall;
@@ -225,17 +225,17 @@ namespace poolz.finance.csharp.DelayVaultMigrator
              return ContractHandler.SendRequestAndWaitForReceiptAsync(setFirewallFunction, cancellationToken);
         }
 
-        public Task<string> SetFirewallAdminRequestAsync(SetFirewallAdminFunction setFirewallAdminFunction)
+        public virtual Task<string> SetFirewallAdminRequestAsync(SetFirewallAdminFunction setFirewallAdminFunction)
         {
              return ContractHandler.SendRequestAsync(setFirewallAdminFunction);
         }
 
-        public Task<TransactionReceipt> SetFirewallAdminRequestAndWaitForReceiptAsync(SetFirewallAdminFunction setFirewallAdminFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> SetFirewallAdminRequestAndWaitForReceiptAsync(SetFirewallAdminFunction setFirewallAdminFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(setFirewallAdminFunction, cancellationToken);
         }
 
-        public Task<string> SetFirewallAdminRequestAsync(string firewallAdmin)
+        public virtual Task<string> SetFirewallAdminRequestAsync(string firewallAdmin)
         {
             var setFirewallAdminFunction = new SetFirewallAdminFunction();
                 setFirewallAdminFunction.FirewallAdmin = firewallAdmin;
@@ -243,7 +243,7 @@ namespace poolz.finance.csharp.DelayVaultMigrator
              return ContractHandler.SendRequestAsync(setFirewallAdminFunction);
         }
 
-        public Task<TransactionReceipt> SetFirewallAdminRequestAndWaitForReceiptAsync(string firewallAdmin, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> SetFirewallAdminRequestAndWaitForReceiptAsync(string firewallAdmin, CancellationTokenSource cancellationToken = null)
         {
             var setFirewallAdminFunction = new SetFirewallAdminFunction();
                 setFirewallAdminFunction.FirewallAdmin = firewallAdmin;
@@ -251,33 +251,33 @@ namespace poolz.finance.csharp.DelayVaultMigrator
              return ContractHandler.SendRequestAndWaitForReceiptAsync(setFirewallAdminFunction, cancellationToken);
         }
 
-        public Task<string> TokenQueryAsync(TokenFunction tokenFunction, BlockParameter blockParameter = null)
+        public virtual Task<string> TokenQueryAsync(TokenFunction tokenFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<TokenFunction, string>(tokenFunction, blockParameter);
         }
 
         
-        public Task<string> TokenQueryAsync(BlockParameter blockParameter = null)
+        public virtual Task<string> TokenQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<TokenFunction, string>(null, blockParameter);
         }
 
-        public Task<string> WithdrawTokensFromV1VaultRequestAsync(WithdrawTokensFromV1VaultFunction withdrawTokensFromV1VaultFunction)
+        public virtual Task<string> WithdrawTokensFromV1VaultRequestAsync(WithdrawTokensFromV1VaultFunction withdrawTokensFromV1VaultFunction)
         {
              return ContractHandler.SendRequestAsync(withdrawTokensFromV1VaultFunction);
         }
 
-        public Task<string> WithdrawTokensFromV1VaultRequestAsync()
+        public virtual Task<string> WithdrawTokensFromV1VaultRequestAsync()
         {
              return ContractHandler.SendRequestAsync<WithdrawTokensFromV1VaultFunction>();
         }
 
-        public Task<TransactionReceipt> WithdrawTokensFromV1VaultRequestAndWaitForReceiptAsync(WithdrawTokensFromV1VaultFunction withdrawTokensFromV1VaultFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> WithdrawTokensFromV1VaultRequestAndWaitForReceiptAsync(WithdrawTokensFromV1VaultFunction withdrawTokensFromV1VaultFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(withdrawTokensFromV1VaultFunction, cancellationToken);
         }
 
-        public Task<TransactionReceipt> WithdrawTokensFromV1VaultRequestAndWaitForReceiptAsync(CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> WithdrawTokensFromV1VaultRequestAndWaitForReceiptAsync(CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync<WithdrawTokensFromV1VaultFunction>(null, cancellationToken);
         }
