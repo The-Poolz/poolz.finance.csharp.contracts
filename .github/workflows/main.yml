@@ -29,10 +29,10 @@ jobs:
           
       - name: Fetch ABI and ByteCode from API and Save
         run: |
-          ABI_URL="https://poolzfinancedata.com/contracts?NameVersion=${CONTRACT_NAME}@${CONTRACT_VERSION}"
-          ABI_JSON=$(curl -s $ABI_URL)
-          ABI=$(echo $ABI_JSON | jq '.[0].ABI')
-          BYTECODE=$(echo $ABI_JSON | jq -r '.[0].ByteCode.bytecode')
+          API_URL="https://poolzfinancedata.com/contracts?NameVersion=${CONTRACT_NAME}@${CONTRACT_VERSION}"
+          API_RESPONSE=$(curl -s $API_URL)
+          ABI=$(echo $API_RESPONSE | jq '.[0].ABI')
+          BYTECODE=$(echo $API_RESPONSE | jq -r '.[0].ByteCode.bytecode')
           mkdir -p ${{ github.workspace }}/ByteCode
           mkdir -p ${{ github.workspace }}/ABIs
           echo $ABI > ${{ github.workspace }}/ABIs/${CONTRACT_NAME}.abi
