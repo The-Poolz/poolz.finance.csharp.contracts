@@ -27,12 +27,16 @@ jobs:
           echo "CONTRACT_NAME=$(echo $CONTRACT_DETAILS | cut -d '@' -f 1)" >> $GITHUB_ENV
           echo "CONTRACT_VERSION=$(echo $CONTRACT_DETAILS | cut -d '@' -f 2)" >> $GITHUB_ENV
           
-      - name: Fetch ABI from API and Save
+      - name: Fetch ABI and ByteCode from API and Save
         run: |
-          ABI_URL="https://poolzfinancedata.com/contracts?NameVersion=${CONTRACT_NAME}@${CONTRACT_VERSION}"
-          ABI_JSON=$(curl -s $ABI_URL)
-          ABI=$(echo $ABI_JSON | jq '.[0].ABI')
-          echo $ABI > ${{ github.workspace }}/${CONTRACT_NAME}.abi
+          API_URL="https://poolzfinancedata.com/contracts?NameVersion=${CONTRACT_NAME}@${CONTRACT_VERSION}"
+          API_RESPONSE=$(curl -s $API_URL)
+          ABI=$(echo $API_RESPONSE | jq '.[0].ABI')
+          mkdir -p ${{ github.workspace }}/ABIs
+          echo $ABI > ${{ github.workspace }}/ABIs/${CONTRACT_NAME}.abi
+          BYTECODE=$(echo $API_RESPONSE | jq -r '.[0].ByteCode.bytecode')
+          mkdir -p ${{ github.workspace }}/ByteCode
+          echo $BYTECODE > ${{ github.workspace }}/ByteCode/${CONTRACT_NAME}.bin
         shell: bash
 
       - name: Add NethereumGenerator.ExtendedConsole to PATH
@@ -63,7 +67,6 @@ jobs:
           echo "PR_NUMBER=${PR_NUMBER}" >> $GITHUB_ENV
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 
       - name: Merge Pull Request
         uses: juliangruber/merge-pull-request-action@v1
