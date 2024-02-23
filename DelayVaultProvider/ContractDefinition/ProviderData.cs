@@ -5,7 +5,7 @@ using System.Numerics;
 using Nethereum.Hex.HexTypes;
 using Nethereum.ABI.FunctionEncoding.Attributes;
 
-namespace poolz.finance.csharp.DelayVaultProvider.ContractDefinition
+namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
 {
     public partial class ProviderData : ProviderDataBase { }
 
