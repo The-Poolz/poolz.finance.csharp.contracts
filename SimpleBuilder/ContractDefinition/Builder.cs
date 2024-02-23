@@ -5,7 +5,7 @@ using System.Numerics;
 using Nethereum.Hex.HexTypes;
 using Nethereum.ABI.FunctionEncoding.Attributes;
 
-namespace poolz.finance.csharp.SimpleBuilder.ContractDefinition
+namespace poolz.finance.csharp.contracts.SimpleBuilder.ContractDefinition
 {
     public partial class Builder : BuilderBase { }
 
