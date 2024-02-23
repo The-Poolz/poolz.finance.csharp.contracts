@@ -1,6 +1,6 @@
 # Contract Code Generator
 
-This repository contains a GitHub Actions workflow that automatically generates C# code files from an ABI file obtained from an API, using the Nethereum.Generator.Console tool.
+This repository contains a GitHub Actions workflow that automatically generates C# code files from an ABI file obtained from an API, using the [NethereumGenerator.ExtendedConsole](https://github.com/ArdenHide/NethereumGenerator) tool.
 
 ## Workflow Overview
 
