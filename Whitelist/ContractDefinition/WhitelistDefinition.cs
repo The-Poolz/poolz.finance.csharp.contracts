@@ -9,7 +9,7 @@ using Nethereum.Contracts.CQS;
 using Nethereum.Contracts;
 using System.Threading;
 
-namespace poolz.finance.csharp.Whitelist.ContractDefinition
+namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
 {
 
 
