@@ -5,7 +5,7 @@ using System.Numerics;
 using Nethereum.Hex.HexTypes;
 using Nethereum.ABI.FunctionEncoding.Attributes;
 
-namespace poolz.finance.csharp.SimpleRefundBuilder.ContractDefinition
+namespace poolz.finance.csharp.contracts.SimpleRefundBuilder.ContractDefinition
 {
     public partial class UserPool : UserPoolBase { }
 
