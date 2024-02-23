@@ -32,9 +32,9 @@ namespace poolz.finance.csharp.Whitelist
             return new WhitelistService(web3, receipt.ContractAddress);
         }
 
-        protected virtual Nethereum.Web3.IWeb3 Web3 { get; }
+        protected Nethereum.Web3.IWeb3 Web3{ get; }
 
-        public virtual ContractHandler ContractHandler { get; }
+        public ContractHandler ContractHandler { get; }
 
         public WhitelistService(Nethereum.Web3.Web3 web3, string contractAddress)
         {
@@ -48,13 +48,13 @@ namespace poolz.finance.csharp.Whitelist
             ContractHandler = web3.Eth.GetContractHandler(contractAddress);
         }
 
-        public virtual Task<BigInteger> CheckQueryAsync(CheckFunction checkFunction, BlockParameter blockParameter = null)
+        public Task<BigInteger> CheckQueryAsync(CheckFunction checkFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<CheckFunction, BigInteger>(checkFunction, blockParameter);
         }
 
         
-        public virtual Task<BigInteger> CheckQueryAsync(string user, BigInteger id, BlockParameter blockParameter = null)
+        public Task<BigInteger> CheckQueryAsync(string user, BigInteger id, BlockParameter blockParameter = null)
         {
             var checkFunction = new CheckFunction();
                 checkFunction.User = user;
@@ -63,46 +63,46 @@ namespace poolz.finance.csharp.Whitelist
             return ContractHandler.QueryAsync<CheckFunction, BigInteger>(checkFunction, blockParameter);
         }
 
-        public virtual Task<BigInteger> MaxUsersLimitQueryAsync(MaxUsersLimitFunction maxUsersLimitFunction, BlockParameter blockParameter = null)
+        public Task<BigInteger> MaxUsersLimitQueryAsync(MaxUsersLimitFunction maxUsersLimitFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<MaxUsersLimitFunction, BigInteger>(maxUsersLimitFunction, blockParameter);
         }
 
         
-        public virtual Task<BigInteger> MaxUsersLimitQueryAsync(BlockParameter blockParameter = null)
+        public Task<BigInteger> MaxUsersLimitQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<MaxUsersLimitFunction, BigInteger>(null, blockParameter);
         }
 
-        public virtual Task<BigInteger> WhiteListCostQueryAsync(WhiteListCostFunction whiteListCostFunction, BlockParameter blockParameter = null)
+        public Task<BigInteger> WhiteListCostQueryAsync(WhiteListCostFunction whiteListCostFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<WhiteListCostFunction, BigInteger>(whiteListCostFunction, blockParameter);
         }
 
         
-        public virtual Task<BigInteger> WhiteListCostQueryAsync(BlockParameter blockParameter = null)
+        public Task<BigInteger> WhiteListCostQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<WhiteListCostFunction, BigInteger>(null, blockParameter);
         }
 
-        public virtual Task<BigInteger> WhiteListCountQueryAsync(WhiteListCountFunction whiteListCountFunction, BlockParameter blockParameter = null)
+        public Task<BigInteger> WhiteListCountQueryAsync(WhiteListCountFunction whiteListCountFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<WhiteListCountFunction, BigInteger>(whiteListCountFunction, blockParameter);
         }
 
         
-        public virtual Task<BigInteger> WhiteListCountQueryAsync(BlockParameter blockParameter = null)
+        public Task<BigInteger> WhiteListCountQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<WhiteListCountFunction, BigInteger>(null, blockParameter);
         }
 
-        public virtual Task<BigInteger> WhitelistDBQueryAsync(WhitelistDBFunction whitelistDBFunction, BlockParameter blockParameter = null)
+        public Task<BigInteger> WhitelistDBQueryAsync(WhitelistDBFunction whitelistDBFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<WhitelistDBFunction, BigInteger>(whitelistDBFunction, blockParameter);
         }
 
         
-        public virtual Task<BigInteger> WhitelistDBQueryAsync(BigInteger returnValue1, string returnValue2, BlockParameter blockParameter = null)
+        public Task<BigInteger> WhitelistDBQueryAsync(BigInteger returnValue1, string returnValue2, BlockParameter blockParameter = null)
         {
             var whitelistDBFunction = new WhitelistDBFunction();
                 whitelistDBFunction.ReturnValue1 = returnValue1;
@@ -111,12 +111,12 @@ namespace poolz.finance.csharp.Whitelist
             return ContractHandler.QueryAsync<WhitelistDBFunction, BigInteger>(whitelistDBFunction, blockParameter);
         }
 
-        public virtual Task<WhitelistSettingsOutputDTO> WhitelistSettingsQueryAsync(WhitelistSettingsFunction whitelistSettingsFunction, BlockParameter blockParameter = null)
+        public Task<WhitelistSettingsOutputDTO> WhitelistSettingsQueryAsync(WhitelistSettingsFunction whitelistSettingsFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryDeserializingToObjectAsync<WhitelistSettingsFunction, WhitelistSettingsOutputDTO>(whitelistSettingsFunction, blockParameter);
         }
 
-        public virtual Task<WhitelistSettingsOutputDTO> WhitelistSettingsQueryAsync(BigInteger returnValue1, BlockParameter blockParameter = null)
+        public Task<WhitelistSettingsOutputDTO> WhitelistSettingsQueryAsync(BigInteger returnValue1, BlockParameter blockParameter = null)
         {
             var whitelistSettingsFunction = new WhitelistSettingsFunction();
                 whitelistSettingsFunction.ReturnValue1 = returnValue1;
@@ -124,13 +124,13 @@ namespace poolz.finance.csharp.Whitelist
             return ContractHandler.QueryDeserializingToObjectAsync<WhitelistSettingsFunction, WhitelistSettingsOutputDTO>(whitelistSettingsFunction, blockParameter);
         }
 
-        public virtual Task<bool> IsWhiteListReadyQueryAsync(IsWhiteListReadyFunction isWhiteListReadyFunction, BlockParameter blockParameter = null)
+        public Task<bool> IsWhiteListReadyQueryAsync(IsWhiteListReadyFunction isWhiteListReadyFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<IsWhiteListReadyFunction, bool>(isWhiteListReadyFunction, blockParameter);
         }
 
         
-        public virtual Task<bool> IsWhiteListReadyQueryAsync(BigInteger id, BlockParameter blockParameter = null)
+        public Task<bool> IsWhiteListReadyQueryAsync(BigInteger id, BlockParameter blockParameter = null)
         {
             var isWhiteListReadyFunction = new IsWhiteListReadyFunction();
                 isWhiteListReadyFunction.Id = id;
@@ -138,48 +138,48 @@ namespace poolz.finance.csharp.Whitelist
             return ContractHandler.QueryAsync<IsWhiteListReadyFunction, bool>(isWhiteListReadyFunction, blockParameter);
         }
 
-        public virtual Task<string> OwnerQueryAsync(OwnerFunction ownerFunction, BlockParameter blockParameter = null)
+        public Task<string> OwnerQueryAsync(OwnerFunction ownerFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<OwnerFunction, string>(ownerFunction, blockParameter);
         }
 
         
-        public virtual Task<string> OwnerQueryAsync(BlockParameter blockParameter = null)
+        public Task<string> OwnerQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<OwnerFunction, string>(null, blockParameter);
         }
 
-        public virtual Task<string> RenounceOwnershipRequestAsync(RenounceOwnershipFunction renounceOwnershipFunction)
+        public Task<string> RenounceOwnershipRequestAsync(RenounceOwnershipFunction renounceOwnershipFunction)
         {
              return ContractHandler.SendRequestAsync(renounceOwnershipFunction);
         }
 
-        public virtual Task<string> RenounceOwnershipRequestAsync()
+        public Task<string> RenounceOwnershipRequestAsync()
         {
              return ContractHandler.SendRequestAsync<RenounceOwnershipFunction>();
         }
 
-        public virtual Task<TransactionReceipt> RenounceOwnershipRequestAndWaitForReceiptAsync(RenounceOwnershipFunction renounceOwnershipFunction, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> RenounceOwnershipRequestAndWaitForReceiptAsync(RenounceOwnershipFunction renounceOwnershipFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(renounceOwnershipFunction, cancellationToken);
         }
 
-        public virtual Task<TransactionReceipt> RenounceOwnershipRequestAndWaitForReceiptAsync(CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> RenounceOwnershipRequestAndWaitForReceiptAsync(CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync<RenounceOwnershipFunction>(null, cancellationToken);
         }
 
-        public virtual Task<string> TransferOwnershipRequestAsync(TransferOwnershipFunction transferOwnershipFunction)
+        public Task<string> TransferOwnershipRequestAsync(TransferOwnershipFunction transferOwnershipFunction)
         {
              return ContractHandler.SendRequestAsync(transferOwnershipFunction);
         }
 
-        public virtual Task<TransactionReceipt> TransferOwnershipRequestAndWaitForReceiptAsync(TransferOwnershipFunction transferOwnershipFunction, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> TransferOwnershipRequestAndWaitForReceiptAsync(TransferOwnershipFunction transferOwnershipFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(transferOwnershipFunction, cancellationToken);
         }
 
-        public virtual Task<string> TransferOwnershipRequestAsync(string newOwner)
+        public Task<string> TransferOwnershipRequestAsync(string newOwner)
         {
             var transferOwnershipFunction = new TransferOwnershipFunction();
                 transferOwnershipFunction.NewOwner = newOwner;
@@ -187,7 +187,7 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAsync(transferOwnershipFunction);
         }
 
-        public virtual Task<TransactionReceipt> TransferOwnershipRequestAndWaitForReceiptAsync(string newOwner, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> TransferOwnershipRequestAndWaitForReceiptAsync(string newOwner, CancellationTokenSource cancellationToken = null)
         {
             var transferOwnershipFunction = new TransferOwnershipFunction();
                 transferOwnershipFunction.NewOwner = newOwner;
@@ -195,17 +195,17 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAndWaitForReceiptAsync(transferOwnershipFunction, cancellationToken);
         }
 
-        public virtual Task<string> SetMaxUsersLimitRequestAsync(SetMaxUsersLimitFunction setMaxUsersLimitFunction)
+        public Task<string> SetMaxUsersLimitRequestAsync(SetMaxUsersLimitFunction setMaxUsersLimitFunction)
         {
              return ContractHandler.SendRequestAsync(setMaxUsersLimitFunction);
         }
 
-        public virtual Task<TransactionReceipt> SetMaxUsersLimitRequestAndWaitForReceiptAsync(SetMaxUsersLimitFunction setMaxUsersLimitFunction, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> SetMaxUsersLimitRequestAndWaitForReceiptAsync(SetMaxUsersLimitFunction setMaxUsersLimitFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(setMaxUsersLimitFunction, cancellationToken);
         }
 
-        public virtual Task<string> SetMaxUsersLimitRequestAsync(BigInteger limit)
+        public Task<string> SetMaxUsersLimitRequestAsync(BigInteger limit)
         {
             var setMaxUsersLimitFunction = new SetMaxUsersLimitFunction();
                 setMaxUsersLimitFunction.Limit = limit;
@@ -213,7 +213,7 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAsync(setMaxUsersLimitFunction);
         }
 
-        public virtual Task<TransactionReceipt> SetMaxUsersLimitRequestAndWaitForReceiptAsync(BigInteger limit, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> SetMaxUsersLimitRequestAndWaitForReceiptAsync(BigInteger limit, CancellationTokenSource cancellationToken = null)
         {
             var setMaxUsersLimitFunction = new SetMaxUsersLimitFunction();
                 setMaxUsersLimitFunction.Limit = limit;
@@ -221,17 +221,17 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAndWaitForReceiptAsync(setMaxUsersLimitFunction, cancellationToken);
         }
 
-        public virtual Task<string> WithdrawETHFeeRequestAsync(WithdrawETHFeeFunction withdrawETHFeeFunction)
+        public Task<string> WithdrawETHFeeRequestAsync(WithdrawETHFeeFunction withdrawETHFeeFunction)
         {
              return ContractHandler.SendRequestAsync(withdrawETHFeeFunction);
         }
 
-        public virtual Task<TransactionReceipt> WithdrawETHFeeRequestAndWaitForReceiptAsync(WithdrawETHFeeFunction withdrawETHFeeFunction, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> WithdrawETHFeeRequestAndWaitForReceiptAsync(WithdrawETHFeeFunction withdrawETHFeeFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(withdrawETHFeeFunction, cancellationToken);
         }
 
-        public virtual Task<string> WithdrawETHFeeRequestAsync(string to)
+        public Task<string> WithdrawETHFeeRequestAsync(string to)
         {
             var withdrawETHFeeFunction = new WithdrawETHFeeFunction();
                 withdrawETHFeeFunction.To = to;
@@ -239,7 +239,7 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAsync(withdrawETHFeeFunction);
         }
 
-        public virtual Task<TransactionReceipt> WithdrawETHFeeRequestAndWaitForReceiptAsync(string to, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> WithdrawETHFeeRequestAndWaitForReceiptAsync(string to, CancellationTokenSource cancellationToken = null)
         {
             var withdrawETHFeeFunction = new WithdrawETHFeeFunction();
                 withdrawETHFeeFunction.To = to;
@@ -247,17 +247,17 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAndWaitForReceiptAsync(withdrawETHFeeFunction, cancellationToken);
         }
 
-        public virtual Task<string> SetWhiteListCostRequestAsync(SetWhiteListCostFunction setWhiteListCostFunction)
+        public Task<string> SetWhiteListCostRequestAsync(SetWhiteListCostFunction setWhiteListCostFunction)
         {
              return ContractHandler.SendRequestAsync(setWhiteListCostFunction);
         }
 
-        public virtual Task<TransactionReceipt> SetWhiteListCostRequestAndWaitForReceiptAsync(SetWhiteListCostFunction setWhiteListCostFunction, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> SetWhiteListCostRequestAndWaitForReceiptAsync(SetWhiteListCostFunction setWhiteListCostFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(setWhiteListCostFunction, cancellationToken);
         }
 
-        public virtual Task<string> SetWhiteListCostRequestAsync(BigInteger newCost)
+        public Task<string> SetWhiteListCostRequestAsync(BigInteger newCost)
         {
             var setWhiteListCostFunction = new SetWhiteListCostFunction();
                 setWhiteListCostFunction.NewCost = newCost;
@@ -265,7 +265,7 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAsync(setWhiteListCostFunction);
         }
 
-        public virtual Task<TransactionReceipt> SetWhiteListCostRequestAndWaitForReceiptAsync(BigInteger newCost, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> SetWhiteListCostRequestAndWaitForReceiptAsync(BigInteger newCost, CancellationTokenSource cancellationToken = null)
         {
             var setWhiteListCostFunction = new SetWhiteListCostFunction();
                 setWhiteListCostFunction.NewCost = newCost;
@@ -273,17 +273,17 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAndWaitForReceiptAsync(setWhiteListCostFunction, cancellationToken);
         }
 
-        public virtual Task<string> CreateManualWhiteListRequestAsync(CreateManualWhiteListFunction createManualWhiteListFunction)
+        public Task<string> CreateManualWhiteListRequestAsync(CreateManualWhiteListFunction createManualWhiteListFunction)
         {
              return ContractHandler.SendRequestAsync(createManualWhiteListFunction);
         }
 
-        public virtual Task<TransactionReceipt> CreateManualWhiteListRequestAndWaitForReceiptAsync(CreateManualWhiteListFunction createManualWhiteListFunction, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> CreateManualWhiteListRequestAndWaitForReceiptAsync(CreateManualWhiteListFunction createManualWhiteListFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(createManualWhiteListFunction, cancellationToken);
         }
 
-        public virtual Task<string> CreateManualWhiteListRequestAsync(BigInteger changeUntil, string contract)
+        public Task<string> CreateManualWhiteListRequestAsync(BigInteger changeUntil, string contract)
         {
             var createManualWhiteListFunction = new CreateManualWhiteListFunction();
                 createManualWhiteListFunction.ChangeUntil = changeUntil;
@@ -292,7 +292,7 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAsync(createManualWhiteListFunction);
         }
 
-        public virtual Task<TransactionReceipt> CreateManualWhiteListRequestAndWaitForReceiptAsync(BigInteger changeUntil, string contract, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> CreateManualWhiteListRequestAndWaitForReceiptAsync(BigInteger changeUntil, string contract, CancellationTokenSource cancellationToken = null)
         {
             var createManualWhiteListFunction = new CreateManualWhiteListFunction();
                 createManualWhiteListFunction.ChangeUntil = changeUntil;
@@ -301,17 +301,17 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAndWaitForReceiptAsync(createManualWhiteListFunction, cancellationToken);
         }
 
-        public virtual Task<string> ChangeCreatorRequestAsync(ChangeCreatorFunction changeCreatorFunction)
+        public Task<string> ChangeCreatorRequestAsync(ChangeCreatorFunction changeCreatorFunction)
         {
              return ContractHandler.SendRequestAsync(changeCreatorFunction);
         }
 
-        public virtual Task<TransactionReceipt> ChangeCreatorRequestAndWaitForReceiptAsync(ChangeCreatorFunction changeCreatorFunction, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> ChangeCreatorRequestAndWaitForReceiptAsync(ChangeCreatorFunction changeCreatorFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(changeCreatorFunction, cancellationToken);
         }
 
-        public virtual Task<string> ChangeCreatorRequestAsync(BigInteger id, string newCreator)
+        public Task<string> ChangeCreatorRequestAsync(BigInteger id, string newCreator)
         {
             var changeCreatorFunction = new ChangeCreatorFunction();
                 changeCreatorFunction.Id = id;
@@ -320,7 +320,7 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAsync(changeCreatorFunction);
         }
 
-        public virtual Task<TransactionReceipt> ChangeCreatorRequestAndWaitForReceiptAsync(BigInteger id, string newCreator, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> ChangeCreatorRequestAndWaitForReceiptAsync(BigInteger id, string newCreator, CancellationTokenSource cancellationToken = null)
         {
             var changeCreatorFunction = new ChangeCreatorFunction();
                 changeCreatorFunction.Id = id;
@@ -329,17 +329,17 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAndWaitForReceiptAsync(changeCreatorFunction, cancellationToken);
         }
 
-        public virtual Task<string> ChangeContractRequestAsync(ChangeContractFunction changeContractFunction)
+        public Task<string> ChangeContractRequestAsync(ChangeContractFunction changeContractFunction)
         {
              return ContractHandler.SendRequestAsync(changeContractFunction);
         }
 
-        public virtual Task<TransactionReceipt> ChangeContractRequestAndWaitForReceiptAsync(ChangeContractFunction changeContractFunction, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> ChangeContractRequestAndWaitForReceiptAsync(ChangeContractFunction changeContractFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(changeContractFunction, cancellationToken);
         }
 
-        public virtual Task<string> ChangeContractRequestAsync(BigInteger id, string newContract)
+        public Task<string> ChangeContractRequestAsync(BigInteger id, string newContract)
         {
             var changeContractFunction = new ChangeContractFunction();
                 changeContractFunction.Id = id;
@@ -348,7 +348,7 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAsync(changeContractFunction);
         }
 
-        public virtual Task<TransactionReceipt> ChangeContractRequestAndWaitForReceiptAsync(BigInteger id, string newContract, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> ChangeContractRequestAndWaitForReceiptAsync(BigInteger id, string newContract, CancellationTokenSource cancellationToken = null)
         {
             var changeContractFunction = new ChangeContractFunction();
                 changeContractFunction.Id = id;
@@ -357,17 +357,17 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAndWaitForReceiptAsync(changeContractFunction, cancellationToken);
         }
 
-        public virtual Task<string> AddAddressRequestAsync(AddAddressFunction addAddressFunction)
+        public Task<string> AddAddressRequestAsync(AddAddressFunction addAddressFunction)
         {
              return ContractHandler.SendRequestAsync(addAddressFunction);
         }
 
-        public virtual Task<TransactionReceipt> AddAddressRequestAndWaitForReceiptAsync(AddAddressFunction addAddressFunction, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> AddAddressRequestAndWaitForReceiptAsync(AddAddressFunction addAddressFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(addAddressFunction, cancellationToken);
         }
 
-        public virtual Task<string> AddAddressRequestAsync(BigInteger id, List<string> users, List<BigInteger> amount)
+        public Task<string> AddAddressRequestAsync(BigInteger id, List<string> users, List<BigInteger> amount)
         {
             var addAddressFunction = new AddAddressFunction();
                 addAddressFunction.Id = id;
@@ -377,7 +377,7 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAsync(addAddressFunction);
         }
 
-        public virtual Task<TransactionReceipt> AddAddressRequestAndWaitForReceiptAsync(BigInteger id, List<string> users, List<BigInteger> amount, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> AddAddressRequestAndWaitForReceiptAsync(BigInteger id, List<string> users, List<BigInteger> amount, CancellationTokenSource cancellationToken = null)
         {
             var addAddressFunction = new AddAddressFunction();
                 addAddressFunction.Id = id;
@@ -387,17 +387,17 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAndWaitForReceiptAsync(addAddressFunction, cancellationToken);
         }
 
-        public virtual Task<string> RemoveAddressRequestAsync(RemoveAddressFunction removeAddressFunction)
+        public Task<string> RemoveAddressRequestAsync(RemoveAddressFunction removeAddressFunction)
         {
              return ContractHandler.SendRequestAsync(removeAddressFunction);
         }
 
-        public virtual Task<TransactionReceipt> RemoveAddressRequestAndWaitForReceiptAsync(RemoveAddressFunction removeAddressFunction, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> RemoveAddressRequestAndWaitForReceiptAsync(RemoveAddressFunction removeAddressFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(removeAddressFunction, cancellationToken);
         }
 
-        public virtual Task<string> RemoveAddressRequestAsync(BigInteger id, List<string> users)
+        public Task<string> RemoveAddressRequestAsync(BigInteger id, List<string> users)
         {
             var removeAddressFunction = new RemoveAddressFunction();
                 removeAddressFunction.Id = id;
@@ -406,7 +406,7 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAsync(removeAddressFunction);
         }
 
-        public virtual Task<TransactionReceipt> RemoveAddressRequestAndWaitForReceiptAsync(BigInteger id, List<string> users, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> RemoveAddressRequestAndWaitForReceiptAsync(BigInteger id, List<string> users, CancellationTokenSource cancellationToken = null)
         {
             var removeAddressFunction = new RemoveAddressFunction();
                 removeAddressFunction.Id = id;
@@ -415,17 +415,17 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAndWaitForReceiptAsync(removeAddressFunction, cancellationToken);
         }
 
-        public virtual Task<string> RegisterRequestAsync(RegisterFunction registerFunction)
+        public Task<string> RegisterRequestAsync(RegisterFunction registerFunction)
         {
              return ContractHandler.SendRequestAsync(registerFunction);
         }
 
-        public virtual Task<TransactionReceipt> RegisterRequestAndWaitForReceiptAsync(RegisterFunction registerFunction, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> RegisterRequestAndWaitForReceiptAsync(RegisterFunction registerFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(registerFunction, cancellationToken);
         }
 
-        public virtual Task<string> RegisterRequestAsync(string subject, BigInteger id, BigInteger amount)
+        public Task<string> RegisterRequestAsync(string subject, BigInteger id, BigInteger amount)
         {
             var registerFunction = new RegisterFunction();
                 registerFunction.Subject = subject;
@@ -435,7 +435,7 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAsync(registerFunction);
         }
 
-        public virtual Task<TransactionReceipt> RegisterRequestAndWaitForReceiptAsync(string subject, BigInteger id, BigInteger amount, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> RegisterRequestAndWaitForReceiptAsync(string subject, BigInteger id, BigInteger amount, CancellationTokenSource cancellationToken = null)
         {
             var registerFunction = new RegisterFunction();
                 registerFunction.Subject = subject;
@@ -445,17 +445,17 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAndWaitForReceiptAsync(registerFunction, cancellationToken);
         }
 
-        public virtual Task<string> LastRoundRegisterRequestAsync(LastRoundRegisterFunction lastRoundRegisterFunction)
+        public Task<string> LastRoundRegisterRequestAsync(LastRoundRegisterFunction lastRoundRegisterFunction)
         {
              return ContractHandler.SendRequestAsync(lastRoundRegisterFunction);
         }
 
-        public virtual Task<TransactionReceipt> LastRoundRegisterRequestAndWaitForReceiptAsync(LastRoundRegisterFunction lastRoundRegisterFunction, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> LastRoundRegisterRequestAndWaitForReceiptAsync(LastRoundRegisterFunction lastRoundRegisterFunction, CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync(lastRoundRegisterFunction, cancellationToken);
         }
 
-        public virtual Task<string> LastRoundRegisterRequestAsync(string subject, BigInteger id)
+        public Task<string> LastRoundRegisterRequestAsync(string subject, BigInteger id)
         {
             var lastRoundRegisterFunction = new LastRoundRegisterFunction();
                 lastRoundRegisterFunction.Subject = subject;
@@ -464,7 +464,7 @@ namespace poolz.finance.csharp.Whitelist
              return ContractHandler.SendRequestAsync(lastRoundRegisterFunction);
         }
 
-        public virtual Task<TransactionReceipt> LastRoundRegisterRequestAndWaitForReceiptAsync(string subject, BigInteger id, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> LastRoundRegisterRequestAndWaitForReceiptAsync(string subject, BigInteger id, CancellationTokenSource cancellationToken = null)
         {
             var lastRoundRegisterFunction = new LastRoundRegisterFunction();
                 lastRoundRegisterFunction.Subject = subject;
