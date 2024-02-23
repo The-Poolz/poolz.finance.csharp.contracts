@@ -32,10 +32,10 @@ jobs:
           API_URL="https://poolzfinancedata.com/contracts?NameVersion=${CONTRACT_NAME}@${CONTRACT_VERSION}"
           API_RESPONSE=$(curl -s $API_URL)
           ABI=$(echo $API_RESPONSE | jq '.[0].ABI')
-          BYTECODE=$(echo $API_RESPONSE | jq -r '.[0].ByteCode.bytecode')
-          mkdir -p ${{ github.workspace }}/ByteCode
           mkdir -p ${{ github.workspace }}/ABIs
           echo $ABI > ${{ github.workspace }}/ABIs/${CONTRACT_NAME}.abi
+          BYTECODE=$(echo $API_RESPONSE | jq -r '.[0].ByteCode.bytecode')
+          mkdir -p ${{ github.workspace }}/ByteCode
           echo $BYTECODE > ${{ github.workspace }}/ByteCode/${CONTRACT_NAME}.bin
         shell: bash
 
