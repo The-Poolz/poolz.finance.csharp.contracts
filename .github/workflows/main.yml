@@ -39,7 +39,7 @@ jobs:
         run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
 
       - name: Run Nethereum.Generator.Console
-        run: NethereumGenerator.ExtendedConsole generate from-abi -cn ${CONTRACT_NAME} -abi ${{ github.workspace }}/${CONTRACT_NAME}.abi
+        run: NethereumGenerator.ExtendedConsole generate from-abi -cn ${CONTRACT_NAME} -abi ${{ github.workspace }}/${CONTRACT_NAME}.abi -o ${{ github.workspace }} -ns poolz.finance.csharp.contracts
         shell: bash
 
       - name: Create new branch
