@@ -18,8 +18,8 @@ jobs:
         with:
           dotnet-version: '6.0'
 
-      - name: Install Nethereum.Generator.Console
-        run: dotnet tool install -g Nethereum.Generator.Console --add-source https://www.myget.org/F/nethereum/api/v3/index.json
+      - name: Install NethereumGenerator.ExtendedConsole
+        run: dotnet tool install --global NethereumGenerator.ExtendedConsole --version 1.0.0
 
       - name: Parse issue for contract details and set environment variables
         run: |
@@ -35,11 +35,11 @@ jobs:
           echo $ABI > ${{ github.workspace }}/${CONTRACT_NAME}.abi
         shell: bash
 
-      - name: Add Nethereum.Generator.Console to PATH
+      - name: Add NethereumGenerator.ExtendedConsole to PATH
         run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
 
       - name: Run Nethereum.Generator.Console
-        run: Nethereum.Generator.Console generate from-project
+        run: NethereumGenerator.ExtendedConsole generate from-project
         shell: bash
 
       - name: Create new branch
