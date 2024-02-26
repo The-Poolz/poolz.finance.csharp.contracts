@@ -36,7 +36,7 @@ jobs:
           echo $ABI > ${{ github.workspace }}/ABIs/${CONTRACT_NAME}.abi
           BYTECODE=$(echo $API_RESPONSE | jq -r '.[0].ByteCode.bytecode')
           mkdir -p ${{ github.workspace }}/ByteCode
-          echo $BYTECODE > ${{ github.workspace }}/ByteCode/${CONTRACT_NAME}.bin
+          echo -n $BYTECODE > ${{ github.workspace }}/ByteCode/${CONTRACT_NAME}.bin
         shell: bash
 
       - name: Add NethereumGenerator.ExtendedConsole to PATH
