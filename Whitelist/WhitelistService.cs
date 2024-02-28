@@ -16,22 +16,6 @@ namespace poolz.finance.csharp.contracts.Whitelist
 {
     public partial class WhitelistService
     {
-        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, WhitelistDeployment whitelistDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            return web3.Eth.GetContractDeploymentHandler<WhitelistDeployment>().SendRequestAndWaitForReceiptAsync(whitelistDeployment, cancellationTokenSource);
-        }
-
-        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, WhitelistDeployment whitelistDeployment)
-        {
-            return web3.Eth.GetContractDeploymentHandler<WhitelistDeployment>().SendRequestAsync(whitelistDeployment);
-        }
-
-        public static async Task<WhitelistService> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, WhitelistDeployment whitelistDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            var receipt = await DeployContractAndWaitForReceiptAsync(web3, whitelistDeployment, cancellationTokenSource);
-            return new WhitelistService(web3, receipt.ContractAddress);
-        }
-
         protected virtual Nethereum.Web3.IWeb3 Web3 { get; }
 
         public virtual ContractHandler ContractHandler { get; }
