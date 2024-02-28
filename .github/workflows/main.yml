@@ -19,7 +19,7 @@ jobs:
           dotnet-version: '6.0'
 
       - name: Install NethereumGenerator.ExtendedConsole
-        run: dotnet tool install --global NethereumGenerator.ExtendedConsole --version 1.0.0
+        run: dotnet tool install --global NethereumGenerator.ExtendedConsole --version 1.0.1
 
       - name: Parse issue for contract details and set environment variables
         run: |
