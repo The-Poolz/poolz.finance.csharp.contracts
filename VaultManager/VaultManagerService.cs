@@ -16,22 +16,6 @@ namespace poolz.finance.csharp.contracts.VaultManager
 {
     public partial class VaultManagerService
     {
-        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, VaultManagerDeployment vaultManagerDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            return web3.Eth.GetContractDeploymentHandler<VaultManagerDeployment>().SendRequestAndWaitForReceiptAsync(vaultManagerDeployment, cancellationTokenSource);
-        }
-
-        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, VaultManagerDeployment vaultManagerDeployment)
-        {
-            return web3.Eth.GetContractDeploymentHandler<VaultManagerDeployment>().SendRequestAsync(vaultManagerDeployment);
-        }
-
-        public static async Task<VaultManagerService> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, VaultManagerDeployment vaultManagerDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            var receipt = await DeployContractAndWaitForReceiptAsync(web3, vaultManagerDeployment, cancellationTokenSource);
-            return new VaultManagerService(web3, receipt.ContractAddress);
-        }
-
         protected virtual Nethereum.Web3.IWeb3 Web3 { get; }
 
         public virtual ContractHandler ContractHandler { get; }
