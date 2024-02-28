@@ -16,22 +16,6 @@ namespace poolz.finance.csharp.contracts.LockDealNFT
 {
     public partial class LockDealNFTService
     {
-        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, LockDealNFTDeployment lockDealNFTDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            return web3.Eth.GetContractDeploymentHandler<LockDealNFTDeployment>().SendRequestAndWaitForReceiptAsync(lockDealNFTDeployment, cancellationTokenSource);
-        }
-
-        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, LockDealNFTDeployment lockDealNFTDeployment)
-        {
-            return web3.Eth.GetContractDeploymentHandler<LockDealNFTDeployment>().SendRequestAsync(lockDealNFTDeployment);
-        }
-
-        public static async Task<LockDealNFTService> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, LockDealNFTDeployment lockDealNFTDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            var receipt = await DeployContractAndWaitForReceiptAsync(web3, lockDealNFTDeployment, cancellationTokenSource);
-            return new LockDealNFTService(web3, receipt.ContractAddress);
-        }
-
         protected virtual Nethereum.Web3.IWeb3 Web3 { get; }
 
         public virtual ContractHandler ContractHandler { get; }
