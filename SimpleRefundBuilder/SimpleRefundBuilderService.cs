@@ -16,22 +16,6 @@ namespace poolz.finance.csharp.contracts.SimpleRefundBuilder
 {
     public partial class SimpleRefundBuilderService
     {
-        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, SimpleRefundBuilderDeployment simpleRefundBuilderDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            return web3.Eth.GetContractDeploymentHandler<SimpleRefundBuilderDeployment>().SendRequestAndWaitForReceiptAsync(simpleRefundBuilderDeployment, cancellationTokenSource);
-        }
-
-        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, SimpleRefundBuilderDeployment simpleRefundBuilderDeployment)
-        {
-            return web3.Eth.GetContractDeploymentHandler<SimpleRefundBuilderDeployment>().SendRequestAsync(simpleRefundBuilderDeployment);
-        }
-
-        public static async Task<SimpleRefundBuilderService> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, SimpleRefundBuilderDeployment simpleRefundBuilderDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            var receipt = await DeployContractAndWaitForReceiptAsync(web3, simpleRefundBuilderDeployment, cancellationTokenSource);
-            return new SimpleRefundBuilderService(web3, receipt.ContractAddress);
-        }
-
         protected virtual Nethereum.Web3.IWeb3 Web3 { get; }
 
         public virtual ContractHandler ContractHandler { get; }
