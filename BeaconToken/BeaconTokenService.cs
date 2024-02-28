@@ -16,22 +16,6 @@ namespace poolz.finance.csharp.contracts.BeaconToken
 {
     public partial class BeaconTokenService
     {
-        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, BeaconTokenDeployment beaconTokenDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            return web3.Eth.GetContractDeploymentHandler<BeaconTokenDeployment>().SendRequestAndWaitForReceiptAsync(beaconTokenDeployment, cancellationTokenSource);
-        }
-
-        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, BeaconTokenDeployment beaconTokenDeployment)
-        {
-            return web3.Eth.GetContractDeploymentHandler<BeaconTokenDeployment>().SendRequestAsync(beaconTokenDeployment);
-        }
-
-        public static async Task<BeaconTokenService> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, BeaconTokenDeployment beaconTokenDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            var receipt = await DeployContractAndWaitForReceiptAsync(web3, beaconTokenDeployment, cancellationTokenSource);
-            return new BeaconTokenService(web3, receipt.ContractAddress);
-        }
-
         protected virtual Nethereum.Web3.IWeb3 Web3 { get; }
 
         public virtual ContractHandler ContractHandler { get; }
