@@ -16,22 +16,6 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider
 {
     public partial class DelayVaultProviderService
     {
-        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, DelayVaultProviderDeployment delayVaultProviderDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            return web3.Eth.GetContractDeploymentHandler<DelayVaultProviderDeployment>().SendRequestAndWaitForReceiptAsync(delayVaultProviderDeployment, cancellationTokenSource);
-        }
-
-        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, DelayVaultProviderDeployment delayVaultProviderDeployment)
-        {
-            return web3.Eth.GetContractDeploymentHandler<DelayVaultProviderDeployment>().SendRequestAsync(delayVaultProviderDeployment);
-        }
-
-        public static async Task<DelayVaultProviderService> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, DelayVaultProviderDeployment delayVaultProviderDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            var receipt = await DeployContractAndWaitForReceiptAsync(web3, delayVaultProviderDeployment, cancellationTokenSource);
-            return new DelayVaultProviderService(web3, receipt.ContractAddress);
-        }
-
         protected virtual Nethereum.Web3.IWeb3 Web3 { get; }
 
         public virtual ContractHandler ContractHandler { get; }
