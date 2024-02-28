@@ -16,22 +16,6 @@ namespace poolz.finance.csharp.contracts.SimpleBuilder
 {
     public partial class SimpleBuilderService
     {
-        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, SimpleBuilderDeployment simpleBuilderDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            return web3.Eth.GetContractDeploymentHandler<SimpleBuilderDeployment>().SendRequestAndWaitForReceiptAsync(simpleBuilderDeployment, cancellationTokenSource);
-        }
-
-        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, SimpleBuilderDeployment simpleBuilderDeployment)
-        {
-            return web3.Eth.GetContractDeploymentHandler<SimpleBuilderDeployment>().SendRequestAsync(simpleBuilderDeployment);
-        }
-
-        public static async Task<SimpleBuilderService> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, SimpleBuilderDeployment simpleBuilderDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            var receipt = await DeployContractAndWaitForReceiptAsync(web3, simpleBuilderDeployment, cancellationTokenSource);
-            return new SimpleBuilderService(web3, receipt.ContractAddress);
-        }
-
         protected virtual Nethereum.Web3.IWeb3 Web3 { get; }
 
         public virtual ContractHandler ContractHandler { get; }
