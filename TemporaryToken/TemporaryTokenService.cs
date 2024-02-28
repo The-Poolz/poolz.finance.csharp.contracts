@@ -16,22 +16,6 @@ namespace poolz.finance.csharp.contracts.TemporaryToken
 {
     public partial class TemporaryTokenService
     {
-        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, TemporaryTokenDeployment temporaryTokenDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            return web3.Eth.GetContractDeploymentHandler<TemporaryTokenDeployment>().SendRequestAndWaitForReceiptAsync(temporaryTokenDeployment, cancellationTokenSource);
-        }
-
-        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, TemporaryTokenDeployment temporaryTokenDeployment)
-        {
-            return web3.Eth.GetContractDeploymentHandler<TemporaryTokenDeployment>().SendRequestAsync(temporaryTokenDeployment);
-        }
-
-        public static async Task<TemporaryTokenService> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, TemporaryTokenDeployment temporaryTokenDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            var receipt = await DeployContractAndWaitForReceiptAsync(web3, temporaryTokenDeployment, cancellationTokenSource);
-            return new TemporaryTokenService(web3, receipt.ContractAddress);
-        }
-
         protected virtual Nethereum.Web3.IWeb3 Web3 { get; }
 
         public virtual ContractHandler ContractHandler { get; }
