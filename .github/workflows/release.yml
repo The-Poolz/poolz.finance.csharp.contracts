@@ -63,7 +63,7 @@ jobs:
             "https://api.github.com/repos/${{ github.repository }}/pulls/$pr_number/merge" \
             -d '{"merge_method": "squash"}'
 
-      - name: Package and Push NuGet Package to GitHub Packages
+      - name: Package and Push NuGet Package to NuGet.org
         run: |
           dotnet pack --configuration Release --output nupkg/
-          nuget push nupkg/*.nupkg -Source https://nuget.pkg.github.com/The-Poolz/index.json -ApiKey ${{ secrets.GITHUB_TOKEN }}
+          dotnet nuget push "nupkg/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
