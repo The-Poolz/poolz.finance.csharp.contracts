@@ -12,8 +12,8 @@ namespace poolz.finance.csharp.contracts.SimpleBuilder.ContractDefinition
     public class BuilderBase 
     {
         [Parameter("tuple[]", "userPools", 1)]
-        public virtual List<UserPool> UserPools { get; set; }
+        public List<UserPool> UserPools { get; set; }
         [Parameter("uint256", "totalAmount", 2)]
-        public virtual BigInteger TotalAmount { get; set; }
+        public BigInteger TotalAmount { get; set; }
     }
 }

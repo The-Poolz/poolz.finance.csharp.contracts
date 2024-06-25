@@ -25,7 +25,7 @@ namespace poolz.finance.csharp.contracts.SimpleBuilder.ContractDefinition
         public SimpleBuilderDeploymentBase() : base(BYTECODE) { }
         public SimpleBuilderDeploymentBase(string byteCode) : base(byteCode) { }
         [Parameter("address", "_nft", 1)]
-        public virtual string Nft { get; set; }
+        public string Nft { get; set; }
     }
 
     public partial class BuildMassPoolsFunction : BuildMassPoolsFunctionBase { }
@@ -34,13 +34,13 @@ namespace poolz.finance.csharp.contracts.SimpleBuilder.ContractDefinition
     public class BuildMassPoolsFunctionBase : FunctionMessage
     {
         [Parameter("address[]", "addressParams", 1)]
-        public virtual List<string> AddressParams { get; set; }
+        public List<string> AddressParams { get; set; }
         [Parameter("tuple", "userData", 2)]
-        public virtual Builder UserData { get; set; }
+        public Builder UserData { get; set; }
         [Parameter("uint256[]", "params", 3)]
-        public virtual List<BigInteger> Params { get; set; }
+        public List<BigInteger> Params { get; set; }
         [Parameter("bytes", "signature", 4)]
-        public virtual byte[] Signature { get; set; }
+        public byte[] Signature { get; set; }
     }
 
     public partial class FirewallAdminFunction : FirewallAdminFunctionBase { }
@@ -65,13 +65,13 @@ namespace poolz.finance.csharp.contracts.SimpleBuilder.ContractDefinition
     public class OnERC721ReceivedFunctionBase : FunctionMessage
     {
         [Parameter("address", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
         [Parameter("address", "", 2)]
-        public virtual string ReturnValue2 { get; set; }
+        public string ReturnValue2 { get; set; }
         [Parameter("uint256", "", 3)]
-        public virtual BigInteger ReturnValue3 { get; set; }
+        public BigInteger ReturnValue3 { get; set; }
         [Parameter("bytes", "", 4)]
-        public virtual byte[] ReturnValue4 { get; set; }
+        public byte[] ReturnValue4 { get; set; }
     }
 
     public partial class SetFirewallFunction : SetFirewallFunctionBase { }
@@ -80,7 +80,7 @@ namespace poolz.finance.csharp.contracts.SimpleBuilder.ContractDefinition
     public class SetFirewallFunctionBase : FunctionMessage
     {
         [Parameter("address", "_firewall", 1)]
-        public virtual string Firewall { get; set; }
+        public string Firewall { get; set; }
     }
 
     public partial class SetFirewallAdminFunction : SetFirewallAdminFunctionBase { }
@@ -89,7 +89,7 @@ namespace poolz.finance.csharp.contracts.SimpleBuilder.ContractDefinition
     public class SetFirewallAdminFunctionBase : FunctionMessage
     {
         [Parameter("address", "_firewallAdmin", 1)]
-        public virtual string FirewallAdmin { get; set; }
+        public string FirewallAdmin { get; set; }
     }
 
 
@@ -100,7 +100,7 @@ namespace poolz.finance.csharp.contracts.SimpleBuilder.ContractDefinition
     public class FirewallAdminOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("address", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
     public partial class LockDealNFTOutputDTO : LockDealNFTOutputDTOBase { }
@@ -109,7 +109,7 @@ namespace poolz.finance.csharp.contracts.SimpleBuilder.ContractDefinition
     public class LockDealNFTOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("address", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
 
