@@ -25,9 +25,9 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
         public LockDealNFTDeploymentBase() : base(BYTECODE) { }
         public LockDealNFTDeploymentBase(string byteCode) : base(byteCode) { }
         [Parameter("address", "_vaultManager", 1)]
-        public virtual string VaultManager { get; set; }
+        public string VaultManager { get; set; }
         [Parameter("string", "_baseURI", 2)]
-        public virtual string BaseURI { get; set; }
+        public string BaseURI { get; set; }
     }
 
     public partial class ApproveFunction : ApproveFunctionBase { }
@@ -36,9 +36,9 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class ApproveFunctionBase : FunctionMessage
     {
         [Parameter("address", "to", 1)]
-        public virtual string To { get; set; }
+        public string To { get; set; }
         [Parameter("uint256", "tokenId", 2)]
-        public virtual BigInteger TokenId { get; set; }
+        public BigInteger TokenId { get; set; }
     }
 
     public partial class ApprovePoolTransfersFunction : ApprovePoolTransfersFunctionBase { }
@@ -47,7 +47,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class ApprovePoolTransfersFunctionBase : FunctionMessage
     {
         [Parameter("bool", "status", 1)]
-        public virtual bool Status { get; set; }
+        public bool Status { get; set; }
     }
 
     public partial class ApprovedContractsFunction : ApprovedContractsFunctionBase { }
@@ -56,7 +56,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class ApprovedContractsFunctionBase : FunctionMessage
     {
         [Parameter("address", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
     public partial class ApprovedPoolUserTransfersFunction : ApprovedPoolUserTransfersFunctionBase { }
@@ -65,7 +65,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class ApprovedPoolUserTransfersFunctionBase : FunctionMessage
     {
         [Parameter("address", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
     public partial class BalanceOf1Function : BalanceOf1FunctionBase { }
@@ -74,9 +74,9 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class BalanceOf1FunctionBase : FunctionMessage
     {
         [Parameter("address", "owner", 1)]
-        public virtual string Owner { get; set; }
+        public string Owner { get; set; }
         [Parameter("address[]", "tokens", 2)]
-        public virtual List<string> Tokens { get; set; }
+        public List<string> Tokens { get; set; }
     }
 
     public partial class BalanceOfFunction : BalanceOfFunctionBase { }
@@ -85,7 +85,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class BalanceOfFunctionBase : FunctionMessage
     {
         [Parameter("address", "owner", 1)]
-        public virtual string Owner { get; set; }
+        public string Owner { get; set; }
     }
 
     public partial class BaseURIFunction : BaseURIFunctionBase { }
@@ -102,9 +102,9 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class CloneVaultIdFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "destinationPoolId", 1)]
-        public virtual BigInteger DestinationPoolId { get; set; }
+        public BigInteger DestinationPoolId { get; set; }
         [Parameter("uint256", "sourcePoolId", 2)]
-        public virtual BigInteger SourcePoolId { get; set; }
+        public BigInteger SourcePoolId { get; set; }
     }
 
     public partial class FirewallAdminFunction : FirewallAdminFunctionBase { }
@@ -121,7 +121,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class GetApprovedFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "tokenId", 1)]
-        public virtual BigInteger TokenId { get; set; }
+        public BigInteger TokenId { get; set; }
     }
 
     public partial class GetDataFunction : GetDataFunctionBase { }
@@ -130,7 +130,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class GetDataFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "poolId", 1)]
-        public virtual BigInteger PoolId { get; set; }
+        public BigInteger PoolId { get; set; }
     }
 
     public partial class GetFullDataFunction : GetFullDataFunctionBase { }
@@ -139,7 +139,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class GetFullDataFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "poolId", 1)]
-        public virtual BigInteger PoolId { get; set; }
+        public BigInteger PoolId { get; set; }
     }
 
     public partial class GetUserDataByTokensFunction : GetUserDataByTokensFunctionBase { }
@@ -148,13 +148,13 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class GetUserDataByTokensFunctionBase : FunctionMessage
     {
         [Parameter("address", "user", 1)]
-        public virtual string User { get; set; }
+        public string User { get; set; }
         [Parameter("address[]", "tokens", 2)]
-        public virtual List<string> Tokens { get; set; }
+        public List<string> Tokens { get; set; }
         [Parameter("uint256", "from", 3)]
-        public virtual BigInteger From { get; set; }
+        public BigInteger From { get; set; }
         [Parameter("uint256", "to", 4)]
-        public virtual BigInteger To { get; set; }
+        public BigInteger To { get; set; }
     }
 
     public partial class GetWithdrawableAmountFunction : GetWithdrawableAmountFunctionBase { }
@@ -163,7 +163,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class GetWithdrawableAmountFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "poolId", 1)]
-        public virtual BigInteger PoolId { get; set; }
+        public BigInteger PoolId { get; set; }
     }
 
     public partial class IsApprovedForAllFunction : IsApprovedForAllFunctionBase { }
@@ -172,9 +172,9 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class IsApprovedForAllFunctionBase : FunctionMessage
     {
         [Parameter("address", "owner", 1)]
-        public virtual string Owner { get; set; }
+        public string Owner { get; set; }
         [Parameter("address", "operator", 2)]
-        public virtual string Operator { get; set; }
+        public string Operator { get; set; }
     }
 
     public partial class MintAndTransferFunction : MintAndTransferFunctionBase { }
@@ -183,13 +183,13 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class MintAndTransferFunctionBase : FunctionMessage
     {
         [Parameter("address", "owner", 1)]
-        public virtual string Owner { get; set; }
+        public string Owner { get; set; }
         [Parameter("address", "token", 2)]
-        public virtual string Token { get; set; }
+        public string Token { get; set; }
         [Parameter("uint256", "amount", 3)]
-        public virtual BigInteger Amount { get; set; }
+        public BigInteger Amount { get; set; }
         [Parameter("address", "provider", 4)]
-        public virtual string Provider { get; set; }
+        public string Provider { get; set; }
     }
 
     public partial class MintForProviderFunction : MintForProviderFunctionBase { }
@@ -198,9 +198,9 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class MintForProviderFunctionBase : FunctionMessage
     {
         [Parameter("address", "owner", 1)]
-        public virtual string Owner { get; set; }
+        public string Owner { get; set; }
         [Parameter("address", "provider", 2)]
-        public virtual string Provider { get; set; }
+        public string Provider { get; set; }
     }
 
     public partial class NameFunction : NameFunctionBase { }
@@ -217,13 +217,13 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class OnERC721ReceivedFunctionBase : FunctionMessage
     {
         [Parameter("address", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
         [Parameter("address", "from", 2)]
-        public virtual string From { get; set; }
+        public string From { get; set; }
         [Parameter("uint256", "poolId", 3)]
-        public virtual BigInteger PoolId { get; set; }
+        public BigInteger PoolId { get; set; }
         [Parameter("bytes", "data", 4)]
-        public virtual byte[] Data { get; set; }
+        public byte[] Data { get; set; }
     }
 
     public partial class OwnerFunction : OwnerFunctionBase { }
@@ -240,7 +240,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class OwnerOfFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "tokenId", 1)]
-        public virtual BigInteger TokenId { get; set; }
+        public BigInteger TokenId { get; set; }
     }
 
     public partial class PoolIdToProviderFunction : PoolIdToProviderFunctionBase { }
@@ -249,7 +249,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class PoolIdToProviderFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
     public partial class PoolIdToVaultIdFunction : PoolIdToVaultIdFunctionBase { }
@@ -258,7 +258,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class PoolIdToVaultIdFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
     public partial class RenounceOwnershipFunction : RenounceOwnershipFunctionBase { }
@@ -275,9 +275,9 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class RoyaltyInfoFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "tokenId", 1)]
-        public virtual BigInteger TokenId { get; set; }
+        public BigInteger TokenId { get; set; }
         [Parameter("uint256", "salePrice", 2)]
-        public virtual BigInteger SalePrice { get; set; }
+        public BigInteger SalePrice { get; set; }
     }
 
     public partial class SafeMintAndTransferFunction : SafeMintAndTransferFunctionBase { }
@@ -286,17 +286,17 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class SafeMintAndTransferFunctionBase : FunctionMessage
     {
         [Parameter("address", "owner", 1)]
-        public virtual string Owner { get; set; }
+        public string Owner { get; set; }
         [Parameter("address", "token", 2)]
-        public virtual string Token { get; set; }
+        public string Token { get; set; }
         [Parameter("address", "from", 3)]
-        public virtual string From { get; set; }
+        public string From { get; set; }
         [Parameter("uint256", "amount", 4)]
-        public virtual BigInteger Amount { get; set; }
+        public BigInteger Amount { get; set; }
         [Parameter("address", "provider", 5)]
-        public virtual string Provider { get; set; }
+        public string Provider { get; set; }
         [Parameter("bytes", "data", 6)]
-        public virtual byte[] Data { get; set; }
+        public byte[] Data { get; set; }
     }
 
     public partial class SafeTransferFromFunction : SafeTransferFromFunctionBase { }
@@ -305,11 +305,11 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class SafeTransferFromFunctionBase : FunctionMessage
     {
         [Parameter("address", "from", 1)]
-        public virtual string From { get; set; }
+        public string From { get; set; }
         [Parameter("address", "to", 2)]
-        public virtual string To { get; set; }
+        public string To { get; set; }
         [Parameter("uint256", "tokenId", 3)]
-        public virtual BigInteger TokenId { get; set; }
+        public BigInteger TokenId { get; set; }
     }
 
     public partial class SafeTransferFrom1Function : SafeTransferFrom1FunctionBase { }
@@ -318,13 +318,13 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class SafeTransferFrom1FunctionBase : FunctionMessage
     {
         [Parameter("address", "from", 1)]
-        public virtual string From { get; set; }
+        public string From { get; set; }
         [Parameter("address", "to", 2)]
-        public virtual string To { get; set; }
+        public string To { get; set; }
         [Parameter("uint256", "tokenId", 3)]
-        public virtual BigInteger TokenId { get; set; }
+        public BigInteger TokenId { get; set; }
         [Parameter("bytes", "data", 4)]
-        public virtual byte[] Data { get; set; }
+        public byte[] Data { get; set; }
     }
 
     public partial class SetApprovalForAllFunction : SetApprovalForAllFunctionBase { }
@@ -333,9 +333,9 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class SetApprovalForAllFunctionBase : FunctionMessage
     {
         [Parameter("address", "operator", 1)]
-        public virtual string Operator { get; set; }
+        public string Operator { get; set; }
         [Parameter("bool", "approved", 2)]
-        public virtual bool Approved { get; set; }
+        public bool Approved { get; set; }
     }
 
     public partial class SetApprovedContractFunction : SetApprovedContractFunctionBase { }
@@ -344,9 +344,9 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class SetApprovedContractFunctionBase : FunctionMessage
     {
         [Parameter("address", "contractAddress", 1)]
-        public virtual string ContractAddress { get; set; }
+        public string ContractAddress { get; set; }
         [Parameter("bool", "status", 2)]
-        public virtual bool Status { get; set; }
+        public bool Status { get; set; }
     }
 
     public partial class SetBaseURIFunction : SetBaseURIFunctionBase { }
@@ -355,7 +355,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class SetBaseURIFunctionBase : FunctionMessage
     {
         [Parameter("string", "newBaseURI", 1)]
-        public virtual string NewBaseURI { get; set; }
+        public string NewBaseURI { get; set; }
     }
 
     public partial class SetFirewallFunction : SetFirewallFunctionBase { }
@@ -364,7 +364,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class SetFirewallFunctionBase : FunctionMessage
     {
         [Parameter("address", "_firewall", 1)]
-        public virtual string Firewall { get; set; }
+        public string Firewall { get; set; }
     }
 
     public partial class SetFirewallAdminFunction : SetFirewallAdminFunctionBase { }
@@ -373,7 +373,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class SetFirewallAdminFunctionBase : FunctionMessage
     {
         [Parameter("address", "_firewallAdmin", 1)]
-        public virtual string FirewallAdmin { get; set; }
+        public string FirewallAdmin { get; set; }
     }
 
     public partial class SupportsInterfaceFunction : SupportsInterfaceFunctionBase { }
@@ -382,7 +382,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class SupportsInterfaceFunctionBase : FunctionMessage
     {
         [Parameter("bytes4", "interfaceId", 1)]
-        public virtual byte[] InterfaceId { get; set; }
+        public byte[] InterfaceId { get; set; }
     }
 
     public partial class SymbolFunction : SymbolFunctionBase { }
@@ -399,7 +399,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class TokenByIndexFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "index", 1)]
-        public virtual BigInteger Index { get; set; }
+        public BigInteger Index { get; set; }
     }
 
     public partial class TokenOfFunction : TokenOfFunctionBase { }
@@ -408,7 +408,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class TokenOfFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "poolId", 1)]
-        public virtual BigInteger PoolId { get; set; }
+        public BigInteger PoolId { get; set; }
     }
 
     public partial class TokenOfOwnerByIndexFunction : TokenOfOwnerByIndexFunctionBase { }
@@ -417,9 +417,9 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class TokenOfOwnerByIndexFunctionBase : FunctionMessage
     {
         [Parameter("address", "owner", 1)]
-        public virtual string Owner { get; set; }
+        public string Owner { get; set; }
         [Parameter("uint256", "index", 2)]
-        public virtual BigInteger Index { get; set; }
+        public BigInteger Index { get; set; }
     }
 
     public partial class TokenOfOwnerByIndex1Function : TokenOfOwnerByIndex1FunctionBase { }
@@ -428,11 +428,11 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class TokenOfOwnerByIndex1FunctionBase : FunctionMessage
     {
         [Parameter("address", "owner", 1)]
-        public virtual string Owner { get; set; }
+        public string Owner { get; set; }
         [Parameter("address[]", "tokens", 2)]
-        public virtual List<string> Tokens { get; set; }
+        public List<string> Tokens { get; set; }
         [Parameter("uint256", "index", 3)]
-        public virtual BigInteger Index { get; set; }
+        public BigInteger Index { get; set; }
     }
 
     public partial class TokenURIFunction : TokenURIFunctionBase { }
@@ -441,7 +441,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class TokenURIFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "tokenId", 1)]
-        public virtual BigInteger TokenId { get; set; }
+        public BigInteger TokenId { get; set; }
     }
 
     public partial class TotalSupplyFunction : TotalSupplyFunctionBase { }
@@ -458,11 +458,11 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class TransferFromFunctionBase : FunctionMessage
     {
         [Parameter("address", "from", 1)]
-        public virtual string From { get; set; }
+        public string From { get; set; }
         [Parameter("address", "to", 2)]
-        public virtual string To { get; set; }
+        public string To { get; set; }
         [Parameter("uint256", "tokenId", 3)]
-        public virtual BigInteger TokenId { get; set; }
+        public BigInteger TokenId { get; set; }
     }
 
     public partial class TransferOwnershipFunction : TransferOwnershipFunctionBase { }
@@ -471,7 +471,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class TransferOwnershipFunctionBase : FunctionMessage
     {
         [Parameter("address", "newOwner", 1)]
-        public virtual string NewOwner { get; set; }
+        public string NewOwner { get; set; }
     }
 
     public partial class UpdateAllMetadataFunction : UpdateAllMetadataFunctionBase { }
@@ -496,11 +496,11 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class ApprovalEventDTOBase : IEventDTO
     {
         [Parameter("address", "owner", 1, true )]
-        public virtual string Owner { get; set; }
+        public string Owner { get; set; }
         [Parameter("address", "approved", 2, true )]
-        public virtual string Approved { get; set; }
+        public string Approved { get; set; }
         [Parameter("uint256", "tokenId", 3, true )]
-        public virtual BigInteger TokenId { get; set; }
+        public BigInteger TokenId { get; set; }
     }
 
     public partial class ApprovalForAllEventDTO : ApprovalForAllEventDTOBase { }
@@ -509,11 +509,11 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class ApprovalForAllEventDTOBase : IEventDTO
     {
         [Parameter("address", "owner", 1, true )]
-        public virtual string Owner { get; set; }
+        public string Owner { get; set; }
         [Parameter("address", "operator", 2, true )]
-        public virtual string Operator { get; set; }
+        public string Operator { get; set; }
         [Parameter("bool", "approved", 3, false )]
-        public virtual bool Approved { get; set; }
+        public bool Approved { get; set; }
     }
 
     public partial class BaseURIChangedEventDTO : BaseURIChangedEventDTOBase { }
@@ -522,9 +522,9 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class BaseURIChangedEventDTOBase : IEventDTO
     {
         [Parameter("string", "oldBaseURI", 1, false )]
-        public virtual string OldBaseURI { get; set; }
+        public string OldBaseURI { get; set; }
         [Parameter("string", "newBaseURI", 2, false )]
-        public virtual string NewBaseURI { get; set; }
+        public string NewBaseURI { get; set; }
     }
 
     public partial class BatchMetadataUpdateEventDTO : BatchMetadataUpdateEventDTOBase { }
@@ -533,9 +533,9 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class BatchMetadataUpdateEventDTOBase : IEventDTO
     {
         [Parameter("uint256", "_fromTokenId", 1, false )]
-        public virtual BigInteger FromTokenId { get; set; }
+        public BigInteger FromTokenId { get; set; }
         [Parameter("uint256", "_toTokenId", 2, false )]
-        public virtual BigInteger ToTokenId { get; set; }
+        public BigInteger ToTokenId { get; set; }
     }
 
     public partial class ContractApprovedEventDTO : ContractApprovedEventDTOBase { }
@@ -544,9 +544,9 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class ContractApprovedEventDTOBase : IEventDTO
     {
         [Parameter("address", "contractAddress", 1, true )]
-        public virtual string ContractAddress { get; set; }
+        public string ContractAddress { get; set; }
         [Parameter("bool", "status", 2, false )]
-        public virtual bool Status { get; set; }
+        public bool Status { get; set; }
     }
 
     public partial class MetadataUpdateEventDTO : MetadataUpdateEventDTOBase { }
@@ -555,7 +555,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class MetadataUpdateEventDTOBase : IEventDTO
     {
         [Parameter("uint256", "_tokenId", 1, false )]
-        public virtual BigInteger TokenId { get; set; }
+        public BigInteger TokenId { get; set; }
     }
 
     public partial class OwnershipTransferredEventDTO : OwnershipTransferredEventDTOBase { }
@@ -564,9 +564,9 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class OwnershipTransferredEventDTOBase : IEventDTO
     {
         [Parameter("address", "previousOwner", 1, true )]
-        public virtual string PreviousOwner { get; set; }
+        public string PreviousOwner { get; set; }
         [Parameter("address", "newOwner", 2, true )]
-        public virtual string NewOwner { get; set; }
+        public string NewOwner { get; set; }
     }
 
     public partial class PoolSplitEventDTO : PoolSplitEventDTOBase { }
@@ -575,17 +575,17 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class PoolSplitEventDTOBase : IEventDTO
     {
         [Parameter("uint256", "poolId", 1, false )]
-        public virtual BigInteger PoolId { get; set; }
+        public BigInteger PoolId { get; set; }
         [Parameter("address", "owner", 2, true )]
-        public virtual string Owner { get; set; }
+        public string Owner { get; set; }
         [Parameter("uint256", "newPoolId", 3, false )]
-        public virtual BigInteger NewPoolId { get; set; }
+        public BigInteger NewPoolId { get; set; }
         [Parameter("address", "newOwner", 4, true )]
-        public virtual string NewOwner { get; set; }
+        public string NewOwner { get; set; }
         [Parameter("uint256", "splitLeftAmount", 5, false )]
-        public virtual BigInteger SplitLeftAmount { get; set; }
+        public BigInteger SplitLeftAmount { get; set; }
         [Parameter("uint256", "newSplitLeftAmount", 6, false )]
-        public virtual BigInteger NewSplitLeftAmount { get; set; }
+        public BigInteger NewSplitLeftAmount { get; set; }
     }
 
     public partial class TokenWithdrawnEventDTO : TokenWithdrawnEventDTOBase { }
@@ -594,13 +594,13 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class TokenWithdrawnEventDTOBase : IEventDTO
     {
         [Parameter("uint256", "poolId", 1, false )]
-        public virtual BigInteger PoolId { get; set; }
+        public BigInteger PoolId { get; set; }
         [Parameter("address", "owner", 2, true )]
-        public virtual string Owner { get; set; }
+        public string Owner { get; set; }
         [Parameter("uint256", "withdrawnAmount", 3, false )]
-        public virtual BigInteger WithdrawnAmount { get; set; }
+        public BigInteger WithdrawnAmount { get; set; }
         [Parameter("uint256", "leftAmount", 4, false )]
-        public virtual BigInteger LeftAmount { get; set; }
+        public BigInteger LeftAmount { get; set; }
     }
 
     public partial class TransferEventDTO : TransferEventDTOBase { }
@@ -609,11 +609,11 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class TransferEventDTOBase : IEventDTO
     {
         [Parameter("address", "from", 1, true )]
-        public virtual string From { get; set; }
+        public string From { get; set; }
         [Parameter("address", "to", 2, true )]
-        public virtual string To { get; set; }
+        public string To { get; set; }
         [Parameter("uint256", "tokenId", 3, true )]
-        public virtual BigInteger TokenId { get; set; }
+        public BigInteger TokenId { get; set; }
     }
 
 
@@ -626,7 +626,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class ApprovedContractsOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("bool", "", 1)]
-        public virtual bool ReturnValue1 { get; set; }
+        public bool ReturnValue1 { get; set; }
     }
 
     public partial class ApprovedPoolUserTransfersOutputDTO : ApprovedPoolUserTransfersOutputDTOBase { }
@@ -635,7 +635,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class ApprovedPoolUserTransfersOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("bool", "", 1)]
-        public virtual bool ReturnValue1 { get; set; }
+        public bool ReturnValue1 { get; set; }
     }
 
     public partial class BalanceOf1OutputDTO : BalanceOf1OutputDTOBase { }
@@ -644,7 +644,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class BalanceOf1OutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "balance", 1)]
-        public virtual BigInteger Balance { get; set; }
+        public BigInteger Balance { get; set; }
     }
 
     public partial class BalanceOfOutputDTO : BalanceOfOutputDTOBase { }
@@ -653,7 +653,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class BalanceOfOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
     public partial class BaseURIOutputDTO : BaseURIOutputDTOBase { }
@@ -662,7 +662,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class BaseURIOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("string", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
 
@@ -673,7 +673,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class FirewallAdminOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("address", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
     public partial class GetApprovedOutputDTO : GetApprovedOutputDTOBase { }
@@ -682,7 +682,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class GetApprovedOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("address", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
     public partial class GetDataOutputDTO : GetDataOutputDTOBase { }
@@ -691,7 +691,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class GetDataOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("tuple", "poolInfo", 1)]
-        public virtual BasePoolInfo PoolInfo { get; set; }
+        public BasePoolInfo PoolInfo { get; set; }
     }
 
     public partial class GetFullDataOutputDTO : GetFullDataOutputDTOBase { }
@@ -700,7 +700,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class GetFullDataOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("tuple[]", "poolInfo", 1)]
-        public virtual List<BasePoolInfo> PoolInfo { get; set; }
+        public List<BasePoolInfo> PoolInfo { get; set; }
     }
 
     public partial class GetUserDataByTokensOutputDTO : GetUserDataByTokensOutputDTOBase { }
@@ -709,7 +709,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class GetUserDataByTokensOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("tuple[]", "userPoolInfo", 1)]
-        public virtual List<BasePoolInfo> UserPoolInfo { get; set; }
+        public List<BasePoolInfo> UserPoolInfo { get; set; }
     }
 
     public partial class GetWithdrawableAmountOutputDTO : GetWithdrawableAmountOutputDTOBase { }
@@ -718,7 +718,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class GetWithdrawableAmountOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "withdrawalAmount", 1)]
-        public virtual BigInteger WithdrawalAmount { get; set; }
+        public BigInteger WithdrawalAmount { get; set; }
     }
 
     public partial class IsApprovedForAllOutputDTO : IsApprovedForAllOutputDTOBase { }
@@ -727,7 +727,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class IsApprovedForAllOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("bool", "", 1)]
-        public virtual bool ReturnValue1 { get; set; }
+        public bool ReturnValue1 { get; set; }
     }
 
 
@@ -740,7 +740,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class NameOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("string", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
 
@@ -751,7 +751,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class OwnerOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("address", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
     public partial class OwnerOfOutputDTO : OwnerOfOutputDTOBase { }
@@ -760,7 +760,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class OwnerOfOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("address", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
     public partial class PoolIdToProviderOutputDTO : PoolIdToProviderOutputDTOBase { }
@@ -769,7 +769,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class PoolIdToProviderOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("address", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
     public partial class PoolIdToVaultIdOutputDTO : PoolIdToVaultIdOutputDTOBase { }
@@ -778,7 +778,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class PoolIdToVaultIdOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
 
@@ -789,9 +789,9 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class RoyaltyInfoOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("address", "receiver", 1)]
-        public virtual string Receiver { get; set; }
+        public string Receiver { get; set; }
         [Parameter("uint256", "royaltyAmount", 2)]
-        public virtual BigInteger RoyaltyAmount { get; set; }
+        public BigInteger RoyaltyAmount { get; set; }
     }
 
 
@@ -816,7 +816,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class SupportsInterfaceOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("bool", "", 1)]
-        public virtual bool ReturnValue1 { get; set; }
+        public bool ReturnValue1 { get; set; }
     }
 
     public partial class SymbolOutputDTO : SymbolOutputDTOBase { }
@@ -825,7 +825,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class SymbolOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("string", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
     public partial class TokenByIndexOutputDTO : TokenByIndexOutputDTOBase { }
@@ -834,7 +834,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class TokenByIndexOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
     public partial class TokenOfOutputDTO : TokenOfOutputDTOBase { }
@@ -843,7 +843,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class TokenOfOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("address", "token", 1)]
-        public virtual string Token { get; set; }
+        public string Token { get; set; }
     }
 
     public partial class TokenOfOwnerByIndexOutputDTO : TokenOfOwnerByIndexOutputDTOBase { }
@@ -852,7 +852,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class TokenOfOwnerByIndexOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
     public partial class TokenOfOwnerByIndex1OutputDTO : TokenOfOwnerByIndex1OutputDTOBase { }
@@ -861,7 +861,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class TokenOfOwnerByIndex1OutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "poolId", 1)]
-        public virtual BigInteger PoolId { get; set; }
+        public BigInteger PoolId { get; set; }
     }
 
     public partial class TokenURIOutputDTO : TokenURIOutputDTOBase { }
@@ -870,7 +870,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class TokenURIOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("string", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
     public partial class TotalSupplyOutputDTO : TotalSupplyOutputDTOBase { }
@@ -879,7 +879,7 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class TotalSupplyOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
 
@@ -894,6 +894,6 @@ namespace poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition
     public class VaultManagerOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("address", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 }
