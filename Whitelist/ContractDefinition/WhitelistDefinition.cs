@@ -33,9 +33,9 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class CheckFunctionBase : FunctionMessage
     {
         [Parameter("address", "_user", 1)]
-        public virtual string User { get; set; }
+        public string User { get; set; }
         [Parameter("uint256", "_id", 2)]
-        public virtual BigInteger Id { get; set; }
+        public BigInteger Id { get; set; }
     }
 
     public partial class MaxUsersLimitFunction : MaxUsersLimitFunctionBase { }
@@ -68,9 +68,9 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class WhitelistDBFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
         [Parameter("address", "", 2)]
-        public virtual string ReturnValue2 { get; set; }
+        public string ReturnValue2 { get; set; }
     }
 
     public partial class WhitelistSettingsFunction : WhitelistSettingsFunctionBase { }
@@ -79,7 +79,7 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class WhitelistSettingsFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
     public partial class IsWhiteListReadyFunction : IsWhiteListReadyFunctionBase { }
@@ -88,7 +88,7 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class IsWhiteListReadyFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "_Id", 1)]
-        public virtual BigInteger Id { get; set; }
+        public BigInteger Id { get; set; }
     }
 
     public partial class OwnerFunction : OwnerFunctionBase { }
@@ -113,7 +113,7 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class TransferOwnershipFunctionBase : FunctionMessage
     {
         [Parameter("address", "newOwner", 1)]
-        public virtual string NewOwner { get; set; }
+        public string NewOwner { get; set; }
     }
 
     public partial class SetMaxUsersLimitFunction : SetMaxUsersLimitFunctionBase { }
@@ -122,7 +122,7 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class SetMaxUsersLimitFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "_limit", 1)]
-        public virtual BigInteger Limit { get; set; }
+        public BigInteger Limit { get; set; }
     }
 
     public partial class WithdrawETHFeeFunction : WithdrawETHFeeFunctionBase { }
@@ -131,7 +131,7 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class WithdrawETHFeeFunctionBase : FunctionMessage
     {
         [Parameter("address", "_to", 1)]
-        public virtual string To { get; set; }
+        public string To { get; set; }
     }
 
     public partial class SetWhiteListCostFunction : SetWhiteListCostFunctionBase { }
@@ -140,7 +140,7 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class SetWhiteListCostFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "_newCost", 1)]
-        public virtual BigInteger NewCost { get; set; }
+        public BigInteger NewCost { get; set; }
     }
 
     public partial class CreateManualWhiteListFunction : CreateManualWhiteListFunctionBase { }
@@ -149,9 +149,9 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class CreateManualWhiteListFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "_ChangeUntil", 1)]
-        public virtual BigInteger ChangeUntil { get; set; }
+        public BigInteger ChangeUntil { get; set; }
         [Parameter("address", "_Contract", 2)]
-        public virtual string Contract { get; set; }
+        public string Contract { get; set; }
     }
 
     public partial class ChangeCreatorFunction : ChangeCreatorFunctionBase { }
@@ -160,9 +160,9 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class ChangeCreatorFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "_Id", 1)]
-        public virtual BigInteger Id { get; set; }
+        public BigInteger Id { get; set; }
         [Parameter("address", "_NewCreator", 2)]
-        public virtual string NewCreator { get; set; }
+        public string NewCreator { get; set; }
     }
 
     public partial class ChangeContractFunction : ChangeContractFunctionBase { }
@@ -171,9 +171,9 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class ChangeContractFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "_Id", 1)]
-        public virtual BigInteger Id { get; set; }
+        public BigInteger Id { get; set; }
         [Parameter("address", "_NewContract", 2)]
-        public virtual string NewContract { get; set; }
+        public string NewContract { get; set; }
     }
 
     public partial class AddAddressFunction : AddAddressFunctionBase { }
@@ -182,11 +182,11 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class AddAddressFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "_Id", 1)]
-        public virtual BigInteger Id { get; set; }
+        public BigInteger Id { get; set; }
         [Parameter("address[]", "_Users", 2)]
-        public virtual List<string> Users { get; set; }
+        public List<string> Users { get; set; }
         [Parameter("uint256[]", "_Amount", 3)]
-        public virtual List<BigInteger> Amount { get; set; }
+        public List<BigInteger> Amount { get; set; }
     }
 
     public partial class RemoveAddressFunction : RemoveAddressFunctionBase { }
@@ -195,9 +195,9 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class RemoveAddressFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "_Id", 1)]
-        public virtual BigInteger Id { get; set; }
+        public BigInteger Id { get; set; }
         [Parameter("address[]", "_Users", 2)]
-        public virtual List<string> Users { get; set; }
+        public List<string> Users { get; set; }
     }
 
     public partial class RegisterFunction : RegisterFunctionBase { }
@@ -206,11 +206,11 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class RegisterFunctionBase : FunctionMessage
     {
         [Parameter("address", "_Subject", 1)]
-        public virtual string Subject { get; set; }
+        public string Subject { get; set; }
         [Parameter("uint256", "_Id", 2)]
-        public virtual BigInteger Id { get; set; }
+        public BigInteger Id { get; set; }
         [Parameter("uint256", "_Amount", 3)]
-        public virtual BigInteger Amount { get; set; }
+        public BigInteger Amount { get; set; }
     }
 
     public partial class LastRoundRegisterFunction : LastRoundRegisterFunctionBase { }
@@ -219,9 +219,9 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class LastRoundRegisterFunctionBase : FunctionMessage
     {
         [Parameter("address", "_Subject", 1)]
-        public virtual string Subject { get; set; }
+        public string Subject { get; set; }
         [Parameter("uint256", "_Id", 2)]
-        public virtual BigInteger Id { get; set; }
+        public BigInteger Id { get; set; }
     }
 
     public partial class NewWhiteListEventDTO : NewWhiteListEventDTOBase { }
@@ -230,13 +230,13 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class NewWhiteListEventDTOBase : IEventDTO
     {
         [Parameter("uint256", "_WhiteListCount", 1, false )]
-        public virtual BigInteger WhiteListCount { get; set; }
+        public BigInteger WhiteListCount { get; set; }
         [Parameter("address", "_creator", 2, false )]
-        public virtual string Creator { get; set; }
+        public string Creator { get; set; }
         [Parameter("address", "_contract", 3, false )]
-        public virtual string Contract { get; set; }
+        public string Contract { get; set; }
         [Parameter("uint256", "_changeUntil", 4, false )]
-        public virtual BigInteger ChangeUntil { get; set; }
+        public BigInteger ChangeUntil { get; set; }
     }
 
     public partial class OwnershipTransferredEventDTO : OwnershipTransferredEventDTOBase { }
@@ -245,9 +245,9 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class OwnershipTransferredEventDTOBase : IEventDTO
     {
         [Parameter("address", "previousOwner", 1, true )]
-        public virtual string PreviousOwner { get; set; }
+        public string PreviousOwner { get; set; }
         [Parameter("address", "newOwner", 2, true )]
-        public virtual string NewOwner { get; set; }
+        public string NewOwner { get; set; }
     }
 
     public partial class CheckOutputDTO : CheckOutputDTOBase { }
@@ -256,7 +256,7 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class CheckOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
     public partial class MaxUsersLimitOutputDTO : MaxUsersLimitOutputDTOBase { }
@@ -265,7 +265,7 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class MaxUsersLimitOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
     public partial class WhiteListCostOutputDTO : WhiteListCostOutputDTOBase { }
@@ -274,7 +274,7 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class WhiteListCostOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
     public partial class WhiteListCountOutputDTO : WhiteListCountOutputDTOBase { }
@@ -283,7 +283,7 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class WhiteListCountOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
     public partial class WhitelistDBOutputDTO : WhitelistDBOutputDTOBase { }
@@ -292,7 +292,7 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class WhitelistDBOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
     public partial class WhitelistSettingsOutputDTO : WhitelistSettingsOutputDTOBase { }
@@ -301,13 +301,13 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class WhitelistSettingsOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("address", "Creator", 1)]
-        public virtual string Creator { get; set; }
+        public string Creator { get; set; }
         [Parameter("uint256", "ChangeUntil", 2)]
-        public virtual BigInteger ChangeUntil { get; set; }
+        public BigInteger ChangeUntil { get; set; }
         [Parameter("address", "Contract", 3)]
-        public virtual string Contract { get; set; }
+        public string Contract { get; set; }
         [Parameter("bool", "isReady", 4)]
-        public virtual bool IsReady { get; set; }
+        public bool IsReady { get; set; }
     }
 
     public partial class IsWhiteListReadyOutputDTO : IsWhiteListReadyOutputDTOBase { }
@@ -316,7 +316,7 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class IsWhiteListReadyOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("bool", "", 1)]
-        public virtual bool ReturnValue1 { get; set; }
+        public bool ReturnValue1 { get; set; }
     }
 
     public partial class OwnerOutputDTO : OwnerOutputDTOBase { }
@@ -325,7 +325,7 @@ namespace poolz.finance.csharp.contracts.Whitelist.ContractDefinition
     public class OwnerOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("address", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
 
