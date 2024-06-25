@@ -25,11 +25,11 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
         public DelayVaultProviderDeploymentBase() : base(BYTECODE) { }
         public DelayVaultProviderDeploymentBase(string byteCode) : base(byteCode) { }
         [Parameter("address", "_token", 1)]
-        public virtual string Token { get; set; }
+        public string Token { get; set; }
         [Parameter("address", "_migrator", 2)]
-        public virtual string Migrator { get; set; }
+        public string Migrator { get; set; }
         [Parameter("tuple[]", "_providersData", 3)]
-        public virtual List<ProviderData> ProvidersData { get; set; }
+        public List<ProviderData> ProvidersData { get; set; }
     }
 
     public partial class BalanceOfFunction : BalanceOfFunctionBase { }
@@ -38,7 +38,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class BalanceOfFunctionBase : FunctionMessage
     {
         [Parameter("address", "user", 1)]
-        public virtual string User { get; set; }
+        public string User { get; set; }
     }
 
     public partial class BeforeTransferFunction : BeforeTransferFunctionBase { }
@@ -47,11 +47,11 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class BeforeTransferFunctionBase : FunctionMessage
     {
         [Parameter("address", "from", 1)]
-        public virtual string From { get; set; }
+        public string From { get; set; }
         [Parameter("address", "to", 2)]
-        public virtual string To { get; set; }
+        public string To { get; set; }
         [Parameter("uint256", "poolId", 3)]
-        public virtual BigInteger PoolId { get; set; }
+        public BigInteger PoolId { get; set; }
     }
 
     public partial class CreateNewDelayVaultFunction : CreateNewDelayVaultFunctionBase { }
@@ -60,9 +60,9 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class CreateNewDelayVaultFunctionBase : FunctionMessage
     {
         [Parameter("address", "owner", 1)]
-        public virtual string Owner { get; set; }
+        public string Owner { get; set; }
         [Parameter("uint256[]", "params", 2)]
-        public virtual List<BigInteger> Params { get; set; }
+        public List<BigInteger> Params { get; set; }
     }
 
     public partial class CreateNewDelayVaultWithSignatureFunction : CreateNewDelayVaultWithSignatureFunctionBase { }
@@ -71,11 +71,11 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class CreateNewDelayVaultWithSignatureFunctionBase : FunctionMessage
     {
         [Parameter("address", "owner", 1)]
-        public virtual string Owner { get; set; }
+        public string Owner { get; set; }
         [Parameter("uint256[]", "params", 2)]
-        public virtual List<BigInteger> Params { get; set; }
+        public List<BigInteger> Params { get; set; }
         [Parameter("bytes", "signature", 3)]
-        public virtual byte[] Signature { get; set; }
+        public byte[] Signature { get; set; }
     }
 
     public partial class CurrentParamsTargetLengthFunction : CurrentParamsTargetLengthFunctionBase { }
@@ -100,7 +100,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class GetParamsFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "poolId", 1)]
-        public virtual BigInteger PoolId { get; set; }
+        public BigInteger PoolId { get; set; }
     }
 
     public partial class GetSubProvidersPoolIdsFunction : GetSubProvidersPoolIdsFunctionBase { }
@@ -109,7 +109,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class GetSubProvidersPoolIdsFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
     public partial class GetTotalAmountFunction : GetTotalAmountFunctionBase { }
@@ -118,7 +118,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class GetTotalAmountFunctionBase : FunctionMessage
     {
         [Parameter("address", "user", 1)]
-        public virtual string User { get; set; }
+        public string User { get; set; }
     }
 
     public partial class GetTypeToProviderDataFunction : GetTypeToProviderDataFunctionBase { }
@@ -127,7 +127,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class GetTypeToProviderDataFunctionBase : FunctionMessage
     {
         [Parameter("uint8", "theType", 1)]
-        public virtual byte TheType { get; set; }
+        public byte TheType { get; set; }
     }
 
     public partial class GetWithdrawPoolParamsFunction : GetWithdrawPoolParamsFunctionBase { }
@@ -136,9 +136,9 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class GetWithdrawPoolParamsFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "amount", 1)]
-        public virtual BigInteger Amount { get; set; }
+        public BigInteger Amount { get; set; }
         [Parameter("uint8", "theType", 2)]
-        public virtual byte TheType { get; set; }
+        public byte TheType { get; set; }
     }
 
     public partial class GetWithdrawableAmountFunction : GetWithdrawableAmountFunctionBase { }
@@ -147,7 +147,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class GetWithdrawableAmountFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "poolId", 1)]
-        public virtual BigInteger PoolId { get; set; }
+        public BigInteger PoolId { get; set; }
     }
 
     public partial class LockDealNFTFunction : LockDealNFTFunctionBase { }
@@ -180,7 +180,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class PoolIdToAmountFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
     public partial class RegisterPoolFunction : RegisterPoolFunctionBase { }
@@ -189,9 +189,9 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class RegisterPoolFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "poolId", 1)]
-        public virtual BigInteger PoolId { get; set; }
+        public BigInteger PoolId { get; set; }
         [Parameter("uint256[]", "params", 2)]
-        public virtual List<BigInteger> Params { get; set; }
+        public List<BigInteger> Params { get; set; }
     }
 
     public partial class SetFirewallFunction : SetFirewallFunctionBase { }
@@ -200,7 +200,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class SetFirewallFunctionBase : FunctionMessage
     {
         [Parameter("address", "_firewall", 1)]
-        public virtual string Firewall { get; set; }
+        public string Firewall { get; set; }
     }
 
     public partial class SetFirewallAdminFunction : SetFirewallAdminFunctionBase { }
@@ -209,7 +209,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class SetFirewallAdminFunctionBase : FunctionMessage
     {
         [Parameter("address", "_firewallAdmin", 1)]
-        public virtual string FirewallAdmin { get; set; }
+        public string FirewallAdmin { get; set; }
     }
 
     public partial class SplitFunction : SplitFunctionBase { }
@@ -218,11 +218,11 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class SplitFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "oldPoolId", 1)]
-        public virtual BigInteger OldPoolId { get; set; }
+        public BigInteger OldPoolId { get; set; }
         [Parameter("uint256", "newPoolId", 2)]
-        public virtual BigInteger NewPoolId { get; set; }
+        public BigInteger NewPoolId { get; set; }
         [Parameter("uint256", "ratio", 3)]
-        public virtual BigInteger Ratio { get; set; }
+        public BigInteger Ratio { get; set; }
     }
 
     public partial class SupportsInterfaceFunction : SupportsInterfaceFunctionBase { }
@@ -231,7 +231,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class SupportsInterfaceFunctionBase : FunctionMessage
     {
         [Parameter("bytes4", "interfaceId", 1)]
-        public virtual byte[] InterfaceId { get; set; }
+        public byte[] InterfaceId { get; set; }
     }
 
     public partial class TheTypeOfFunction : TheTypeOfFunctionBase { }
@@ -240,7 +240,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class TheTypeOfFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "amount", 1)]
-        public virtual BigInteger Amount { get; set; }
+        public BigInteger Amount { get; set; }
     }
 
     public partial class TokenFunction : TokenFunctionBase { }
@@ -257,9 +257,9 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class TokenOfOwnerByIndexFunctionBase : FunctionMessage
     {
         [Parameter("address", "user", 1)]
-        public virtual string User { get; set; }
+        public string User { get; set; }
         [Parameter("uint256", "index", 2)]
-        public virtual BigInteger Index { get; set; }
+        public BigInteger Index { get; set; }
     }
 
     public partial class TypeToProviderDataFunction : TypeToProviderDataFunctionBase { }
@@ -268,7 +268,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class TypeToProviderDataFunctionBase : FunctionMessage
     {
         [Parameter("uint8", "", 1)]
-        public virtual byte ReturnValue1 { get; set; }
+        public byte ReturnValue1 { get; set; }
     }
 
     public partial class TypesCountFunction : TypesCountFunctionBase { }
@@ -285,7 +285,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class UpgradeTypeFunctionBase : FunctionMessage
     {
         [Parameter("uint8", "newType", 1)]
-        public virtual byte NewType { get; set; }
+        public byte NewType { get; set; }
     }
 
     public partial class UserToAmountFunction : UserToAmountFunctionBase { }
@@ -294,7 +294,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class UserToAmountFunctionBase : FunctionMessage
     {
         [Parameter("address", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
     public partial class UserToTypeFunction : UserToTypeFunctionBase { }
@@ -303,7 +303,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class UserToTypeFunctionBase : FunctionMessage
     {
         [Parameter("address", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
     public partial class WithdrawFunction : WithdrawFunctionBase { }
@@ -312,7 +312,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class WithdrawFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "tokenId", 1)]
-        public virtual BigInteger TokenId { get; set; }
+        public BigInteger TokenId { get; set; }
     }
 
     public partial class UpdateParamsEventDTO : UpdateParamsEventDTOBase { }
@@ -321,9 +321,9 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class UpdateParamsEventDTOBase : IEventDTO
     {
         [Parameter("uint256", "poolId", 1, true )]
-        public virtual BigInteger PoolId { get; set; }
+        public BigInteger PoolId { get; set; }
         [Parameter("uint256[]", "params", 2, false )]
-        public virtual List<BigInteger> Params { get; set; }
+        public List<BigInteger> Params { get; set; }
     }
 
     public partial class VaultValueChangedEventDTO : VaultValueChangedEventDTOBase { }
@@ -332,11 +332,11 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class VaultValueChangedEventDTOBase : IEventDTO
     {
         [Parameter("address", "token", 1, true )]
-        public virtual string Token { get; set; }
+        public string Token { get; set; }
         [Parameter("address", "owner", 2, true )]
-        public virtual string Owner { get; set; }
+        public string Owner { get; set; }
         [Parameter("uint256", "amount", 3, false )]
-        public virtual BigInteger Amount { get; set; }
+        public BigInteger Amount { get; set; }
     }
 
     public partial class BalanceOfOutputDTO : BalanceOfOutputDTOBase { }
@@ -345,7 +345,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class BalanceOfOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "balance", 1)]
-        public virtual BigInteger Balance { get; set; }
+        public BigInteger Balance { get; set; }
     }
 
 
@@ -360,7 +360,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class CurrentParamsTargetLengthOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
     public partial class FirewallAdminOutputDTO : FirewallAdminOutputDTOBase { }
@@ -369,7 +369,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class FirewallAdminOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("address", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
     public partial class GetParamsOutputDTO : GetParamsOutputDTOBase { }
@@ -378,7 +378,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class GetParamsOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256[]", "params", 1)]
-        public virtual List<BigInteger> Params { get; set; }
+        public List<BigInteger> Params { get; set; }
     }
 
     public partial class GetSubProvidersPoolIdsOutputDTO : GetSubProvidersPoolIdsOutputDTOBase { }
@@ -387,7 +387,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class GetSubProvidersPoolIdsOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256[]", "poolIds", 1)]
-        public virtual List<BigInteger> PoolIds { get; set; }
+        public List<BigInteger> PoolIds { get; set; }
     }
 
     public partial class GetTotalAmountOutputDTO : GetTotalAmountOutputDTOBase { }
@@ -396,7 +396,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class GetTotalAmountOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
     public partial class GetTypeToProviderDataOutputDTO : GetTypeToProviderDataOutputDTOBase { }
@@ -405,7 +405,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class GetTypeToProviderDataOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("tuple", "providerData", 1)]
-        public virtual ProviderData ProviderData { get; set; }
+        public ProviderData ProviderData { get; set; }
     }
 
     public partial class GetWithdrawPoolParamsOutputDTO : GetWithdrawPoolParamsOutputDTOBase { }
@@ -414,7 +414,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class GetWithdrawPoolParamsOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256[]", "params", 1)]
-        public virtual List<BigInteger> Params { get; set; }
+        public List<BigInteger> Params { get; set; }
     }
 
     public partial class GetWithdrawableAmountOutputDTO : GetWithdrawableAmountOutputDTOBase { }
@@ -423,7 +423,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class GetWithdrawableAmountOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "withdrawalAmount", 1)]
-        public virtual BigInteger WithdrawalAmount { get; set; }
+        public BigInteger WithdrawalAmount { get; set; }
     }
 
     public partial class LockDealNFTOutputDTO : LockDealNFTOutputDTOBase { }
@@ -432,7 +432,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class LockDealNFTOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("address", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
     public partial class MigratorOutputDTO : MigratorOutputDTOBase { }
@@ -441,7 +441,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class MigratorOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("address", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
     public partial class NameOutputDTO : NameOutputDTOBase { }
@@ -450,7 +450,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class NameOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("string", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
     public partial class PoolIdToAmountOutputDTO : PoolIdToAmountOutputDTOBase { }
@@ -459,7 +459,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class PoolIdToAmountOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
 
@@ -476,7 +476,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class SupportsInterfaceOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("bool", "", 1)]
-        public virtual bool ReturnValue1 { get; set; }
+        public bool ReturnValue1 { get; set; }
     }
 
     public partial class TheTypeOfOutputDTO : TheTypeOfOutputDTOBase { }
@@ -485,7 +485,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class TheTypeOfOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint8", "theType", 1)]
-        public virtual byte TheType { get; set; }
+        public byte TheType { get; set; }
     }
 
     public partial class TokenOutputDTO : TokenOutputDTOBase { }
@@ -494,7 +494,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class TokenOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("address", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
     public partial class TokenOfOwnerByIndexOutputDTO : TokenOfOwnerByIndexOutputDTOBase { }
@@ -503,7 +503,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class TokenOfOwnerByIndexOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "poolId", 1)]
-        public virtual BigInteger PoolId { get; set; }
+        public BigInteger PoolId { get; set; }
     }
 
     public partial class TypeToProviderDataOutputDTO : TypeToProviderDataOutputDTOBase { }
@@ -512,9 +512,9 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class TypeToProviderDataOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("address", "provider", 1)]
-        public virtual string Provider { get; set; }
+        public string Provider { get; set; }
         [Parameter("uint256", "limit", 2)]
-        public virtual BigInteger Limit { get; set; }
+        public BigInteger Limit { get; set; }
     }
 
     public partial class TypesCountOutputDTO : TypesCountOutputDTOBase { }
@@ -523,7 +523,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class TypesCountOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint8", "", 1)]
-        public virtual byte ReturnValue1 { get; set; }
+        public byte ReturnValue1 { get; set; }
     }
 
 
@@ -534,7 +534,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class UserToAmountOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
     public partial class UserToTypeOutputDTO : UserToTypeOutputDTOBase { }
@@ -543,7 +543,7 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class UserToTypeOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint8", "", 1)]
-        public virtual byte ReturnValue1 { get; set; }
+        public byte ReturnValue1 { get; set; }
     }
 
     public partial class WithdrawOutputDTO : WithdrawOutputDTOBase { }
@@ -552,8 +552,8 @@ namespace poolz.finance.csharp.contracts.DelayVaultProvider.ContractDefinition
     public class WithdrawOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "withdrawnAmount", 1)]
-        public virtual BigInteger WithdrawnAmount { get; set; }
+        public BigInteger WithdrawnAmount { get; set; }
         [Parameter("bool", "isFinal", 2)]
-        public virtual bool IsFinal { get; set; }
+        public bool IsFinal { get; set; }
     }
 }
