@@ -12,8 +12,8 @@ namespace poolz.finance.csharp.contracts.SimpleRefundBuilder.ContractDefinition
     public class UserPoolBase 
     {
         [Parameter("address", "user", 1)]
-        public virtual string User { get; set; }
+        public string User { get; set; }
         [Parameter("uint256", "amount", 2)]
-        public virtual BigInteger Amount { get; set; }
+        public BigInteger Amount { get; set; }
     }
 }
