@@ -25,15 +25,15 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
         public BeaconTokenDeploymentBase() : base(BYTECODE) { }
         public BeaconTokenDeploymentBase(string byteCode) : base(byteCode) { }
         [Parameter("string", "_name", 1)]
-        public virtual string Name { get; set; }
+        public string Name { get; set; }
         [Parameter("string", "_symbol", 2)]
-        public virtual string Symbol { get; set; }
+        public string Symbol { get; set; }
         [Parameter("uint256", "_cap", 3)]
-        public virtual BigInteger Cap { get; set; }
+        public BigInteger Cap { get; set; }
         [Parameter("uint8", "_decimals", 4)]
-        public virtual byte Decimals { get; set; }
+        public byte Decimals { get; set; }
         [Parameter("address", "_owner", 5)]
-        public virtual string Owner { get; set; }
+        public string Owner { get; set; }
     }
 
     public partial class AllowanceFunction : AllowanceFunctionBase { }
@@ -42,9 +42,9 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class AllowanceFunctionBase : FunctionMessage
     {
         [Parameter("address", "owner", 1)]
-        public virtual string Owner { get; set; }
+        public string Owner { get; set; }
         [Parameter("address", "spender", 2)]
-        public virtual string Spender { get; set; }
+        public string Spender { get; set; }
     }
 
     public partial class ApproveFunction : ApproveFunctionBase { }
@@ -53,9 +53,9 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class ApproveFunctionBase : FunctionMessage
     {
         [Parameter("address", "spender", 1)]
-        public virtual string Spender { get; set; }
+        public string Spender { get; set; }
         [Parameter("uint256", "amount", 2)]
-        public virtual BigInteger Amount { get; set; }
+        public BigInteger Amount { get; set; }
     }
 
     public partial class BalanceOfFunction : BalanceOfFunctionBase { }
@@ -64,7 +64,7 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class BalanceOfFunctionBase : FunctionMessage
     {
         [Parameter("address", "account", 1)]
-        public virtual string Account { get; set; }
+        public string Account { get; set; }
     }
 
     public partial class BurnFunction : BurnFunctionBase { }
@@ -73,7 +73,7 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class BurnFunctionBase : FunctionMessage
     {
         [Parameter("uint256", "amount", 1)]
-        public virtual BigInteger Amount { get; set; }
+        public BigInteger Amount { get; set; }
     }
 
     public partial class BurnFromFunction : BurnFromFunctionBase { }
@@ -82,9 +82,9 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class BurnFromFunctionBase : FunctionMessage
     {
         [Parameter("address", "account", 1)]
-        public virtual string Account { get; set; }
+        public string Account { get; set; }
         [Parameter("uint256", "amount", 2)]
-        public virtual BigInteger Amount { get; set; }
+        public BigInteger Amount { get; set; }
     }
 
     public partial class CapFunction : CapFunctionBase { }
@@ -101,9 +101,9 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class DecreaseAllowanceFunctionBase : FunctionMessage
     {
         [Parameter("address", "spender", 1)]
-        public virtual string Spender { get; set; }
+        public string Spender { get; set; }
         [Parameter("uint256", "subtractedValue", 2)]
-        public virtual BigInteger SubtractedValue { get; set; }
+        public BigInteger SubtractedValue { get; set; }
     }
 
     public partial class IncreaseAllowanceFunction : IncreaseAllowanceFunctionBase { }
@@ -112,9 +112,9 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class IncreaseAllowanceFunctionBase : FunctionMessage
     {
         [Parameter("address", "spender", 1)]
-        public virtual string Spender { get; set; }
+        public string Spender { get; set; }
         [Parameter("uint256", "addedValue", 2)]
-        public virtual BigInteger AddedValue { get; set; }
+        public BigInteger AddedValue { get; set; }
     }
 
     public partial class NameFunction : NameFunctionBase { }
@@ -147,9 +147,9 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class TransferFunctionBase : FunctionMessage
     {
         [Parameter("address", "to", 1)]
-        public virtual string To { get; set; }
+        public string To { get; set; }
         [Parameter("uint256", "amount", 2)]
-        public virtual BigInteger Amount { get; set; }
+        public BigInteger Amount { get; set; }
     }
 
     public partial class TransferFromFunction : TransferFromFunctionBase { }
@@ -158,11 +158,11 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class TransferFromFunctionBase : FunctionMessage
     {
         [Parameter("address", "from", 1)]
-        public virtual string From { get; set; }
+        public string From { get; set; }
         [Parameter("address", "to", 2)]
-        public virtual string To { get; set; }
+        public string To { get; set; }
         [Parameter("uint256", "amount", 3)]
-        public virtual BigInteger Amount { get; set; }
+        public BigInteger Amount { get; set; }
     }
 
     public partial class DecimalsFunction : DecimalsFunctionBase { }
@@ -179,7 +179,7 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class ActivateBeaconFunctionBase : FunctionMessage
     {
         [Parameter("bytes", "_Address", 1)]
-        public virtual byte[] Address { get; set; }
+        public byte[] Address { get; set; }
     }
 
     public partial class ActivateBeacon1Function : ActivateBeacon1FunctionBase { }
@@ -188,9 +188,9 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class ActivateBeacon1FunctionBase : FunctionMessage
     {
         [Parameter("bytes", "_Address", 1)]
-        public virtual byte[] Address { get; set; }
+        public byte[] Address { get; set; }
         [Parameter("uint256", "_Amount", 2)]
-        public virtual BigInteger Amount { get; set; }
+        public BigInteger Amount { get; set; }
     }
 
     public partial class ApprovalEventDTO : ApprovalEventDTOBase { }
@@ -199,11 +199,11 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class ApprovalEventDTOBase : IEventDTO
     {
         [Parameter("address", "owner", 1, true )]
-        public virtual string Owner { get; set; }
+        public string Owner { get; set; }
         [Parameter("address", "spender", 2, true )]
-        public virtual string Spender { get; set; }
+        public string Spender { get; set; }
         [Parameter("uint256", "value", 3, false )]
-        public virtual BigInteger Value { get; set; }
+        public BigInteger Value { get; set; }
     }
 
     public partial class BeconEventDTO : BeconEventDTOBase { }
@@ -212,9 +212,9 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class BeconEventDTOBase : IEventDTO
     {
         [Parameter("bytes", "Address", 1, false )]
-        public virtual byte[] Address { get; set; }
+        public byte[] Address { get; set; }
         [Parameter("uint256", "Amount", 2, false )]
-        public virtual BigInteger Amount { get; set; }
+        public BigInteger Amount { get; set; }
     }
 
     public partial class TransferEventDTO : TransferEventDTOBase { }
@@ -223,11 +223,11 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class TransferEventDTOBase : IEventDTO
     {
         [Parameter("address", "from", 1, true )]
-        public virtual string From { get; set; }
+        public string From { get; set; }
         [Parameter("address", "to", 2, true )]
-        public virtual string To { get; set; }
+        public string To { get; set; }
         [Parameter("uint256", "value", 3, false )]
-        public virtual BigInteger Value { get; set; }
+        public BigInteger Value { get; set; }
     }
 
     public partial class AllowanceOutputDTO : AllowanceOutputDTOBase { }
@@ -236,7 +236,7 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class AllowanceOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
 
@@ -247,7 +247,7 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class BalanceOfOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
 
@@ -260,7 +260,7 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class CapOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
 
@@ -273,7 +273,7 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class NameOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("string", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
     public partial class SymbolOutputDTO : SymbolOutputDTOBase { }
@@ -282,7 +282,7 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class SymbolOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("string", "", 1)]
-        public virtual string ReturnValue1 { get; set; }
+        public string ReturnValue1 { get; set; }
     }
 
     public partial class TotalSupplyOutputDTO : TotalSupplyOutputDTOBase { }
@@ -291,7 +291,7 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class TotalSupplyOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "", 1)]
-        public virtual BigInteger ReturnValue1 { get; set; }
+        public BigInteger ReturnValue1 { get; set; }
     }
 
 
@@ -304,7 +304,7 @@ namespace poolz.finance.csharp.contracts.BeaconToken.ContractDefinition
     public class DecimalsOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint8", "", 1)]
-        public virtual byte ReturnValue1 { get; set; }
+        public byte ReturnValue1 { get; set; }
     }
 
 
