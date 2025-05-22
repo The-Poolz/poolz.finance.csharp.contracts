@@ -29,6 +29,8 @@ jobs:
           
       - name: Fetch ABI and ByteCode from GraphQL API and save
         shell: bash
+        env:
+          GRAPHQL_URL: ${{ secrets.GRAPHQL_URL }}
         run: |
           GRAPHQL_URL="https://poolzfinancedata.com/graphql"   # при необходимости поменяй
           NAME_VERSION="${CONTRACT_NAME}@${CONTRACT_VERSION}"
@@ -41,7 +43,7 @@ jobs:
           EOF
 
           RESP=$(curl -s -X POST -H "Content-Type: application/json" \
-                     --data "${GQL_BODY}" "${GRAPHQL_URL}")
+               --data "${GQL_BODY}" "${GRAPHQL_URL}")
 
           [[ $(echo "$RESP" | jq '.data.contracts | length') -eq 0 ]] && {
               echo "❌ Contract ${NAME_VERSION} not found"; exit 1; }
