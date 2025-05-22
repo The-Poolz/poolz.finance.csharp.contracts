@@ -32,7 +32,6 @@ jobs:
         env:
           GRAPHQL_URL: ${{ secrets.GRAPHQL_URL }}
         run: |
-          GRAPHQL_URL="https://poolzfinancedata.com/graphql"   # при необходимости поменяй
           NAME_VERSION="${CONTRACT_NAME}@${CONTRACT_VERSION}"
 
           read -r -d '' GQL_BODY <<EOF
