@@ -27,32 +27,49 @@ jobs:
           echo "CONTRACT_NAME=$(echo $CONTRACT_DETAILS | cut -d '@' -f 1)" >> $GITHUB_ENV
           echo "CONTRACT_VERSION=$(echo $CONTRACT_DETAILS | cut -d '@' -f 2)" >> $GITHUB_ENV
           
-      - name: Fetch ABI and ByteCode from GraphQL API and save
+      - name: Fetch ABI / ByteCode
         shell: bash
         env:
           GRAPHQL_URL: ${{ secrets.GRAPHQL_URL }}
         run: |
+          set -o errexit -o pipefail
+      
           NAME_VERSION="${CONTRACT_NAME}@${CONTRACT_VERSION}"
 
-          read -r -d '' GQL_BODY <<EOF
-          {
-            "query": "query Contracts(\$nv: String!) { contracts(filters: { NameVersion: { eq: \$nv } }) { ABI ByteCode { bytecode } } }",
-            "variables": { "nv": "${NAME_VERSION}" }
+          read -r -d '' GQL_QUERY <<EOF
+          query {
+            contracts(filters: { NameVersion: { eq: "$NAME_VERSION" } }) {
+              ABI
+              ByteCode { bytecode }
+            }
           }
           EOF
 
-          RESP=$(curl -s -X POST -H "Content-Type: application/json" \
-               --data "${GQL_BODY}" "${GRAPHQL_URL}")
+          GQL_BODY=$(jq -n --arg q "$GQL_QUERY" '{ query: $q }')
 
-          [[ $(echo "$RESP" | jq '.data.contracts | length') -eq 0 ]] && {
-              echo "❌ Contract ${NAME_VERSION} not found"; exit 1; }
+          RESP=$(curl -sS -X POST -H "Content-Type: application/json" \
+                       --data "$GQL_BODY" "$GRAPHQL_URL")
+      
+          echo "🎯 GraphQL response:"
+          echo "$RESP" | jq .
+
+          if [[ $(echo "$RESP" | jq '.errors | length') -gt 0 ]]; then
+              echo "❌ GraphQL returned errors:"
+              echo "$RESP" | jq '.errors'
+              exit 1
+          fi
+
+          if [[ $(echo "$RESP" | jq '.data.contracts | length') -eq 0 ]]; then
+              echo "❌ Contract $NAME_VERSION not found"
+              exit 1
+          fi
 
           ABI=$(echo "$RESP" | jq -c '.data.contracts[0].ABI')
           BYTECODE=$(echo "$RESP" | jq -r '.data.contracts[0].ByteCode.bytecode')
 
-          mkdir -p "${{ github.workspace }}/ABIs" "${{ github.workspace }}/ByteCode"
-          echo "${ABI}"          > "${{ github.workspace }}/ABIs/${CONTRACT_NAME}.abi"
-          echo -n "${BYTECODE}"  > "${{ github.workspace }}/ByteCode/${CONTRACT_NAME}.bin"
+          mkdir -p "$GITHUB_WORKSPACE/ABIs" "$GITHUB_WORKSPACE/ByteCode"
+          echo "$ABI"       > "$GITHUB_WORKSPACE/ABIs/${CONTRACT_NAME}.abi"
+          echo -n "$BYTECODE" > "$GITHUB_WORKSPACE/ByteCode/${CONTRACT_NAME}.bin"
 
       - name: Add NethereumGenerator.ExtendedConsole to PATH
         run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
