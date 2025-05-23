@@ -40,7 +40,7 @@ jobs:
           query {
             contracts(filters: { NameVersion: { eq: "$NAME_VERSION" } }) {
               ABI
-              ByteCode { bytecode }
+              ByteCode
             }
           }
           EOF
