@@ -26,16 +26,16 @@ jobs:
           CONTRACT_DETAILS=$(echo ${{ github.event.issue.title }} | cut -d ' ' -f 2)
           echo "CONTRACT_NAME=$(echo $CONTRACT_DETAILS | cut -d '@' -f 1)" >> $GITHUB_ENV
           echo "CONTRACT_VERSION=$(echo $CONTRACT_DETAILS | cut -d '@' -f 2)" >> $GITHUB_ENV
-          
+
       - name: Fetch ABI / ByteCode
         shell: bash
         env:
           GRAPHQL_URL: ${{ secrets.GRAPHQL_URL }}
         run: |
           set -o errexit -o pipefail
-      
+
           NAME_VERSION="${CONTRACT_NAME}@${CONTRACT_VERSION}"
-      
+
           GQL_QUERY=$(cat <<EOF
           query {
             contracts(filters: { NameVersion: { eq: "$NAME_VERSION" } }) {
@@ -45,30 +45,30 @@ jobs:
           }
           EOF
           )
-      
+
           GQL_BODY=$(jq -n --arg q "$GQL_QUERY" '{query:$q}')
 
           RESP=$(curl --fail-with-body -sS -X POST \
                       -H "Content-Type: application/json" \
                       --data "$GQL_BODY" "$GRAPHQL_URL")
-      
+
           echo "🎯 GraphQL response:"
           echo "$RESP" | jq .
-      
+
           if [[ $(jq '.errors | length' <<<"$RESP") -gt 0 ]]; then
             echo "❌ GraphQL returned errors:"
             jq '.errors' <<<"$RESP"
             exit 1
           fi
-      
+
           if [[ $(jq '.data.contracts | length' <<<"$RESP") -eq 0 ]]; then
             echo "❌ Contract $NAME_VERSION not found"
             exit 1
           fi
-      
+
           ABI=$(jq -c '.data.contracts[0].ABI' <<<"$RESP")
           BYTECODE=$(jq -r '.data.contracts[0].ByteCode.bytecode' <<<"$RESP")
-      
+
           mkdir -p "$GITHUB_WORKSPACE/ABIs" "$GITHUB_WORKSPACE/ByteCode"
           echo "$ABI"        > "$GITHUB_WORKSPACE/ABIs/${CONTRACT_NAME}.abi"
           echo -n "$BYTECODE" > "$GITHUB_WORKSPACE/ByteCode/${CONTRACT_NAME}.bin"
