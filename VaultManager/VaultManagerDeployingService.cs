@@ -15,11 +15,12 @@ using poolz.finance.csharp.contracts.VaultManager.ContractDefinition;
 
 namespace poolz.finance.csharp.contracts.VaultManager
 {
-    public partial class VaultManagerDeployingService
+    public partial class VaultManagerDeployingService<TContractType>
+        where TContractType : Enum
     {
-        public IChainProvider ChainProvider { get; }
+        public IChainProvider<TContractType> ChainProvider { get; }
 
-        public VaultManagerDeployingService(IChainProvider chainProvider)
+        public VaultManagerDeployingService(IChainProvider<TContractType> chainProvider)
         {
             ChainProvider = chainProvider;
         }
