@@ -10,26 +10,30 @@ using Nethereum.Contracts.CQS;
 using Nethereum.Contracts.ContractHandlers;
 using Nethereum.Contracts;
 using System.Threading;
+using NethereumGenerators.Interfaces;
 using poolz.finance.csharp.contracts.PoolzBack.ContractDefinition;
 
 namespace poolz.finance.csharp.contracts.PoolzBack
 {
     public partial class PoolzBackDeployingService
     {
-        public virtual Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.IWeb3 web3, PoolzBackDeployment poolzBackDeployment, CancellationTokenSource cancellationTokenSource = null)
+        public IChainProvider ChainProvider { get; }
+
+        public PoolzBackDeployingService(IChainProvider chainProvider)
         {
+            ChainProvider = chainProvider;
+        }
+
+        public virtual Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(long chainId, PoolzBackDeployment poolzBackDeployment, CancellationTokenSource cancellationTokenSource = null)
+        {
+            var web3 = ChainProvider.Web3(chainId);
             return web3.Eth.GetContractDeploymentHandler<PoolzBackDeployment>().SendRequestAndWaitForReceiptAsync(poolzBackDeployment, cancellationTokenSource);
         }
 
-        public virtual Task<string> DeployContractAsync(Nethereum.Web3.IWeb3 web3, PoolzBackDeployment poolzBackDeployment)
+        public virtual Task<string> DeployContractAsync(long chainId, PoolzBackDeployment poolzBackDeployment)
         {
+            var web3 = ChainProvider.Web3(chainId);
             return web3.Eth.GetContractDeploymentHandler<PoolzBackDeployment>().SendRequestAsync(poolzBackDeployment);
-        }
-
-        public virtual async Task<PoolzBackService> DeployContractAndGetServiceAsync(Nethereum.Web3.IWeb3 web3, PoolzBackDeployment poolzBackDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            var receipt = await DeployContractAndWaitForReceiptAsync(web3, poolzBackDeployment, cancellationTokenSource);
-            return new PoolzBackService(web3, receipt.ContractAddress);
         }
     }
 }
