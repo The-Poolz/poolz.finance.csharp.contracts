@@ -15,11 +15,12 @@ using poolz.finance.csharp.contracts.InvestProvider.ContractDefinition;
 
 namespace poolz.finance.csharp.contracts.InvestProvider
 {
-    public partial class InvestProviderDeployingService
+    public partial class InvestProviderDeployingService<TContractType>
+        where TContractType : Enum
     {
-        public IChainProvider ChainProvider { get; }
+        public IChainProvider<TContractType> ChainProvider { get; }
 
-        public InvestProviderDeployingService(IChainProvider chainProvider)
+        public InvestProviderDeployingService(IChainProvider<TContractType> chainProvider)
         {
             ChainProvider = chainProvider;
         }
