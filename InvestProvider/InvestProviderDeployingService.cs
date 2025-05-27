@@ -10,26 +10,30 @@ using Nethereum.Contracts.CQS;
 using Nethereum.Contracts.ContractHandlers;
 using Nethereum.Contracts;
 using System.Threading;
+using NethereumGenerators.Interfaces;
 using poolz.finance.csharp.contracts.InvestProvider.ContractDefinition;
 
 namespace poolz.finance.csharp.contracts.InvestProvider
 {
     public partial class InvestProviderDeployingService
     {
-        public virtual Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.IWeb3 web3, InvestProviderDeployment investProviderDeployment, CancellationTokenSource cancellationTokenSource = null)
+        public IChainProvider ChainProvider { get; }
+
+        public InvestProviderDeployingService(IChainProvider chainProvider)
         {
+            ChainProvider = chainProvider;
+        }
+
+        public virtual Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(long chainId, InvestProviderDeployment investProviderDeployment, CancellationTokenSource cancellationTokenSource = null)
+        {
+            var web3 = ChainProvider.Web3(chainId);
             return web3.Eth.GetContractDeploymentHandler<InvestProviderDeployment>().SendRequestAndWaitForReceiptAsync(investProviderDeployment, cancellationTokenSource);
         }
 
-        public virtual Task<string> DeployContractAsync(Nethereum.Web3.IWeb3 web3, InvestProviderDeployment investProviderDeployment)
+        public virtual Task<string> DeployContractAsync(long chainId, InvestProviderDeployment investProviderDeployment)
         {
+            var web3 = ChainProvider.Web3(chainId);
             return web3.Eth.GetContractDeploymentHandler<InvestProviderDeployment>().SendRequestAsync(investProviderDeployment);
-        }
-
-        public virtual async Task<InvestProviderService> DeployContractAndGetServiceAsync(Nethereum.Web3.IWeb3 web3, InvestProviderDeployment investProviderDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            var receipt = await DeployContractAndWaitForReceiptAsync(web3, investProviderDeployment, cancellationTokenSource);
-            return new InvestProviderService(web3, receipt.ContractAddress);
         }
     }
 }
