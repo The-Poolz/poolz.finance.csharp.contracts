@@ -10,57 +10,42 @@ using Nethereum.Contracts.CQS;
 using Nethereum.Contracts.ContractHandlers;
 using Nethereum.Contracts;
 using System.Threading;
+using NethereumGenerators.Interfaces;
 using poolz.finance.csharp.contracts.DelayVaultMigrator.ContractDefinition;
 
 namespace poolz.finance.csharp.contracts.DelayVaultMigrator
 {
     public partial class DelayVaultMigratorService : IDelayVaultMigratorService
     {
-        protected virtual IWeb3 Web3 { get; private set; }
+        public IChainProvider ChainProvider { get; }
 
-        public virtual ContractHandler ContractHandler { get; private set; }
-
-        public DelayVaultMigratorService() { }
-
-        public DelayVaultMigratorService(Web3 web3, string contractAddress)
+        public DelayVaultMigratorService(IChainProvider chainProvider)
         {
-            Initialize(web3, contractAddress);
+            ChainProvider = chainProvider;
         }
 
-        public DelayVaultMigratorService(IWeb3 web3, string contractAddress)
+        private ContractHandler InitializeContractHandler(long chainId, Enum contractType)
         {
-            Initialize(web3, contractAddress);
+            var contractAddress = ChainProvider.ContractAddress(chainId, contractType);
+            var web3 = ChainProvider.Web3(chainId);
+            var contractHandler = web3.Eth.GetContractHandler(contractAddress);
+            return contractHandler;
         }
 
-        public void Initialize(IWeb3 web3, string contractAddress)
+        public virtual Task<string> CreateNewPoolRequestAsync(long chainId, Enum contractType, CreateNewPoolFunction createNewPoolFunction)
         {
-            Web3 = web3;
-            ContractHandler = web3.Eth.GetContractHandler(contractAddress);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAsync(createNewPoolFunction);
         }
 
-        private void EnsureInitialized()
+        public virtual Task<TransactionReceipt> CreateNewPoolRequestAndWaitForReceiptAsync(long chainId, Enum contractType, CreateNewPoolFunction createNewPoolFunction, CancellationTokenSource cancellationToken = null)
         {
-            if (Web3 == null || ContractHandler == null)
-            {
-                throw new InvalidOperationException("The service has not been initialized. Please call the Initialize method with a valid IWeb3 instance and contract address.");
-            }
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAndWaitForReceiptAsync(createNewPoolFunction, cancellationToken);
         }
 
-        public virtual Task<string> CreateNewPoolRequestAsync(CreateNewPoolFunction createNewPoolFunction)
+        public virtual Task<string> CreateNewPoolRequestAsync(long chainId, Enum contractType, string token, BigInteger returnValue2, BigInteger returnValue3, BigInteger returnValue4, BigInteger startAmount, string owner)
         {
-            EnsureInitialized();
-            return ContractHandler.SendRequestAsync(createNewPoolFunction);
-        }
-
-        public virtual Task<TransactionReceipt> CreateNewPoolRequestAndWaitForReceiptAsync(CreateNewPoolFunction createNewPoolFunction, CancellationTokenSource cancellationToken = null)
-        {
-            EnsureInitialized();
-            return ContractHandler.SendRequestAndWaitForReceiptAsync(createNewPoolFunction, cancellationToken);
-        }
-
-        public virtual Task<string> CreateNewPoolRequestAsync(string token, BigInteger returnValue2, BigInteger returnValue3, BigInteger returnValue4, BigInteger startAmount, string owner)
-        {
-            EnsureInitialized();
             var createNewPoolFunction = new CreateNewPoolFunction();
                 createNewPoolFunction.Token = token;
                 createNewPoolFunction.ReturnValue2 = returnValue2;
@@ -69,12 +54,12 @@ namespace poolz.finance.csharp.contracts.DelayVaultMigrator
                 createNewPoolFunction.StartAmount = startAmount;
                 createNewPoolFunction.Owner = owner;
             
-            return ContractHandler.SendRequestAsync(createNewPoolFunction);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAsync(createNewPoolFunction);
         }
 
-        public virtual Task<TransactionReceipt> CreateNewPoolRequestAndWaitForReceiptAsync(string token, BigInteger returnValue2, BigInteger returnValue3, BigInteger returnValue4, BigInteger startAmount, string owner, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> CreateNewPoolRequestAndWaitForReceiptAsync(long chainId, Enum contractType, string token, BigInteger returnValue2, BigInteger returnValue3, BigInteger returnValue4, BigInteger startAmount, string owner, CancellationTokenSource cancellationToken = null)
         {
-            EnsureInitialized();
             var createNewPoolFunction = new CreateNewPoolFunction();
                 createNewPoolFunction.Token = token;
                 createNewPoolFunction.ReturnValue2 = returnValue2;
@@ -83,232 +68,233 @@ namespace poolz.finance.csharp.contracts.DelayVaultMigrator
                 createNewPoolFunction.StartAmount = startAmount;
                 createNewPoolFunction.Owner = owner;
             
-            return ContractHandler.SendRequestAndWaitForReceiptAsync(createNewPoolFunction, cancellationToken);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAndWaitForReceiptAsync(createNewPoolFunction, cancellationToken);
         }
 
-        public virtual Task<string> FinalizeRequestAsync(FinalizeFunction finalizeFunction)
+        public virtual Task<string> FinalizeRequestAsync(long chainId, Enum contractType, FinalizeFunction finalizeFunction)
         {
-            EnsureInitialized();
-            return ContractHandler.SendRequestAsync(finalizeFunction);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAsync(finalizeFunction);
         }
 
-        public virtual Task<TransactionReceipt> FinalizeRequestAndWaitForReceiptAsync(FinalizeFunction finalizeFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> FinalizeRequestAndWaitForReceiptAsync(long chainId, Enum contractType, FinalizeFunction finalizeFunction, CancellationTokenSource cancellationToken = null)
         {
-            EnsureInitialized();
-            return ContractHandler.SendRequestAndWaitForReceiptAsync(finalizeFunction, cancellationToken);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAndWaitForReceiptAsync(finalizeFunction, cancellationToken);
         }
 
-        public virtual Task<string> FinalizeRequestAsync(string newVault)
+        public virtual Task<string> FinalizeRequestAsync(long chainId, Enum contractType, string newVault)
         {
-            EnsureInitialized();
             var finalizeFunction = new FinalizeFunction();
                 finalizeFunction.NewVault = newVault;
             
-            return ContractHandler.SendRequestAsync(finalizeFunction);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAsync(finalizeFunction);
         }
 
-        public virtual Task<TransactionReceipt> FinalizeRequestAndWaitForReceiptAsync(string newVault, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> FinalizeRequestAndWaitForReceiptAsync(long chainId, Enum contractType, string newVault, CancellationTokenSource cancellationToken = null)
         {
-            EnsureInitialized();
             var finalizeFunction = new FinalizeFunction();
                 finalizeFunction.NewVault = newVault;
             
-            return ContractHandler.SendRequestAndWaitForReceiptAsync(finalizeFunction, cancellationToken);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAndWaitForReceiptAsync(finalizeFunction, cancellationToken);
         }
 
-        public virtual Task<string> FirewallAdminQueryAsync(FirewallAdminFunction firewallAdminFunction, BlockParameter blockParameter = null)
+        public virtual Task<string> FirewallAdminQueryAsync(long chainId, Enum contractType, FirewallAdminFunction firewallAdminFunction, BlockParameter blockParameter = null)
         {
-            EnsureInitialized();
-            return ContractHandler.QueryAsync<FirewallAdminFunction, string>(firewallAdminFunction, blockParameter);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.QueryAsync<FirewallAdminFunction, string>(firewallAdminFunction, blockParameter);
         }
 
-        public virtual Task<string> FirewallAdminQueryAsync(BlockParameter blockParameter = null)
+        public virtual Task<string> FirewallAdminQueryAsync(long chainId, Enum contractType, BlockParameter blockParameter = null)
         {
-            EnsureInitialized();
-            return ContractHandler.QueryAsync<FirewallAdminFunction, string>(null, blockParameter);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.QueryAsync<FirewallAdminFunction, string>(null, blockParameter);
         }
 
-        public virtual Task<string> FullMigrateRequestAsync(FullMigrateFunction fullMigrateFunction)
+        public virtual Task<string> FullMigrateRequestAsync(long chainId, Enum contractType, FullMigrateFunction fullMigrateFunction)
         {
-            EnsureInitialized();
-            return ContractHandler.SendRequestAsync(fullMigrateFunction);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAsync(fullMigrateFunction);
         }
 
-        public virtual Task<string> FullMigrateRequestAsync()
+        public virtual Task<string> FullMigrateRequestAsync(long chainId, Enum contractType)
         {
-            EnsureInitialized();
-            return ContractHandler.SendRequestAsync<FullMigrateFunction>();
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAsync<FullMigrateFunction>();
         }
 
-        public virtual Task<TransactionReceipt> FullMigrateRequestAndWaitForReceiptAsync(FullMigrateFunction fullMigrateFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> FullMigrateRequestAndWaitForReceiptAsync(long chainId, Enum contractType, FullMigrateFunction fullMigrateFunction, CancellationTokenSource cancellationToken = null)
         {
-            EnsureInitialized();
-            return ContractHandler.SendRequestAndWaitForReceiptAsync(fullMigrateFunction, cancellationToken);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAndWaitForReceiptAsync(fullMigrateFunction, cancellationToken);
         }
 
-        public virtual Task<TransactionReceipt> FullMigrateRequestAndWaitForReceiptAsync(CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> FullMigrateRequestAndWaitForReceiptAsync(long chainId, Enum contractType, CancellationTokenSource cancellationToken = null)
         {
-            EnsureInitialized();
-            return ContractHandler.SendRequestAndWaitForReceiptAsync<FullMigrateFunction>(null, cancellationToken);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAndWaitForReceiptAsync<FullMigrateFunction>(null, cancellationToken);
         }
 
-        public virtual Task<BigInteger> GetUserV1AmountQueryAsync(GetUserV1AmountFunction getUserV1AmountFunction, BlockParameter blockParameter = null)
+        public virtual Task<BigInteger> GetUserV1AmountQueryAsync(long chainId, Enum contractType, GetUserV1AmountFunction getUserV1AmountFunction, BlockParameter blockParameter = null)
         {
-            EnsureInitialized();
-            return ContractHandler.QueryAsync<GetUserV1AmountFunction, BigInteger>(getUserV1AmountFunction, blockParameter);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.QueryAsync<GetUserV1AmountFunction, BigInteger>(getUserV1AmountFunction, blockParameter);
         }
 
-        public virtual Task<BigInteger> GetUserV1AmountQueryAsync(string user, BlockParameter blockParameter = null)
+        public virtual Task<BigInteger> GetUserV1AmountQueryAsync(long chainId, Enum contractType, string user, BlockParameter blockParameter = null)
         {
-            EnsureInitialized();
             var getUserV1AmountFunction = new GetUserV1AmountFunction();
                 getUserV1AmountFunction.User = user;
             
-            return ContractHandler.QueryAsync<GetUserV1AmountFunction, BigInteger>(getUserV1AmountFunction, blockParameter);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.QueryAsync<GetUserV1AmountFunction, BigInteger>(getUserV1AmountFunction, blockParameter);
         }
 
-        public virtual Task<string> LockDealNFTQueryAsync(LockDealNFTFunction lockDealNFTFunction, BlockParameter blockParameter = null)
+        public virtual Task<string> LockDealNFTQueryAsync(long chainId, Enum contractType, LockDealNFTFunction lockDealNFTFunction, BlockParameter blockParameter = null)
         {
-            EnsureInitialized();
-            return ContractHandler.QueryAsync<LockDealNFTFunction, string>(lockDealNFTFunction, blockParameter);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.QueryAsync<LockDealNFTFunction, string>(lockDealNFTFunction, blockParameter);
         }
 
-        public virtual Task<string> LockDealNFTQueryAsync(BlockParameter blockParameter = null)
+        public virtual Task<string> LockDealNFTQueryAsync(long chainId, Enum contractType, BlockParameter blockParameter = null)
         {
-            EnsureInitialized();
-            return ContractHandler.QueryAsync<LockDealNFTFunction, string>(null, blockParameter);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.QueryAsync<LockDealNFTFunction, string>(null, blockParameter);
         }
 
-        public virtual Task<string> NewVaultQueryAsync(NewVaultFunction newVaultFunction, BlockParameter blockParameter = null)
+        public virtual Task<string> NewVaultQueryAsync(long chainId, Enum contractType, NewVaultFunction newVaultFunction, BlockParameter blockParameter = null)
         {
-            EnsureInitialized();
-            return ContractHandler.QueryAsync<NewVaultFunction, string>(newVaultFunction, blockParameter);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.QueryAsync<NewVaultFunction, string>(newVaultFunction, blockParameter);
         }
 
-        public virtual Task<string> NewVaultQueryAsync(BlockParameter blockParameter = null)
+        public virtual Task<string> NewVaultQueryAsync(long chainId, Enum contractType, BlockParameter blockParameter = null)
         {
-            EnsureInitialized();
-            return ContractHandler.QueryAsync<NewVaultFunction, string>(null, blockParameter);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.QueryAsync<NewVaultFunction, string>(null, blockParameter);
         }
 
-        public virtual Task<string> OldVaultQueryAsync(OldVaultFunction oldVaultFunction, BlockParameter blockParameter = null)
+        public virtual Task<string> OldVaultQueryAsync(long chainId, Enum contractType, OldVaultFunction oldVaultFunction, BlockParameter blockParameter = null)
         {
-            EnsureInitialized();
-            return ContractHandler.QueryAsync<OldVaultFunction, string>(oldVaultFunction, blockParameter);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.QueryAsync<OldVaultFunction, string>(oldVaultFunction, blockParameter);
         }
 
-        public virtual Task<string> OldVaultQueryAsync(BlockParameter blockParameter = null)
+        public virtual Task<string> OldVaultQueryAsync(long chainId, Enum contractType, BlockParameter blockParameter = null)
         {
-            EnsureInitialized();
-            return ContractHandler.QueryAsync<OldVaultFunction, string>(null, blockParameter);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.QueryAsync<OldVaultFunction, string>(null, blockParameter);
         }
 
-        public virtual Task<string> OwnerQueryAsync(OwnerFunction ownerFunction, BlockParameter blockParameter = null)
+        public virtual Task<string> OwnerQueryAsync(long chainId, Enum contractType, OwnerFunction ownerFunction, BlockParameter blockParameter = null)
         {
-            EnsureInitialized();
-            return ContractHandler.QueryAsync<OwnerFunction, string>(ownerFunction, blockParameter);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.QueryAsync<OwnerFunction, string>(ownerFunction, blockParameter);
         }
 
-        public virtual Task<string> OwnerQueryAsync(BlockParameter blockParameter = null)
+        public virtual Task<string> OwnerQueryAsync(long chainId, Enum contractType, BlockParameter blockParameter = null)
         {
-            EnsureInitialized();
-            return ContractHandler.QueryAsync<OwnerFunction, string>(null, blockParameter);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.QueryAsync<OwnerFunction, string>(null, blockParameter);
         }
 
-        public virtual Task<string> SetFirewallRequestAsync(SetFirewallFunction setFirewallFunction)
+        public virtual Task<string> SetFirewallRequestAsync(long chainId, Enum contractType, SetFirewallFunction setFirewallFunction)
         {
-            EnsureInitialized();
-            return ContractHandler.SendRequestAsync(setFirewallFunction);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAsync(setFirewallFunction);
         }
 
-        public virtual Task<TransactionReceipt> SetFirewallRequestAndWaitForReceiptAsync(SetFirewallFunction setFirewallFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> SetFirewallRequestAndWaitForReceiptAsync(long chainId, Enum contractType, SetFirewallFunction setFirewallFunction, CancellationTokenSource cancellationToken = null)
         {
-            EnsureInitialized();
-            return ContractHandler.SendRequestAndWaitForReceiptAsync(setFirewallFunction, cancellationToken);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAndWaitForReceiptAsync(setFirewallFunction, cancellationToken);
         }
 
-        public virtual Task<string> SetFirewallRequestAsync(string firewall)
+        public virtual Task<string> SetFirewallRequestAsync(long chainId, Enum contractType, string firewall)
         {
-            EnsureInitialized();
             var setFirewallFunction = new SetFirewallFunction();
                 setFirewallFunction.Firewall = firewall;
             
-            return ContractHandler.SendRequestAsync(setFirewallFunction);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAsync(setFirewallFunction);
         }
 
-        public virtual Task<TransactionReceipt> SetFirewallRequestAndWaitForReceiptAsync(string firewall, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> SetFirewallRequestAndWaitForReceiptAsync(long chainId, Enum contractType, string firewall, CancellationTokenSource cancellationToken = null)
         {
-            EnsureInitialized();
             var setFirewallFunction = new SetFirewallFunction();
                 setFirewallFunction.Firewall = firewall;
             
-            return ContractHandler.SendRequestAndWaitForReceiptAsync(setFirewallFunction, cancellationToken);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAndWaitForReceiptAsync(setFirewallFunction, cancellationToken);
         }
 
-        public virtual Task<string> SetFirewallAdminRequestAsync(SetFirewallAdminFunction setFirewallAdminFunction)
+        public virtual Task<string> SetFirewallAdminRequestAsync(long chainId, Enum contractType, SetFirewallAdminFunction setFirewallAdminFunction)
         {
-            EnsureInitialized();
-            return ContractHandler.SendRequestAsync(setFirewallAdminFunction);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAsync(setFirewallAdminFunction);
         }
 
-        public virtual Task<TransactionReceipt> SetFirewallAdminRequestAndWaitForReceiptAsync(SetFirewallAdminFunction setFirewallAdminFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> SetFirewallAdminRequestAndWaitForReceiptAsync(long chainId, Enum contractType, SetFirewallAdminFunction setFirewallAdminFunction, CancellationTokenSource cancellationToken = null)
         {
-            EnsureInitialized();
-            return ContractHandler.SendRequestAndWaitForReceiptAsync(setFirewallAdminFunction, cancellationToken);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAndWaitForReceiptAsync(setFirewallAdminFunction, cancellationToken);
         }
 
-        public virtual Task<string> SetFirewallAdminRequestAsync(string firewallAdmin)
+        public virtual Task<string> SetFirewallAdminRequestAsync(long chainId, Enum contractType, string firewallAdmin)
         {
-            EnsureInitialized();
             var setFirewallAdminFunction = new SetFirewallAdminFunction();
                 setFirewallAdminFunction.FirewallAdmin = firewallAdmin;
             
-            return ContractHandler.SendRequestAsync(setFirewallAdminFunction);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAsync(setFirewallAdminFunction);
         }
 
-        public virtual Task<TransactionReceipt> SetFirewallAdminRequestAndWaitForReceiptAsync(string firewallAdmin, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> SetFirewallAdminRequestAndWaitForReceiptAsync(long chainId, Enum contractType, string firewallAdmin, CancellationTokenSource cancellationToken = null)
         {
-            EnsureInitialized();
             var setFirewallAdminFunction = new SetFirewallAdminFunction();
                 setFirewallAdminFunction.FirewallAdmin = firewallAdmin;
             
-            return ContractHandler.SendRequestAndWaitForReceiptAsync(setFirewallAdminFunction, cancellationToken);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAndWaitForReceiptAsync(setFirewallAdminFunction, cancellationToken);
         }
 
-        public virtual Task<string> TokenQueryAsync(TokenFunction tokenFunction, BlockParameter blockParameter = null)
+        public virtual Task<string> TokenQueryAsync(long chainId, Enum contractType, TokenFunction tokenFunction, BlockParameter blockParameter = null)
         {
-            EnsureInitialized();
-            return ContractHandler.QueryAsync<TokenFunction, string>(tokenFunction, blockParameter);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.QueryAsync<TokenFunction, string>(tokenFunction, blockParameter);
         }
 
-        public virtual Task<string> TokenQueryAsync(BlockParameter blockParameter = null)
+        public virtual Task<string> TokenQueryAsync(long chainId, Enum contractType, BlockParameter blockParameter = null)
         {
-            EnsureInitialized();
-            return ContractHandler.QueryAsync<TokenFunction, string>(null, blockParameter);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.QueryAsync<TokenFunction, string>(null, blockParameter);
         }
 
-        public virtual Task<string> WithdrawTokensFromV1VaultRequestAsync(WithdrawTokensFromV1VaultFunction withdrawTokensFromV1VaultFunction)
+        public virtual Task<string> WithdrawTokensFromV1VaultRequestAsync(long chainId, Enum contractType, WithdrawTokensFromV1VaultFunction withdrawTokensFromV1VaultFunction)
         {
-            EnsureInitialized();
-            return ContractHandler.SendRequestAsync(withdrawTokensFromV1VaultFunction);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAsync(withdrawTokensFromV1VaultFunction);
         }
 
-        public virtual Task<string> WithdrawTokensFromV1VaultRequestAsync()
+        public virtual Task<string> WithdrawTokensFromV1VaultRequestAsync(long chainId, Enum contractType)
         {
-            EnsureInitialized();
-            return ContractHandler.SendRequestAsync<WithdrawTokensFromV1VaultFunction>();
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAsync<WithdrawTokensFromV1VaultFunction>();
         }
 
-        public virtual Task<TransactionReceipt> WithdrawTokensFromV1VaultRequestAndWaitForReceiptAsync(WithdrawTokensFromV1VaultFunction withdrawTokensFromV1VaultFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> WithdrawTokensFromV1VaultRequestAndWaitForReceiptAsync(long chainId, Enum contractType, WithdrawTokensFromV1VaultFunction withdrawTokensFromV1VaultFunction, CancellationTokenSource cancellationToken = null)
         {
-            EnsureInitialized();
-            return ContractHandler.SendRequestAndWaitForReceiptAsync(withdrawTokensFromV1VaultFunction, cancellationToken);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAndWaitForReceiptAsync(withdrawTokensFromV1VaultFunction, cancellationToken);
         }
 
-        public virtual Task<TransactionReceipt> WithdrawTokensFromV1VaultRequestAndWaitForReceiptAsync(CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> WithdrawTokensFromV1VaultRequestAndWaitForReceiptAsync(long chainId, Enum contractType, CancellationTokenSource cancellationToken = null)
         {
-            EnsureInitialized();
-            return ContractHandler.SendRequestAndWaitForReceiptAsync<WithdrawTokensFromV1VaultFunction>(null, cancellationToken);
+            var contractHandler = InitializeContractHandler(chainId, contractType);
+            return contractHandler.SendRequestAndWaitForReceiptAsync<WithdrawTokensFromV1VaultFunction>(null, cancellationToken);
         }
     }
 }
