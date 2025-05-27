@@ -15,11 +15,12 @@ using poolz.finance.csharp.contracts.LockDealNFT.ContractDefinition;
 
 namespace poolz.finance.csharp.contracts.LockDealNFT
 {
-    public partial class LockDealNFTDeployingService
+    public partial class LockDealNFTDeployingService<TContractType>
+        where TContractType : Enum
     {
-        public IChainProvider ChainProvider { get; }
+        public IChainProvider<TContractType> ChainProvider { get; }
 
-        public LockDealNFTDeployingService(IChainProvider chainProvider)
+        public LockDealNFTDeployingService(IChainProvider<TContractType> chainProvider)
         {
             ChainProvider = chainProvider;
         }
