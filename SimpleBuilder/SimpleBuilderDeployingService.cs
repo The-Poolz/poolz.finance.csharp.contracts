@@ -15,11 +15,12 @@ using poolz.finance.csharp.contracts.SimpleBuilder.ContractDefinition;
 
 namespace poolz.finance.csharp.contracts.SimpleBuilder
 {
-    public partial class SimpleBuilderDeployingService
+    public partial class SimpleBuilderDeployingService<TContractType>
+        where TContractType : Enum
     {
-        public IChainProvider ChainProvider { get; }
+        public IChainProvider<TContractType> ChainProvider { get; }
 
-        public SimpleBuilderDeployingService(IChainProvider chainProvider)
+        public SimpleBuilderDeployingService(IChainProvider<TContractType> chainProvider)
         {
             ChainProvider = chainProvider;
         }
