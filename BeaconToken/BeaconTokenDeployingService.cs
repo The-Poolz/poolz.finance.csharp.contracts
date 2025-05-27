@@ -10,26 +10,30 @@ using Nethereum.Contracts.CQS;
 using Nethereum.Contracts.ContractHandlers;
 using Nethereum.Contracts;
 using System.Threading;
+using NethereumGenerators.Interfaces;
 using poolz.finance.csharp.contracts.BeaconToken.ContractDefinition;
 
 namespace poolz.finance.csharp.contracts.BeaconToken
 {
     public partial class BeaconTokenDeployingService
     {
-        public virtual Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.IWeb3 web3, BeaconTokenDeployment beaconTokenDeployment, CancellationTokenSource cancellationTokenSource = null)
+        public IChainProvider ChainProvider { get; }
+
+        public BeaconTokenDeployingService(IChainProvider chainProvider)
         {
+            ChainProvider = chainProvider;
+        }
+
+        public virtual Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(long chainId, BeaconTokenDeployment beaconTokenDeployment, CancellationTokenSource cancellationTokenSource = null)
+        {
+            var web3 = ChainProvider.Web3(chainId);
             return web3.Eth.GetContractDeploymentHandler<BeaconTokenDeployment>().SendRequestAndWaitForReceiptAsync(beaconTokenDeployment, cancellationTokenSource);
         }
 
-        public virtual Task<string> DeployContractAsync(Nethereum.Web3.IWeb3 web3, BeaconTokenDeployment beaconTokenDeployment)
+        public virtual Task<string> DeployContractAsync(long chainId, BeaconTokenDeployment beaconTokenDeployment)
         {
+            var web3 = ChainProvider.Web3(chainId);
             return web3.Eth.GetContractDeploymentHandler<BeaconTokenDeployment>().SendRequestAsync(beaconTokenDeployment);
-        }
-
-        public virtual async Task<BeaconTokenService> DeployContractAndGetServiceAsync(Nethereum.Web3.IWeb3 web3, BeaconTokenDeployment beaconTokenDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            var receipt = await DeployContractAndWaitForReceiptAsync(web3, beaconTokenDeployment, cancellationTokenSource);
-            return new BeaconTokenService(web3, receipt.ContractAddress);
         }
     }
 }
