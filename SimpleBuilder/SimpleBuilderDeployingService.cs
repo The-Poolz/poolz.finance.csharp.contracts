@@ -10,26 +10,30 @@ using Nethereum.Contracts.CQS;
 using Nethereum.Contracts.ContractHandlers;
 using Nethereum.Contracts;
 using System.Threading;
+using NethereumGenerators.Interfaces;
 using poolz.finance.csharp.contracts.SimpleBuilder.ContractDefinition;
 
 namespace poolz.finance.csharp.contracts.SimpleBuilder
 {
     public partial class SimpleBuilderDeployingService
     {
-        public virtual Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.IWeb3 web3, SimpleBuilderDeployment simpleBuilderDeployment, CancellationTokenSource cancellationTokenSource = null)
+        public IChainProvider ChainProvider { get; }
+
+        public SimpleBuilderDeployingService(IChainProvider chainProvider)
         {
+            ChainProvider = chainProvider;
+        }
+
+        public virtual Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(long chainId, SimpleBuilderDeployment simpleBuilderDeployment, CancellationTokenSource cancellationTokenSource = null)
+        {
+            var web3 = ChainProvider.Web3(chainId);
             return web3.Eth.GetContractDeploymentHandler<SimpleBuilderDeployment>().SendRequestAndWaitForReceiptAsync(simpleBuilderDeployment, cancellationTokenSource);
         }
 
-        public virtual Task<string> DeployContractAsync(Nethereum.Web3.IWeb3 web3, SimpleBuilderDeployment simpleBuilderDeployment)
+        public virtual Task<string> DeployContractAsync(long chainId, SimpleBuilderDeployment simpleBuilderDeployment)
         {
+            var web3 = ChainProvider.Web3(chainId);
             return web3.Eth.GetContractDeploymentHandler<SimpleBuilderDeployment>().SendRequestAsync(simpleBuilderDeployment);
-        }
-
-        public virtual async Task<SimpleBuilderService> DeployContractAndGetServiceAsync(Nethereum.Web3.IWeb3 web3, SimpleBuilderDeployment simpleBuilderDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            var receipt = await DeployContractAndWaitForReceiptAsync(web3, simpleBuilderDeployment, cancellationTokenSource);
-            return new SimpleBuilderService(web3, receipt.ContractAddress);
         }
     }
 }
