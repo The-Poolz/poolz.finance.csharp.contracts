@@ -10,26 +10,30 @@ using Nethereum.Contracts.CQS;
 using Nethereum.Contracts.ContractHandlers;
 using Nethereum.Contracts;
 using System.Threading;
+using NethereumGenerators.Interfaces;
 using poolz.finance.csharp.contracts.DispenserProvider.ContractDefinition;
 
 namespace poolz.finance.csharp.contracts.DispenserProvider
 {
     public partial class DispenserProviderDeployingService
     {
-        public virtual Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.IWeb3 web3, DispenserProviderDeployment dispenserProviderDeployment, CancellationTokenSource cancellationTokenSource = null)
+        public IChainProvider ChainProvider { get; }
+
+        public DispenserProviderDeployingService(IChainProvider chainProvider)
         {
+            ChainProvider = chainProvider;
+        }
+
+        public virtual Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(long chainId, DispenserProviderDeployment dispenserProviderDeployment, CancellationTokenSource cancellationTokenSource = null)
+        {
+            var web3 = ChainProvider.Web3(chainId);
             return web3.Eth.GetContractDeploymentHandler<DispenserProviderDeployment>().SendRequestAndWaitForReceiptAsync(dispenserProviderDeployment, cancellationTokenSource);
         }
 
-        public virtual Task<string> DeployContractAsync(Nethereum.Web3.IWeb3 web3, DispenserProviderDeployment dispenserProviderDeployment)
+        public virtual Task<string> DeployContractAsync(long chainId, DispenserProviderDeployment dispenserProviderDeployment)
         {
+            var web3 = ChainProvider.Web3(chainId);
             return web3.Eth.GetContractDeploymentHandler<DispenserProviderDeployment>().SendRequestAsync(dispenserProviderDeployment);
-        }
-
-        public virtual async Task<DispenserProviderService> DeployContractAndGetServiceAsync(Nethereum.Web3.IWeb3 web3, DispenserProviderDeployment dispenserProviderDeployment, CancellationTokenSource cancellationTokenSource = null)
-        {
-            var receipt = await DeployContractAndWaitForReceiptAsync(web3, dispenserProviderDeployment, cancellationTokenSource);
-            return new DispenserProviderService(web3, receipt.ContractAddress);
         }
     }
 }
