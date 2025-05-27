@@ -16,82 +16,80 @@ namespace poolz.finance.csharp.contracts.DelayVaultMigrator
 {
     public interface IDelayVaultMigratorService
     {
-        public Task<string> CreateNewPoolRequestAsync(CreateNewPoolFunction createNewPoolFunction);
+        Task<string> CreateNewPoolRequestAsync(long chainId, Enum contractType, CreateNewPoolFunction createNewPoolFunction);
 
-        public Task<TransactionReceipt> CreateNewPoolRequestAndWaitForReceiptAsync(CreateNewPoolFunction createNewPoolFunction, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> CreateNewPoolRequestAndWaitForReceiptAsync(long chainId, Enum contractType, CreateNewPoolFunction createNewPoolFunction, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> CreateNewPoolRequestAsync(string token, BigInteger returnValue2, BigInteger returnValue3, BigInteger returnValue4, BigInteger startAmount, string owner);
+        Task<string> CreateNewPoolRequestAsync(long chainId, Enum contractType, string token, BigInteger returnValue2, BigInteger returnValue3, BigInteger returnValue4, BigInteger startAmount, string owner);
 
-        public Task<TransactionReceipt> CreateNewPoolRequestAndWaitForReceiptAsync(string token, BigInteger returnValue2, BigInteger returnValue3, BigInteger returnValue4, BigInteger startAmount, string owner, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> CreateNewPoolRequestAndWaitForReceiptAsync(long chainId, Enum contractType, string token, BigInteger returnValue2, BigInteger returnValue3, BigInteger returnValue4, BigInteger startAmount, string owner, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> FinalizeRequestAsync(FinalizeFunction finalizeFunction);
+        Task<string> FinalizeRequestAsync(long chainId, Enum contractType, FinalizeFunction finalizeFunction);
 
-        public Task<TransactionReceipt> FinalizeRequestAndWaitForReceiptAsync(FinalizeFunction finalizeFunction, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> FinalizeRequestAndWaitForReceiptAsync(long chainId, Enum contractType, FinalizeFunction finalizeFunction, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> FinalizeRequestAsync(string newVault);
+        Task<string> FinalizeRequestAsync(long chainId, Enum contractType, string newVault);
 
-        public Task<TransactionReceipt> FinalizeRequestAndWaitForReceiptAsync(string newVault, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> FinalizeRequestAndWaitForReceiptAsync(long chainId, Enum contractType, string newVault, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> FirewallAdminQueryAsync(FirewallAdminFunction firewallAdminFunction, BlockParameter blockParameter = null);
+        Task<string> FirewallAdminQueryAsync(long chainId, Enum contractType, FirewallAdminFunction firewallAdminFunction, BlockParameter blockParameter = null);
 
-        public Task<string> FirewallAdminQueryAsync(BlockParameter blockParameter = null);
+        Task<string> FirewallAdminQueryAsync(long chainId, Enum contractType, BlockParameter blockParameter = null);
 
-        public Task<string> FullMigrateRequestAsync(FullMigrateFunction fullMigrateFunction);
+        Task<string> FullMigrateRequestAsync(long chainId, Enum contractType, FullMigrateFunction fullMigrateFunction);
 
-        public Task<string> FullMigrateRequestAsync();
+        Task<string> FullMigrateRequestAsync(long chainId, Enum contractType);
 
-        public Task<TransactionReceipt> FullMigrateRequestAndWaitForReceiptAsync(FullMigrateFunction fullMigrateFunction, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> FullMigrateRequestAndWaitForReceiptAsync(long chainId, Enum contractType, FullMigrateFunction fullMigrateFunction, CancellationTokenSource cancellationToken = null);
 
-        public Task<TransactionReceipt> FullMigrateRequestAndWaitForReceiptAsync(CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> FullMigrateRequestAndWaitForReceiptAsync(long chainId, Enum contractType, CancellationTokenSource cancellationToken = null);
 
-        public Task<BigInteger> GetUserV1AmountQueryAsync(GetUserV1AmountFunction getUserV1AmountFunction, BlockParameter blockParameter = null);
+        Task<BigInteger> GetUserV1AmountQueryAsync(long chainId, Enum contractType, GetUserV1AmountFunction getUserV1AmountFunction, BlockParameter blockParameter = null);
 
-        public Task<BigInteger> GetUserV1AmountQueryAsync(string user, BlockParameter blockParameter = null);
+        Task<BigInteger> GetUserV1AmountQueryAsync(long chainId, Enum contractType, string user, BlockParameter blockParameter = null);
 
-        public Task<string> LockDealNFTQueryAsync(LockDealNFTFunction lockDealNFTFunction, BlockParameter blockParameter = null);
+        Task<string> LockDealNFTQueryAsync(long chainId, Enum contractType, LockDealNFTFunction lockDealNFTFunction, BlockParameter blockParameter = null);
 
-        public Task<string> LockDealNFTQueryAsync(BlockParameter blockParameter = null);
+        Task<string> LockDealNFTQueryAsync(long chainId, Enum contractType, BlockParameter blockParameter = null);
 
-        public Task<string> NewVaultQueryAsync(NewVaultFunction newVaultFunction, BlockParameter blockParameter = null);
+        Task<string> NewVaultQueryAsync(long chainId, Enum contractType, NewVaultFunction newVaultFunction, BlockParameter blockParameter = null);
 
-        public Task<string> NewVaultQueryAsync(BlockParameter blockParameter = null);
+        Task<string> NewVaultQueryAsync(long chainId, Enum contractType, BlockParameter blockParameter = null);
 
-        public Task<string> OldVaultQueryAsync(OldVaultFunction oldVaultFunction, BlockParameter blockParameter = null);
+        Task<string> OldVaultQueryAsync(long chainId, Enum contractType, OldVaultFunction oldVaultFunction, BlockParameter blockParameter = null);
 
-        public Task<string> OldVaultQueryAsync(BlockParameter blockParameter = null);
+        Task<string> OldVaultQueryAsync(long chainId, Enum contractType, BlockParameter blockParameter = null);
 
-        public Task<string> OwnerQueryAsync(OwnerFunction ownerFunction, BlockParameter blockParameter = null);
+        Task<string> OwnerQueryAsync(long chainId, Enum contractType, OwnerFunction ownerFunction, BlockParameter blockParameter = null);
 
-        public Task<string> OwnerQueryAsync(BlockParameter blockParameter = null);
+        Task<string> OwnerQueryAsync(long chainId, Enum contractType, BlockParameter blockParameter = null);
 
-        public Task<string> SetFirewallRequestAsync(SetFirewallFunction setFirewallFunction);
+        Task<string> SetFirewallRequestAsync(long chainId, Enum contractType, SetFirewallFunction setFirewallFunction);
 
-        public Task<TransactionReceipt> SetFirewallRequestAndWaitForReceiptAsync(SetFirewallFunction setFirewallFunction, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> SetFirewallRequestAndWaitForReceiptAsync(long chainId, Enum contractType, SetFirewallFunction setFirewallFunction, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> SetFirewallRequestAsync(string firewall);
+        Task<string> SetFirewallRequestAsync(long chainId, Enum contractType, string firewall);
 
-        public Task<TransactionReceipt> SetFirewallRequestAndWaitForReceiptAsync(string firewall, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> SetFirewallRequestAndWaitForReceiptAsync(long chainId, Enum contractType, string firewall, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> SetFirewallAdminRequestAsync(SetFirewallAdminFunction setFirewallAdminFunction);
+        Task<string> SetFirewallAdminRequestAsync(long chainId, Enum contractType, SetFirewallAdminFunction setFirewallAdminFunction);
 
-        public Task<TransactionReceipt> SetFirewallAdminRequestAndWaitForReceiptAsync(SetFirewallAdminFunction setFirewallAdminFunction, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> SetFirewallAdminRequestAndWaitForReceiptAsync(long chainId, Enum contractType, SetFirewallAdminFunction setFirewallAdminFunction, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> SetFirewallAdminRequestAsync(string firewallAdmin);
+        Task<string> SetFirewallAdminRequestAsync(long chainId, Enum contractType, string firewallAdmin);
 
-        public Task<TransactionReceipt> SetFirewallAdminRequestAndWaitForReceiptAsync(string firewallAdmin, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> SetFirewallAdminRequestAndWaitForReceiptAsync(long chainId, Enum contractType, string firewallAdmin, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> TokenQueryAsync(TokenFunction tokenFunction, BlockParameter blockParameter = null);
+        Task<string> TokenQueryAsync(long chainId, Enum contractType, TokenFunction tokenFunction, BlockParameter blockParameter = null);
 
-        public Task<string> TokenQueryAsync(BlockParameter blockParameter = null);
+        Task<string> TokenQueryAsync(long chainId, Enum contractType, BlockParameter blockParameter = null);
 
-        public Task<string> WithdrawTokensFromV1VaultRequestAsync(WithdrawTokensFromV1VaultFunction withdrawTokensFromV1VaultFunction);
+        Task<string> WithdrawTokensFromV1VaultRequestAsync(long chainId, Enum contractType, WithdrawTokensFromV1VaultFunction withdrawTokensFromV1VaultFunction);
 
-        public Task<string> WithdrawTokensFromV1VaultRequestAsync();
+        Task<string> WithdrawTokensFromV1VaultRequestAsync(long chainId, Enum contractType);
 
-        public Task<TransactionReceipt> WithdrawTokensFromV1VaultRequestAndWaitForReceiptAsync(WithdrawTokensFromV1VaultFunction withdrawTokensFromV1VaultFunction, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> WithdrawTokensFromV1VaultRequestAndWaitForReceiptAsync(long chainId, Enum contractType, WithdrawTokensFromV1VaultFunction withdrawTokensFromV1VaultFunction, CancellationTokenSource cancellationToken = null);
 
-        public Task<TransactionReceipt> WithdrawTokensFromV1VaultRequestAndWaitForReceiptAsync(CancellationTokenSource cancellationToken = null);
-
-        public void Initialize(IWeb3 web3, string contractAddress);
+        Task<TransactionReceipt> WithdrawTokensFromV1VaultRequestAndWaitForReceiptAsync(long chainId, Enum contractType, CancellationTokenSource cancellationToken = null);
     }
 }
