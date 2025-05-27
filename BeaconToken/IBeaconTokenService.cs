@@ -16,106 +16,104 @@ namespace poolz.finance.csharp.contracts.BeaconToken
 {
     public interface IBeaconTokenService
     {
-        public Task<BigInteger> AllowanceQueryAsync(AllowanceFunction allowanceFunction, BlockParameter blockParameter = null);
+        Task<BigInteger> AllowanceQueryAsync(long chainId, Enum contractType, AllowanceFunction allowanceFunction, BlockParameter blockParameter = null);
 
-        public Task<BigInteger> AllowanceQueryAsync(string owner, string spender, BlockParameter blockParameter = null);
+        Task<BigInteger> AllowanceQueryAsync(long chainId, Enum contractType, string owner, string spender, BlockParameter blockParameter = null);
 
-        public Task<string> ApproveRequestAsync(ApproveFunction approveFunction);
+        Task<string> ApproveRequestAsync(long chainId, Enum contractType, ApproveFunction approveFunction);
 
-        public Task<TransactionReceipt> ApproveRequestAndWaitForReceiptAsync(ApproveFunction approveFunction, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> ApproveRequestAndWaitForReceiptAsync(long chainId, Enum contractType, ApproveFunction approveFunction, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> ApproveRequestAsync(string spender, BigInteger amount);
+        Task<string> ApproveRequestAsync(long chainId, Enum contractType, string spender, BigInteger amount);
 
-        public Task<TransactionReceipt> ApproveRequestAndWaitForReceiptAsync(string spender, BigInteger amount, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> ApproveRequestAndWaitForReceiptAsync(long chainId, Enum contractType, string spender, BigInteger amount, CancellationTokenSource cancellationToken = null);
 
-        public Task<BigInteger> BalanceOfQueryAsync(BalanceOfFunction balanceOfFunction, BlockParameter blockParameter = null);
+        Task<BigInteger> BalanceOfQueryAsync(long chainId, Enum contractType, BalanceOfFunction balanceOfFunction, BlockParameter blockParameter = null);
 
-        public Task<BigInteger> BalanceOfQueryAsync(string account, BlockParameter blockParameter = null);
+        Task<BigInteger> BalanceOfQueryAsync(long chainId, Enum contractType, string account, BlockParameter blockParameter = null);
 
-        public Task<string> BurnRequestAsync(BurnFunction burnFunction);
+        Task<string> BurnRequestAsync(long chainId, Enum contractType, BurnFunction burnFunction);
 
-        public Task<TransactionReceipt> BurnRequestAndWaitForReceiptAsync(BurnFunction burnFunction, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> BurnRequestAndWaitForReceiptAsync(long chainId, Enum contractType, BurnFunction burnFunction, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> BurnRequestAsync(BigInteger amount);
+        Task<string> BurnRequestAsync(long chainId, Enum contractType, BigInteger amount);
 
-        public Task<TransactionReceipt> BurnRequestAndWaitForReceiptAsync(BigInteger amount, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> BurnRequestAndWaitForReceiptAsync(long chainId, Enum contractType, BigInteger amount, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> BurnFromRequestAsync(BurnFromFunction burnFromFunction);
+        Task<string> BurnFromRequestAsync(long chainId, Enum contractType, BurnFromFunction burnFromFunction);
 
-        public Task<TransactionReceipt> BurnFromRequestAndWaitForReceiptAsync(BurnFromFunction burnFromFunction, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> BurnFromRequestAndWaitForReceiptAsync(long chainId, Enum contractType, BurnFromFunction burnFromFunction, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> BurnFromRequestAsync(string account, BigInteger amount);
+        Task<string> BurnFromRequestAsync(long chainId, Enum contractType, string account, BigInteger amount);
 
-        public Task<TransactionReceipt> BurnFromRequestAndWaitForReceiptAsync(string account, BigInteger amount, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> BurnFromRequestAndWaitForReceiptAsync(long chainId, Enum contractType, string account, BigInteger amount, CancellationTokenSource cancellationToken = null);
 
-        public Task<BigInteger> CapQueryAsync(CapFunction capFunction, BlockParameter blockParameter = null);
+        Task<BigInteger> CapQueryAsync(long chainId, Enum contractType, CapFunction capFunction, BlockParameter blockParameter = null);
 
-        public Task<BigInteger> CapQueryAsync(BlockParameter blockParameter = null);
+        Task<BigInteger> CapQueryAsync(long chainId, Enum contractType, BlockParameter blockParameter = null);
 
-        public Task<string> DecreaseAllowanceRequestAsync(DecreaseAllowanceFunction decreaseAllowanceFunction);
+        Task<string> DecreaseAllowanceRequestAsync(long chainId, Enum contractType, DecreaseAllowanceFunction decreaseAllowanceFunction);
 
-        public Task<TransactionReceipt> DecreaseAllowanceRequestAndWaitForReceiptAsync(DecreaseAllowanceFunction decreaseAllowanceFunction, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> DecreaseAllowanceRequestAndWaitForReceiptAsync(long chainId, Enum contractType, DecreaseAllowanceFunction decreaseAllowanceFunction, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> DecreaseAllowanceRequestAsync(string spender, BigInteger subtractedValue);
+        Task<string> DecreaseAllowanceRequestAsync(long chainId, Enum contractType, string spender, BigInteger subtractedValue);
 
-        public Task<TransactionReceipt> DecreaseAllowanceRequestAndWaitForReceiptAsync(string spender, BigInteger subtractedValue, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> DecreaseAllowanceRequestAndWaitForReceiptAsync(long chainId, Enum contractType, string spender, BigInteger subtractedValue, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> IncreaseAllowanceRequestAsync(IncreaseAllowanceFunction increaseAllowanceFunction);
+        Task<string> IncreaseAllowanceRequestAsync(long chainId, Enum contractType, IncreaseAllowanceFunction increaseAllowanceFunction);
 
-        public Task<TransactionReceipt> IncreaseAllowanceRequestAndWaitForReceiptAsync(IncreaseAllowanceFunction increaseAllowanceFunction, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> IncreaseAllowanceRequestAndWaitForReceiptAsync(long chainId, Enum contractType, IncreaseAllowanceFunction increaseAllowanceFunction, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> IncreaseAllowanceRequestAsync(string spender, BigInteger addedValue);
+        Task<string> IncreaseAllowanceRequestAsync(long chainId, Enum contractType, string spender, BigInteger addedValue);
 
-        public Task<TransactionReceipt> IncreaseAllowanceRequestAndWaitForReceiptAsync(string spender, BigInteger addedValue, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> IncreaseAllowanceRequestAndWaitForReceiptAsync(long chainId, Enum contractType, string spender, BigInteger addedValue, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> NameQueryAsync(NameFunction nameFunction, BlockParameter blockParameter = null);
+        Task<string> NameQueryAsync(long chainId, Enum contractType, NameFunction nameFunction, BlockParameter blockParameter = null);
 
-        public Task<string> NameQueryAsync(BlockParameter blockParameter = null);
+        Task<string> NameQueryAsync(long chainId, Enum contractType, BlockParameter blockParameter = null);
 
-        public Task<string> SymbolQueryAsync(SymbolFunction symbolFunction, BlockParameter blockParameter = null);
+        Task<string> SymbolQueryAsync(long chainId, Enum contractType, SymbolFunction symbolFunction, BlockParameter blockParameter = null);
 
-        public Task<string> SymbolQueryAsync(BlockParameter blockParameter = null);
+        Task<string> SymbolQueryAsync(long chainId, Enum contractType, BlockParameter blockParameter = null);
 
-        public Task<BigInteger> TotalSupplyQueryAsync(TotalSupplyFunction totalSupplyFunction, BlockParameter blockParameter = null);
+        Task<BigInteger> TotalSupplyQueryAsync(long chainId, Enum contractType, TotalSupplyFunction totalSupplyFunction, BlockParameter blockParameter = null);
 
-        public Task<BigInteger> TotalSupplyQueryAsync(BlockParameter blockParameter = null);
+        Task<BigInteger> TotalSupplyQueryAsync(long chainId, Enum contractType, BlockParameter blockParameter = null);
 
-        public Task<string> TransferRequestAsync(TransferFunction transferFunction);
+        Task<string> TransferRequestAsync(long chainId, Enum contractType, TransferFunction transferFunction);
 
-        public Task<TransactionReceipt> TransferRequestAndWaitForReceiptAsync(TransferFunction transferFunction, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> TransferRequestAndWaitForReceiptAsync(long chainId, Enum contractType, TransferFunction transferFunction, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> TransferRequestAsync(string to, BigInteger amount);
+        Task<string> TransferRequestAsync(long chainId, Enum contractType, string to, BigInteger amount);
 
-        public Task<TransactionReceipt> TransferRequestAndWaitForReceiptAsync(string to, BigInteger amount, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> TransferRequestAndWaitForReceiptAsync(long chainId, Enum contractType, string to, BigInteger amount, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> TransferFromRequestAsync(TransferFromFunction transferFromFunction);
+        Task<string> TransferFromRequestAsync(long chainId, Enum contractType, TransferFromFunction transferFromFunction);
 
-        public Task<TransactionReceipt> TransferFromRequestAndWaitForReceiptAsync(TransferFromFunction transferFromFunction, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> TransferFromRequestAndWaitForReceiptAsync(long chainId, Enum contractType, TransferFromFunction transferFromFunction, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> TransferFromRequestAsync(string from, string to, BigInteger amount);
+        Task<string> TransferFromRequestAsync(long chainId, Enum contractType, string from, string to, BigInteger amount);
 
-        public Task<TransactionReceipt> TransferFromRequestAndWaitForReceiptAsync(string from, string to, BigInteger amount, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> TransferFromRequestAndWaitForReceiptAsync(long chainId, Enum contractType, string from, string to, BigInteger amount, CancellationTokenSource cancellationToken = null);
 
-        public Task<byte> DecimalsQueryAsync(DecimalsFunction decimalsFunction, BlockParameter blockParameter = null);
+        Task<byte> DecimalsQueryAsync(long chainId, Enum contractType, DecimalsFunction decimalsFunction, BlockParameter blockParameter = null);
 
-        public Task<byte> DecimalsQueryAsync(BlockParameter blockParameter = null);
+        Task<byte> DecimalsQueryAsync(long chainId, Enum contractType, BlockParameter blockParameter = null);
 
-        public Task<string> ActivateBeaconRequestAsync(ActivateBeaconFunction activateBeaconFunction);
+        Task<string> ActivateBeaconRequestAsync(long chainId, Enum contractType, ActivateBeaconFunction activateBeaconFunction);
 
-        public Task<TransactionReceipt> ActivateBeaconRequestAndWaitForReceiptAsync(ActivateBeaconFunction activateBeaconFunction, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> ActivateBeaconRequestAndWaitForReceiptAsync(long chainId, Enum contractType, ActivateBeaconFunction activateBeaconFunction, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> ActivateBeaconRequestAsync(byte[] address);
+        Task<string> ActivateBeaconRequestAsync(long chainId, Enum contractType, byte[] address);
 
-        public Task<TransactionReceipt> ActivateBeaconRequestAndWaitForReceiptAsync(byte[] address, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> ActivateBeaconRequestAndWaitForReceiptAsync(long chainId, Enum contractType, byte[] address, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> ActivateBeaconRequestAsync(ActivateBeacon1Function activateBeacon1Function);
+        Task<string> ActivateBeaconRequestAsync(long chainId, Enum contractType, ActivateBeacon1Function activateBeacon1Function);
 
-        public Task<TransactionReceipt> ActivateBeaconRequestAndWaitForReceiptAsync(ActivateBeacon1Function activateBeacon1Function, CancellationTokenSource cancellationToken = null);
+        Task<TransactionReceipt> ActivateBeaconRequestAndWaitForReceiptAsync(long chainId, Enum contractType, ActivateBeacon1Function activateBeacon1Function, CancellationTokenSource cancellationToken = null);
 
-        public Task<string> ActivateBeaconRequestAsync(byte[] address, BigInteger amount);
+        Task<string> ActivateBeaconRequestAsync(long chainId, Enum contractType, byte[] address, BigInteger amount);
 
-        public Task<TransactionReceipt> ActivateBeaconRequestAndWaitForReceiptAsync(byte[] address, BigInteger amount, CancellationTokenSource cancellationToken = null);
-
-        public void Initialize(IWeb3 web3, string contractAddress);
+        Task<TransactionReceipt> ActivateBeaconRequestAndWaitForReceiptAsync(long chainId, Enum contractType, byte[] address, BigInteger amount, CancellationTokenSource cancellationToken = null);
     }
 }
