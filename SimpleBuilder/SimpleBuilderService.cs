@@ -15,16 +15,17 @@ using poolz.finance.csharp.contracts.SimpleBuilder.ContractDefinition;
 
 namespace poolz.finance.csharp.contracts.SimpleBuilder
 {
-    public partial class SimpleBuilderService : ISimpleBuilderService
+    public partial class SimpleBuilderService<TContractType> : ISimpleBuilderService<TContractType>
+        where TContractType : Enum
     {
-        public IChainProvider ChainProvider { get; }
+        public IChainProvider<TContractType> ChainProvider { get; }
 
-        public SimpleBuilderService(IChainProvider chainProvider)
+        public SimpleBuilderService(IChainProvider<TContractType> chainProvider)
         {
             ChainProvider = chainProvider;
         }
 
-        private ContractHandler InitializeContractHandler(long chainId, Enum contractType)
+        private ContractHandler InitializeContractHandler(long chainId, TContractType contractType)
         {
             var contractAddress = ChainProvider.ContractAddress(chainId, contractType);
             var web3 = ChainProvider.Web3(chainId);
@@ -32,19 +33,19 @@ namespace poolz.finance.csharp.contracts.SimpleBuilder
             return contractHandler;
         }
 
-        public virtual Task<string> BuildMassPoolsRequestAsync(long chainId, Enum contractType, BuildMassPoolsFunction buildMassPoolsFunction)
+        public virtual Task<string> BuildMassPoolsRequestAsync(long chainId, TContractType contractType, BuildMassPoolsFunction buildMassPoolsFunction)
         {
             var contractHandler = InitializeContractHandler(chainId, contractType);
             return contractHandler.SendRequestAsync(buildMassPoolsFunction);
         }
 
-        public virtual Task<TransactionReceipt> BuildMassPoolsRequestAndWaitForReceiptAsync(long chainId, Enum contractType, BuildMassPoolsFunction buildMassPoolsFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> BuildMassPoolsRequestAndWaitForReceiptAsync(long chainId, TContractType contractType, BuildMassPoolsFunction buildMassPoolsFunction, CancellationTokenSource cancellationToken = null)
         {
             var contractHandler = InitializeContractHandler(chainId, contractType);
             return contractHandler.SendRequestAndWaitForReceiptAsync(buildMassPoolsFunction, cancellationToken);
         }
 
-        public virtual Task<string> BuildMassPoolsRequestAsync(long chainId, Enum contractType, List<string> addressParams, Builder userData, List<BigInteger> @params, byte[] signature)
+        public virtual Task<string> BuildMassPoolsRequestAsync(long chainId, TContractType contractType, List<string> addressParams, Builder userData, List<BigInteger> @params, byte[] signature)
         {
             var buildMassPoolsFunction = new BuildMassPoolsFunction();
                 buildMassPoolsFunction.AddressParams = addressParams;
@@ -56,7 +57,7 @@ namespace poolz.finance.csharp.contracts.SimpleBuilder
             return contractHandler.SendRequestAsync(buildMassPoolsFunction);
         }
 
-        public virtual Task<TransactionReceipt> BuildMassPoolsRequestAndWaitForReceiptAsync(long chainId, Enum contractType, List<string> addressParams, Builder userData, List<BigInteger> @params, byte[] signature, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> BuildMassPoolsRequestAndWaitForReceiptAsync(long chainId, TContractType contractType, List<string> addressParams, Builder userData, List<BigInteger> @params, byte[] signature, CancellationTokenSource cancellationToken = null)
         {
             var buildMassPoolsFunction = new BuildMassPoolsFunction();
                 buildMassPoolsFunction.AddressParams = addressParams;
@@ -68,43 +69,43 @@ namespace poolz.finance.csharp.contracts.SimpleBuilder
             return contractHandler.SendRequestAndWaitForReceiptAsync(buildMassPoolsFunction, cancellationToken);
         }
 
-        public virtual Task<string> FirewallAdminQueryAsync(long chainId, Enum contractType, FirewallAdminFunction firewallAdminFunction, BlockParameter blockParameter = null)
+        public virtual Task<string> FirewallAdminQueryAsync(long chainId, TContractType contractType, FirewallAdminFunction firewallAdminFunction, BlockParameter blockParameter = null)
         {
             var contractHandler = InitializeContractHandler(chainId, contractType);
             return contractHandler.QueryAsync<FirewallAdminFunction, string>(firewallAdminFunction, blockParameter);
         }
 
-        public virtual Task<string> FirewallAdminQueryAsync(long chainId, Enum contractType, BlockParameter blockParameter = null)
+        public virtual Task<string> FirewallAdminQueryAsync(long chainId, TContractType contractType, BlockParameter blockParameter = null)
         {
             var contractHandler = InitializeContractHandler(chainId, contractType);
             return contractHandler.QueryAsync<FirewallAdminFunction, string>(null, blockParameter);
         }
 
-        public virtual Task<string> LockDealNFTQueryAsync(long chainId, Enum contractType, LockDealNFTFunction lockDealNFTFunction, BlockParameter blockParameter = null)
+        public virtual Task<string> LockDealNFTQueryAsync(long chainId, TContractType contractType, LockDealNFTFunction lockDealNFTFunction, BlockParameter blockParameter = null)
         {
             var contractHandler = InitializeContractHandler(chainId, contractType);
             return contractHandler.QueryAsync<LockDealNFTFunction, string>(lockDealNFTFunction, blockParameter);
         }
 
-        public virtual Task<string> LockDealNFTQueryAsync(long chainId, Enum contractType, BlockParameter blockParameter = null)
+        public virtual Task<string> LockDealNFTQueryAsync(long chainId, TContractType contractType, BlockParameter blockParameter = null)
         {
             var contractHandler = InitializeContractHandler(chainId, contractType);
             return contractHandler.QueryAsync<LockDealNFTFunction, string>(null, blockParameter);
         }
 
-        public virtual Task<string> OnERC721ReceivedRequestAsync(long chainId, Enum contractType, OnERC721ReceivedFunction onERC721ReceivedFunction)
+        public virtual Task<string> OnERC721ReceivedRequestAsync(long chainId, TContractType contractType, OnERC721ReceivedFunction onERC721ReceivedFunction)
         {
             var contractHandler = InitializeContractHandler(chainId, contractType);
             return contractHandler.SendRequestAsync(onERC721ReceivedFunction);
         }
 
-        public virtual Task<TransactionReceipt> OnERC721ReceivedRequestAndWaitForReceiptAsync(long chainId, Enum contractType, OnERC721ReceivedFunction onERC721ReceivedFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> OnERC721ReceivedRequestAndWaitForReceiptAsync(long chainId, TContractType contractType, OnERC721ReceivedFunction onERC721ReceivedFunction, CancellationTokenSource cancellationToken = null)
         {
             var contractHandler = InitializeContractHandler(chainId, contractType);
             return contractHandler.SendRequestAndWaitForReceiptAsync(onERC721ReceivedFunction, cancellationToken);
         }
 
-        public virtual Task<string> OnERC721ReceivedRequestAsync(long chainId, Enum contractType, string returnValue1, string returnValue2, BigInteger returnValue3, byte[] returnValue4)
+        public virtual Task<string> OnERC721ReceivedRequestAsync(long chainId, TContractType contractType, string returnValue1, string returnValue2, BigInteger returnValue3, byte[] returnValue4)
         {
             var onERC721ReceivedFunction = new OnERC721ReceivedFunction();
                 onERC721ReceivedFunction.ReturnValue1 = returnValue1;
@@ -116,7 +117,7 @@ namespace poolz.finance.csharp.contracts.SimpleBuilder
             return contractHandler.SendRequestAsync(onERC721ReceivedFunction);
         }
 
-        public virtual Task<TransactionReceipt> OnERC721ReceivedRequestAndWaitForReceiptAsync(long chainId, Enum contractType, string returnValue1, string returnValue2, BigInteger returnValue3, byte[] returnValue4, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> OnERC721ReceivedRequestAndWaitForReceiptAsync(long chainId, TContractType contractType, string returnValue1, string returnValue2, BigInteger returnValue3, byte[] returnValue4, CancellationTokenSource cancellationToken = null)
         {
             var onERC721ReceivedFunction = new OnERC721ReceivedFunction();
                 onERC721ReceivedFunction.ReturnValue1 = returnValue1;
@@ -128,19 +129,19 @@ namespace poolz.finance.csharp.contracts.SimpleBuilder
             return contractHandler.SendRequestAndWaitForReceiptAsync(onERC721ReceivedFunction, cancellationToken);
         }
 
-        public virtual Task<string> SetFirewallRequestAsync(long chainId, Enum contractType, SetFirewallFunction setFirewallFunction)
+        public virtual Task<string> SetFirewallRequestAsync(long chainId, TContractType contractType, SetFirewallFunction setFirewallFunction)
         {
             var contractHandler = InitializeContractHandler(chainId, contractType);
             return contractHandler.SendRequestAsync(setFirewallFunction);
         }
 
-        public virtual Task<TransactionReceipt> SetFirewallRequestAndWaitForReceiptAsync(long chainId, Enum contractType, SetFirewallFunction setFirewallFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> SetFirewallRequestAndWaitForReceiptAsync(long chainId, TContractType contractType, SetFirewallFunction setFirewallFunction, CancellationTokenSource cancellationToken = null)
         {
             var contractHandler = InitializeContractHandler(chainId, contractType);
             return contractHandler.SendRequestAndWaitForReceiptAsync(setFirewallFunction, cancellationToken);
         }
 
-        public virtual Task<string> SetFirewallRequestAsync(long chainId, Enum contractType, string firewall)
+        public virtual Task<string> SetFirewallRequestAsync(long chainId, TContractType contractType, string firewall)
         {
             var setFirewallFunction = new SetFirewallFunction();
                 setFirewallFunction.Firewall = firewall;
@@ -149,7 +150,7 @@ namespace poolz.finance.csharp.contracts.SimpleBuilder
             return contractHandler.SendRequestAsync(setFirewallFunction);
         }
 
-        public virtual Task<TransactionReceipt> SetFirewallRequestAndWaitForReceiptAsync(long chainId, Enum contractType, string firewall, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> SetFirewallRequestAndWaitForReceiptAsync(long chainId, TContractType contractType, string firewall, CancellationTokenSource cancellationToken = null)
         {
             var setFirewallFunction = new SetFirewallFunction();
                 setFirewallFunction.Firewall = firewall;
@@ -158,19 +159,19 @@ namespace poolz.finance.csharp.contracts.SimpleBuilder
             return contractHandler.SendRequestAndWaitForReceiptAsync(setFirewallFunction, cancellationToken);
         }
 
-        public virtual Task<string> SetFirewallAdminRequestAsync(long chainId, Enum contractType, SetFirewallAdminFunction setFirewallAdminFunction)
+        public virtual Task<string> SetFirewallAdminRequestAsync(long chainId, TContractType contractType, SetFirewallAdminFunction setFirewallAdminFunction)
         {
             var contractHandler = InitializeContractHandler(chainId, contractType);
             return contractHandler.SendRequestAsync(setFirewallAdminFunction);
         }
 
-        public virtual Task<TransactionReceipt> SetFirewallAdminRequestAndWaitForReceiptAsync(long chainId, Enum contractType, SetFirewallAdminFunction setFirewallAdminFunction, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> SetFirewallAdminRequestAndWaitForReceiptAsync(long chainId, TContractType contractType, SetFirewallAdminFunction setFirewallAdminFunction, CancellationTokenSource cancellationToken = null)
         {
             var contractHandler = InitializeContractHandler(chainId, contractType);
             return contractHandler.SendRequestAndWaitForReceiptAsync(setFirewallAdminFunction, cancellationToken);
         }
 
-        public virtual Task<string> SetFirewallAdminRequestAsync(long chainId, Enum contractType, string firewallAdmin)
+        public virtual Task<string> SetFirewallAdminRequestAsync(long chainId, TContractType contractType, string firewallAdmin)
         {
             var setFirewallAdminFunction = new SetFirewallAdminFunction();
                 setFirewallAdminFunction.FirewallAdmin = firewallAdmin;
@@ -179,7 +180,7 @@ namespace poolz.finance.csharp.contracts.SimpleBuilder
             return contractHandler.SendRequestAsync(setFirewallAdminFunction);
         }
 
-        public virtual Task<TransactionReceipt> SetFirewallAdminRequestAndWaitForReceiptAsync(long chainId, Enum contractType, string firewallAdmin, CancellationTokenSource cancellationToken = null)
+        public virtual Task<TransactionReceipt> SetFirewallAdminRequestAndWaitForReceiptAsync(long chainId, TContractType contractType, string firewallAdmin, CancellationTokenSource cancellationToken = null)
         {
             var setFirewallAdminFunction = new SetFirewallAdminFunction();
                 setFirewallAdminFunction.FirewallAdmin = firewallAdmin;
